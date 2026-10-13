@@ -571,6 +571,7 @@ function openDetails(product, trigger) {
   document.querySelector("#copy-code").classList.toggle("hide", !product.productCode || free);
   document.querySelector("#dialog-code").closest(".code-row")?.classList.toggle("hide", free);
   document.querySelector("#copy-code-status").textContent = "";
+  document.querySelector("#copy-code").classList.remove("is-copied");
 
   const dialogPrice = document.querySelector("#dialog-price");
   dialogPrice.replaceChildren();
@@ -629,7 +630,7 @@ function openDetails(product, trigger) {
   }
   discord.classList.remove("is-download");
   const speed = document.querySelector("[data-trust-speed]");
-  if (speed) speed.lastChild.textContent = free ? "Members-only channel" : "Files within 24h";
+  if (speed) speed.querySelector("span").textContent = free ? "Members-only channel" : "Files within 24h";
 
   // short "how to" so the next step is obvious (and the panel isn't empty)
   const name = displayName(product);
@@ -674,11 +675,15 @@ dialog.addEventListener("close", () => { if (opener?.isConnected) opener.focus()
 document.querySelector("#copy-code").addEventListener("click", async () => {
   const code = document.querySelector("#dialog-code").textContent;
   const status = document.querySelector("#copy-code-status");
+  const chip = document.querySelector("#copy-code");
   try {
     await navigator.clipboard.writeText(code);
-    status.textContent = "Copied";
+    status.textContent = "Copied!";
+    chip.classList.add("is-copied");
+    clearTimeout(chip._t);
+    chip._t = setTimeout(() => { chip.classList.remove("is-copied"); status.textContent = ""; }, 1600);
   } catch {
-    status.textContent = "Select and copy the code";
+    status.textContent = "Select the code to copy";
   }
 });
 searchInput.addEventListener("input", () => { currentPage = 1; render(); });
