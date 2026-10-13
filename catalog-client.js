@@ -12,6 +12,7 @@ async function loadLocalCatalog() {
     .map((product) => ({
       ...product,
       image_url: URL.createObjectURL(product.image_blob),
+      gallery: (product.gallery_blobs || []).filter(Boolean).map((blob) => ({ url: URL.createObjectURL(blob) })),
     }));
   dispatchProducts(activeProducts);
 }
@@ -29,8 +30,11 @@ if (isSupabaseConfigured) {
       .order("created_at", { ascending: false });
     // download_url is used by the Free Ped tab. If that column hasn't been added yet
     // (free-peds-setup.sql), load the catalog without it so nothing breaks.
-    let { data, error } = await query(`${COLUMNS},download_url`);
-    if (error && /download_url/i.test(error.message || "")) ({ data, error } = await query(COLUMNS));
+    // Optional columns (gallery = extra photos). If one hasn't been added in Supabase yet,
+    // load the catalog without it so nothing breaks.
+    let { data, error } = await query(`${COLUMNS},gallery,download_url`);
+    if (error && /gallery|download_url/i.test(error.message || "")) ({ data, error } = await query(`${COLUMNS},gallery`));
+    if (error && /gallery/i.test(error.message || "")) ({ data, error } = await query(COLUMNS));
 
     if (!error) dispatchProducts(data || []);
     else {

@@ -89,6 +89,11 @@ function normalizeProduct(item, sample = false) {
   };
   product.tags = normalizeTags(product);
   if (product.isSample && !product.image) product.image = placeholderFor(product);
+  // cover first, then the extra photos (front, back, close-up…)
+  let gallery = item.gallery;
+  if (typeof gallery === "string") { try { gallery = JSON.parse(gallery); } catch { gallery = []; } }
+  const extras = (Array.isArray(gallery) ? gallery : []).map((g) => (typeof g === "string" ? g : g?.url)).filter(Boolean);
+  product.images = [product.image, ...extras].filter(Boolean);
   return product;
 }
 
@@ -196,6 +201,13 @@ function buildCard(product) {
   if (product.isSample) photo.append(make("span", "sale sample-badge", "DEMO SAMPLE"));
   else if (product.is_sold) photo.append(make("span", "sale sold-badge", "SOLD"));
   else if (isFree(product)) photo.append(make("span", "sale free-badge", "FREE"));
+  if (product.images.length > 1) {
+    const many = make("span", "photo-count");
+    many.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg>';
+    many.append(document.createTextNode(String(product.images.length)));
+    many.setAttribute("aria-label", `${product.images.length} photos`);
+    photo.append(many);
+  }
   if (isNew(product) && !product.is_sold) {
     const badge = make("span", "new-badge", "NEW");
     badge.setAttribute("aria-label", "Added this week");
@@ -452,6 +464,77 @@ function renderRelated(product) {
   wrap.classList.toggle("hide", !related.length);
 }
 
+/* ---------- Popup photo gallery: big photo + thumbnails, arrows, ← → keys, swipe ---------- */
+const galleryState = { product: null, index: 0 };
+function showPhoto(index) {
+  const product = galleryState.product;
+  if (!product) return;
+  const images = product.images.length ? product.images : [product.image];
+  const count = images.length;
+  galleryState.index = (index + count) % count;
+  const media = document.querySelector("#dialog-media");
+  let image = media.querySelector(".pd-image");
+  if (!image) { image = make("img", "pd-image"); media.prepend(image); }
+  image.classList.remove("pd-image"); void image.offsetWidth; image.classList.add("pd-image"); // replay fade
+  image.src = images[galleryState.index];
+  image.alt = product.isSample ? "Sample catalog artwork" : `${displayName(product)} — photo ${galleryState.index + 1} of ${count}`;
+  image.onerror = () => { image.onerror = null; image.src = placeholderFor({ ...product, sampleCode: "R67" }); };
+  const counter = media.querySelector(".pd-counter");
+  if (counter) counter.textContent = `${galleryState.index + 1} / ${count}`;
+  document.querySelectorAll("#dialog-thumbs .pd-thumb").forEach((thumb, i) => {
+    const active = i === galleryState.index;
+    thumb.classList.toggle("is-active", active);
+    thumb.setAttribute("aria-current", active ? "true" : "false");
+    if (active) thumb.scrollIntoView({ block: "nearest", inline: "nearest" });
+  });
+}
+function renderGallery(product) {
+  galleryState.product = product;
+  const images = product.images.length ? product.images : [product.image];
+  const many = images.length > 1;
+  const media = document.querySelector("#dialog-media");
+  media.replaceChildren();
+  media.classList.toggle("has-many", many);
+  if (many) {
+    const prev = make("button", "pd-nav pd-prev"); prev.type = "button"; prev.setAttribute("aria-label", "Previous photo"); prev.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
+    const next = make("button", "pd-nav pd-next"); next.type = "button"; next.setAttribute("aria-label", "Next photo"); next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>';
+    prev.addEventListener("click", () => showPhoto(galleryState.index - 1));
+    next.addEventListener("click", () => showPhoto(galleryState.index + 1));
+    media.append(prev, next, make("span", "pd-counter"));
+  }
+  const thumbs = document.querySelector("#dialog-thumbs");
+  if (thumbs) {
+    thumbs.hidden = !many;
+    thumbs.replaceChildren(...(many ? images.map((src, i) => {
+      const thumb = make("button", "pd-thumb"); thumb.type = "button";
+      thumb.setAttribute("aria-label", `Show photo ${i + 1} of ${images.length}`);
+      const img = make("img"); img.src = src; img.alt = ""; img.loading = "lazy";
+      thumb.append(img);
+      thumb.addEventListener("click", () => showPhoto(i));
+      return thumb;
+    }) : []));
+  }
+  showPhoto(0);
+}
+// ← → keys while the popup is open
+document.addEventListener("keydown", (event) => {
+  if (!dialog.open || !galleryState.product || galleryState.product.images.length < 2) return;
+  if (event.target.closest?.("input, textarea, select")) return;
+  if (event.key === "ArrowLeft") { event.preventDefault(); showPhoto(galleryState.index - 1); }
+  if (event.key === "ArrowRight") { event.preventDefault(); showPhoto(galleryState.index + 1); }
+});
+// swipe on phones
+(() => {
+  const media = document.querySelector("#dialog-media");
+  let startX = 0, startY = 0, tracking = false;
+  media.addEventListener("touchstart", (e) => { if (e.touches.length !== 1) return; tracking = true; startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
+  media.addEventListener("touchend", (e) => {
+    if (!tracking) return; tracking = false;
+    const dx = e.changedTouches[0].clientX - startX, dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3 && galleryState.product?.images.length > 1) showPhoto(galleryState.index + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();
+
 function openDetails(product, trigger) {
   if (!product) return;
   opener = trigger;
@@ -474,11 +557,7 @@ function openDetails(product, trigger) {
   current.setAttribute("aria-current", "page");
   crumbs.append(current);
 
-  const media = document.querySelector("#dialog-media");
-  media.replaceChildren();
-  const image = make("img", "pd-image"); image.src = product.image; image.alt = product.isSample ? "Sample catalog artwork" : `${product.name} preview`;
-  image.onerror = () => { image.src = placeholderFor({ ...product, sampleCode: "R67" }); };
-  media.append(image);
+  renderGallery(product);
 
   const categoryEl = document.querySelector("#dialog-category");
   categoryEl.textContent = free ? `${genderOf(product) || "Community"} ped` : category;
