@@ -449,8 +449,12 @@ function showCatalog({ category = "all", collection } = {}) {
 
 function renderRelated(product) {
   const wrap = document.querySelector("#dialog-related-wrap");
-  const pool = products.filter((item) => item.id !== product.id && collectionOf(item) === collectionOf(product) && !item.is_sold);
-  const related = [...pool.filter((item) => item.category === product.category), ...pool.filter((item) => item.category !== product.category)].slice(0, 4);
+  // same category first, then the same type, then (if still fewer than 4) your other peds/heads —
+  // so the popup always has suggestions to fill its corner, and free-ped visitors discover paid peds
+  const pool = products.filter((item) => item.id !== product.id && !item.is_sold && !item.isSample);
+  const sameType = pool.filter((item) => collectionOf(item) === collectionOf(product));
+  const others = pool.filter((item) => collectionOf(item) !== collectionOf(product) && collectionOf(item) !== "clothing");
+  const related = [...sameType.filter((item) => item.category === product.category), ...sameType.filter((item) => item.category !== product.category), ...others].slice(0, 4);
   document.querySelector("#dialog-related").replaceChildren(...related.map((item) => {
     const button = make("button", "pd-related-item");
     button.type = "button";
@@ -676,9 +680,9 @@ function openDetails(product, trigger) {
   }));
 
   const steps = free
-    ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are posted there."], [`Download ${name}`, "Add it to your server and enjoy."]]
+    ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are there."], [`Download ${name}`, "Add it to your server."]]
     : product.isSample ? []
-    : [["Click “Order on Discord”", "Your order message (with the code) is copied for you."], ["Open a ticket and paste it", "Press Ctrl+V (or hold → Paste on phone) and send."], ["Get your files", "Delivered in your ticket within 24 hours."]];
+    : [["Click “Order on Discord”", "Your order message is copied for you."], ["Open a ticket & paste", "Ctrl+V (or hold → Paste) and send."], ["Get your files", "In your ticket within 24 hours."]];
   document.querySelector("#dialog-steps").classList.toggle("hide", !steps.length);
   document.querySelector("#dialog-steps-title").textContent = free ? "How to claim" : "How to order";
   // one compact panel: tabs only when both parts exist

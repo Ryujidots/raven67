@@ -1049,3 +1049,50 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
   .pd-info:not(:has(.pd-related:not(.hide))) .pd-panel{flex:1}
 }
 @media (max-width:820px){ .pd-info .pd-related-grid{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+/* =========================================================
+   Popup polish: centered guarantees, stable tab panel, sliding tab pill
+   ========================================================= */
+/* guarantees + rating centered under the button */
+.pd-buy-foot{flex-direction:column;justify-content:center;align-items:center;gap:6px;text-align:center}
+.pd-buy .pd-trust{justify-content:center}
+.pd-rating-link{justify-content:center}
+
+/* tab panel: both tabs share one grid cell, so the panel is always as tall as the taller tab
+   and switching never moves anything below it */
+.pd-panel.has-tabs{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto}
+.pd-panel.has-tabs .pd-tabs{grid-row:1}
+.pd-panel.has-tabs .pd-features,
+.pd-panel.has-tabs .pd-steps{grid-row:2;grid-column:1;display:block !important;transition:opacity .25s,transform .3s var(--ease-out),visibility 0s}
+.pd-panel.has-tabs .pd-features.hide{display:none !important}
+.pd-panel.has-tabs[data-active=features] .pd-steps,
+.pd-panel.has-tabs[data-active=steps] .pd-features{visibility:hidden;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .2s,transform .2s,visibility 0s .2s}
+.pd-panel.has-tabs .pd-features:not(.hide),.pd-panel.has-tabs .pd-steps{animation:none}
+
+/* equal-width tabs with a sliding highlight */
+.pd-panel.has-tabs .pd-tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;width:min(100%,340px)}
+.pd-tabs::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--grad-primary);box-shadow:0 0 14px rgba(138,44,255,.45);transition:transform .35s cubic-bezier(.3,1.25,.5,1)}
+.pd-panel[data-active=steps] .pd-tabs::before{transform:translateX(100%)}
+.pd-tabs button{position:relative;z-index:1;padding:0 10px}
+.pd-tabs button[aria-selected=true]{background:transparent;box-shadow:none;color:#fff}
+@media (prefers-reduced-motion:reduce){ .pd-tabs::before{transition:none} }
+
+/* =========================================================
+   Popup: no empty space — photo fills its column, steps go horizontal
+   ========================================================= */
+@media (min-width:821px){
+  .pd-gallery{--gw:min(440px,calc((100dvh - 210px) * .8));width:var(--gw);grid-template-rows:minmax(0,1fr) auto;align-self:stretch}
+  /* the photo takes all the height the column has (but never gets shorter than a normal portrait) */
+  .pd-gallery .dialog-media{aspect-ratio:auto;height:100%;min-height:calc(var(--gw) * 1.12)}
+  .pd-gallery .dialog-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* "How to order": horizontal 1 → 2 → 3 stepper (about as tall as "What's included") */
+  .pd-panel .pd-steps ol{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .pd-panel .pd-steps li{padding:0;align-content:start;text-align:center;justify-items:center;gap:3px}
+  .pd-panel .pd-steps li::before{position:relative;left:auto;top:auto;margin:0 auto 6px;z-index:1;box-shadow:inset 0 0 0 1px rgba(168,85,247,.55),0 0 0 5px rgba(14,8,24,.9)}
+  .pd-panel .pd-steps li:not(:last-child)::after{left:calc(50% + 18px);right:calc(-50% + 18px);top:13px;bottom:auto;width:auto;height:1px;background:linear-gradient(90deg,rgba(168,85,247,.55),rgba(168,85,247,.2))}
+  .pd-panel .pd-steps li strong{font-size:13px;line-height:1.3}
+  .pd-panel .pd-steps li span{font-size:12px;line-height:1.4}
+  /* both tab contents centered in the shared area */
+  .pd-panel.has-tabs .pd-features,.pd-panel.has-tabs .pd-steps{align-self:center}
+}
