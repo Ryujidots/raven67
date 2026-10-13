@@ -465,6 +465,18 @@ function renderRelated(product) {
   wrap.classList.toggle("hide", !related.length);
 }
 
+/* ---------- Popup info panel tabs ---------- */
+function setPanelTab(name) {
+  const panel = document.querySelector("#dialog-panel");
+  if (!panel) return;
+  panel.dataset.active = name;
+  panel.querySelectorAll("[data-pd-tab]").forEach((tab) => tab.setAttribute("aria-selected", String(tab.dataset.pdTab === name)));
+}
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest("[data-pd-tab]");
+  if (tab) setPanelTab(tab.dataset.pdTab);
+});
+
 /* ---------- "What's included" per product type ---------- */
 const FEATURE_ICONS = {
   check: '<path d="M20 6 9 17l-5-5"/>',
@@ -669,6 +681,13 @@ function openDetails(product, trigger) {
     : [["Click “Order on Discord”", "Your order message (with the code) is copied for you."], ["Open a ticket and paste it", "Press Ctrl+V (or hold → Paste on phone) and send."], ["Get your files", "Delivered in your ticket within 24 hours."]];
   document.querySelector("#dialog-steps").classList.toggle("hide", !steps.length);
   document.querySelector("#dialog-steps-title").textContent = free ? "How to claim" : "How to order";
+  // one compact panel: tabs only when both parts exist
+  const hasFeatures = features.length > 0 && !product.isSample;
+  const panel = document.querySelector("#dialog-panel");
+  panel.classList.toggle("hide", !hasFeatures && !steps.length);
+  panel.classList.toggle("has-tabs", hasFeatures && steps.length > 0);
+  document.querySelector("#dialog-steps-tab").textContent = free ? "How to claim" : "How to order";
+  setPanelTab(hasFeatures ? "features" : "steps");
   document.querySelector("#dialog-steps-list").replaceChildren(...steps.map(([title, text]) => {
     const li = make("li");
     li.append(make("strong", "", title), make("span", "", text));

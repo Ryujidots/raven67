@@ -957,3 +957,77 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
   .pd-main{align-items:start}
   .pd-gallery{position:sticky;top:16px;z-index:1}
 }
+
+/* =========================================================
+   Product popup — COMPACT (everything visible without scrolling on computers)
+   ========================================================= */
+/* duplicates removed: tag chips, "FiveM Ready" pill, seller row (all shown elsewhere) */
+.ped-dialog .dialog-tags,
+.ped-dialog .compatibility,
+.ped-dialog .pd-seller{display:none}
+.pd-buy-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px}
+.dialog-description{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:0;font-size:14px;line-height:1.6}
+.dialog-description.hide{display:none}
+
+/* info panel with tabs */
+.pd-panel{padding:6px 16px 16px;border:1px solid var(--r-line);border-radius:16px;background:rgba(14,8,24,.55)}
+.pd-panel.hide{display:none}
+.pd-panel .pd-features,.pd-panel .pd-steps{margin:0;padding:12px 0 0;border:0;background:none}
+.pd-tabs{display:none;gap:4px;margin:6px 0 2px;padding:4px;border-radius:999px;background:rgba(6,3,12,.6);box-shadow:inset 0 0 0 1px rgba(168,85,247,.16);width:max-content;max-width:100%}
+.pd-tabs button{min-height:32px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--r-muted);font:700 11.5px var(--f-ui);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s,background .25s,box-shadow .25s}
+.pd-tabs button:hover{color:#fff}
+.pd-tabs button[aria-selected=true]{background:var(--grad-primary);color:#fff;box-shadow:0 0 14px rgba(138,44,255,.45)}
+.pd-panel.has-tabs .pd-tabs{display:flex}
+.pd-panel.has-tabs h3{display:none}
+.pd-panel.has-tabs[data-active=features] .pd-steps,
+.pd-panel.has-tabs[data-active=steps] .pd-features{display:none}
+.pd-panel.has-tabs .pd-features:not(.hide),.pd-panel.has-tabs .pd-steps{animation:panel-in .3s var(--ease-out)}
+@keyframes panel-in{from{opacity:0;transform:translateY(6px)}}
+.pd-panel:not(.has-tabs) h3{margin-top:8px}
+/* compact steps */
+.pd-panel .pd-steps ol{gap:10px}
+.pd-panel .pd-steps li{padding-left:38px}
+.pd-panel .pd-steps li::before{width:26px;height:26px;font-size:12px}
+.pd-panel .pd-steps li:not(:last-child)::after{left:12.5px;top:30px;bottom:-10px}
+.pd-panel .pd-steps li strong{font-size:14px}
+.pd-panel .pd-steps li span{font-size:13px}
+
+@media (min-width:821px){
+  .pd{padding:16px 24px 22px}
+  .pd-top{margin-bottom:12px}
+  .dialog-close{width:38px;height:38px}
+  /* photo column sized from the screen height so the popup never grows taller than the window */
+  .pd-main{grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+  .pd-gallery{position:static;width:min(440px,calc((100dvh - 210px) * .8));display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+  .pd-gallery .dialog-media{grid-column:1/-1;aspect-ratio:4/5;max-height:none}
+  .pd-gallery .pd-thumbs{grid-column:1;padding:0}
+  .pd-gallery .pd-thumbs[hidden]{display:block;visibility:hidden;height:0}
+  .pd-gallery .pd-thumb{width:46px}
+  .pd-gallery .pd-gallery-foot{grid-column:2}
+  .pd-small-btn{min-height:36px;padding:0 12px;font-size:11px}
+
+  .pd-info{gap:12px}
+  .pd-head{gap:4px}
+  .pd-head h2{font-size:clamp(24px,2.4vw,30px)}
+  .pd-buy{gap:12px;padding:16px 18px;border-radius:18px}
+  .pd-buy .dialog-price strong{font-size:clamp(32px,3.2vw,40px)}
+  .pd-buy-top{flex-wrap:nowrap}
+  .code-chip{min-height:36px;flex:none}
+  .pd-cta{min-height:52px !important;font-size:14px}
+  .pd-order-hint{margin:-4px 0 0;font-size:12px}
+  /* guarantees: slim one-line row instead of big tiles */
+  .pd-buy .pd-trust{display:flex;flex-wrap:wrap;gap:6px 14px}
+  .pd-buy .pd-trust li{flex-direction:row;min-height:0;padding:0;background:none;box-shadow:none;gap:6px;font-size:12px;color:var(--r-muted)}
+  .pd-buy .pd-trust li:hover{background:none;transform:none;color:#fff}
+  .pd-buy .pd-trust svg{width:15px !important;height:15px !important}
+  .pd-rating-link{margin:0;font-size:12px}
+  .pd .pd-features svg{width:26px !important;height:26px !important;padding:6px}
+  .pd-features ul{gap:8px 12px}
+  .pd-features li{font-size:13px}
+}
+/* short laptop screens: a bit tighter still */
+@media (min-width:821px) and (max-height:760px){
+  .pd-gallery{width:min(400px,calc((100dvh - 190px) * .8))}
+  .pd-cta{min-height:46px !important}
+  .pd-order-hint{display:none}
+}
