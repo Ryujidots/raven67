@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Raven67 R monogram</title>
+  <desc id="desc">A clearly recognizable angular capital R in neon purple and silver, on a dark background.</desc>
+  <defs>
+    <radialGradient id="background" cx="50%" cy="42%" r="75%">
+      <stop offset="0" stop-color="#1b0730"/>
+      <stop offset="1" stop-color="#030207"/>
+    </radialGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2d6ff"/>
+      <stop offset=".3" stop-color="#bd65ff"/>
+      <stop offset=".7" stop-color="#811cff"/>
+      <stop offset="1" stop-color="#4c0a9b"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".5" stop-color="#e8e5f4"/>
+      <stop offset="1" stop-color="#bcb2d6"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c20ff"/>
+      <stop offset=".45" stop-color="#e4a7ff"/>
+      <stop offset="1" stop-color="#5d0ebd"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="smallGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="84" fill="url(#background)"/>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#38105e" stroke-width="2"/>
+  <g fill="none" stroke="url(#ring)" stroke-linecap="round" filter="url(#smallGlow)">
+    <path d="M130 155 A170 170 0 0 1 356 98" stroke-width="7"/>
+    <path d="M393 135 A170 170 0 0 1 413 315" stroke-width="6"/>
+    <path d="M378 371 A170 170 0 0 1 151 400" stroke-width="7"/>
+    <path d="M105 345 A170 170 0 0 1 96 218" stroke-width="5"/>
+  </g>
+  <g fill="#a84cff" filter="url(#smallGlow)">
+    <path d="M86 177l28-20-13 31z"/>
+    <path d="M405 353l25-22-11 31z"/>
+    <path d="M127 405l21-12-12 22z"/>
+  </g>
+  <!-- Recognizable capital R: vertical stem, closed upper bowl, and diagonal leg -->
+  <path d="M142 111 H283
+           C359 111 398 151 398 214
+           C398 264 373 298 330 313
+           L402 401 H312
+           L240 309 H222 V401 H142 Z"
+        fill="#17052a" stroke="#2b0a49" stroke-width="12" stroke-linejoin="round" transform="translate(7 9)"/>
+  <path d="M132 101 H273
+           C349 101 388 141 388 204
+           C388 254 363 288 320 303
+           L392 391 H302
+           L230 299 H212 V391 H132 Z"
+        fill="url(#silver)" stroke="#e4c9ff" stroke-width="3" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Purple face on the main stem, while preserving the unmistakable R silhouette -->
+  <path d="M132 101 H197 V391 H132 Z" fill="url(#purple)"/>
+  <!-- Purple inset edge defines the bowl and silver diagonal leg -->
+  <path d="M197 151 H270
+           C307 151 333 166 333 204
+           C333 241 307 253 270 253 H212 V299 H230
+           L302 391 H392 L320 303
+           C363 288 388 254 388 204
+           C388 141 349 101 273 101 H197 Z"
+        fill="url(#silver)" opacity=".98"/>
+  <!-- Bowl counter: dark opening makes the letter read clearly as R -->
+  <path d="M197 151 H268
+           C309 151 333 168 333 204
+           C333 240 309 253 268 253 H197 Z" fill="#0b0413"/>
+  <path d="M148 116H270 C342 116 379 151 379 204 C379 244 359 272 322 288"
+        fill="none" stroke="#fff0ff" stroke-width="3" opacity=".75"/>
+  <path d="M235 299L302 391" fill="none" stroke="#9d37ff" stroke-width="5" filter="url(#smallGlow)"/>
+  <path d="M147 119H185V365" fill="none" stroke="#fff" stroke-width="3" opacity=".35"/>
+</svg>

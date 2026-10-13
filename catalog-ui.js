@@ -31,28 +31,6 @@ const make = (tag, className = "", text) => {
   return element;
 };
 
-// Which tab a product belongs to: "peds", "clothing" or "free" (Free Ped tab)
-function collectionOf(product) {
-  const category = String(product.category || "").toLowerCase();
-  return category.startsWith("clothing") ? "clothing" : category.startsWith("free") ? "free" : "peds";
-}
-const isFree = (product) => collectionOf(product) === "free";
-// "Free Ped DEATH" → "DEATH" (the FREE badge already says it's free)
-function displayName(product) {
-  const name = String(product.name || "").trim();
-  if (!isFree(product)) return name || "Custom character";
-  return name.replace(/^free\s*peds?\b\s*[-:·|]?\s*/i, "").trim() || name || "Free ped";
-}
-const genderOf = (product) => /female/i.test(product.category || "") ? "Female" : /male/i.test(product.category || "") ? "Male" : /unisex/i.test(product.category || "") ? "Unisex" : "";
-// "New" = added in the last 7 days
-const NEW_DAYS = 7;
-function isNew(product) {
-  if (product.isSample || !product.created_at) return false;
-  const added = Date.parse(product.created_at);
-  return Number.isFinite(added) && Date.now() - added < NEW_DAYS * 24 * 60 * 60 * 1000 && Date.now() >= added - 60000;
-}
-const COLLECTION_NAMES = { peds: ["ped", "peds"], clothing: ["clothing item", "clothing items"], free: ["free ped", "free peds"] };
-
 function placeholderFor(product) {
   const color = product.accent || "#9868f2";
   const code = String(product.sampleCode || "R67").replace(/[^a-z0-9-]/gi, "");
@@ -71,7 +49,6 @@ function normalizeTags(item) {
   const original = Number(item.originalPrice ?? item.original_price);
   if (category && !tags.some((tag) => String(tag).toLowerCase() === category.toLowerCase())) tags.unshift(category);
   if (Number.isFinite(sale) && Number.isFinite(original) && original > sale && !tags.some((tag) => String(tag).toLowerCase() === "sale")) tags.push("Sale");
-  if (isNew(item) && !tags.some((tag) => String(tag).toLowerCase() === "new")) tags.unshift("New");
   return [...new Set(tags.map((tag) => String(tag).trim()).filter(Boolean))].slice(0, 8);
 }
 
@@ -94,8 +71,7 @@ function compareCatalogCodes(a, b) {
     const code = String(value || "").trim().toUpperCase();
     const ped = code.match(/^#(\d+)$/);
     const clothing = code.match(/^C-(\d+)$/);
-    const free = code.match(/^F-(\d+)$/);
-    return ped ? { group: 0, number: Number(ped[1]) } : clothing ? { group: 1, number: Number(clothing[1]) } : free ? { group: 2, number: Number(free[1]) } : null;
+    return ped ? { group: 0, number: Number(ped[1]) } : clothing ? { group: 1, number: Number(clothing[1]) } : null;
   };
   const left = parse(a.productCode);
   const right = parse(b.productCode);
@@ -109,9 +85,10 @@ function currentProducts() {
   const query = searchInput.value.trim().toLowerCase();
   return products.filter((product) => {
     const category = String(product.category || "Other");
+    const isClothing = category.toLowerCase().startsWith("clothing");
     const gender = category.toLowerCase().includes("female") ? "female" : category.toLowerCase().includes("male") ? "male" : "other";
     const searchable = [product.name, product.productCode, product.modelName, category, product.description, ...product.tags].join(" ").toLowerCase();
-    return collectionOf(product) === activeCollection
+    return (activeCollection === "clothing" ? isClothing : !isClothing)
       && (activeGender === "all" || gender === activeGender)
       && (categorySelect.value === "all" || category === categorySelect.value)
       && (!activeTag || product.tags.some((tag) => tag.toLowerCase() === activeTag.toLowerCase()))
@@ -121,7 +98,7 @@ function currentProducts() {
 
 function fillCategories() {
   const selected = categorySelect.value;
-  const categories = [...new Set(products.filter((product) => collectionOf(product) === activeCollection).map((product) => product.category || "Other"))].sort((a, b) => a.localeCompare(b));
+  const categories = [...new Set(products.filter((product) => (String(product.category || "Other").toLowerCase().startsWith("clothing")) === (activeCollection === "clothing")).map((product) => product.category || "Other"))].sort((a, b) => a.localeCompare(b));
   categorySelect.replaceChildren(make("option", "", "All categories"));
   categorySelect.options[0].value = "all";
   for (const category of categories) {
@@ -135,7 +112,7 @@ function fillCategories() {
 function renderTagFilters() {
   tagFilters.replaceChildren();
   const frequencies = new Map();
-  products.filter((product) => collectionOf(product) === activeCollection).forEach((product) => product.tags.forEach((tag) => frequencies.set(tag, (frequencies.get(tag) || 0) + 1)));
+  products.forEach((product) => product.tags.forEach((tag) => frequencies.set(tag, (frequencies.get(tag) || 0) + 1)));
   const popular = [...frequencies].filter(([tag]) => tag.toLowerCase() !== "sample").sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6);
   if (!popular.length) return;
   tagFilters.append(make("span", "tag-label", "POPULAR TAGS"));
@@ -186,22 +163,15 @@ function buildCard(product) {
 
   const sale = Number(product.price);
   const original = Number(product.originalPrice);
-  const free = isFree(product);
-  const hasPrice = !free && product.price !== null && product.price !== undefined && Number.isFinite(sale);
+  const hasPrice = product.price !== null && product.price !== undefined && Number.isFinite(sale);
   const onSale = hasPrice && Number.isFinite(original) && original > sale;
   if (product.isSample) photo.append(make("span", "sale sample-badge", "DEMO SAMPLE"));
   else if (product.is_sold) photo.append(make("span", "sale sold-badge", "SOLD"));
-  else if (isFree(product)) photo.append(make("span", "sale free-badge", "FREE"));
-  if (isNew(product) && !product.is_sold) {
-    const badge = make("span", "new-badge", "NEW");
-    badge.setAttribute("aria-label", "Added this week");
-    photo.append(badge);
-  }
   else if (onSale) photo.append(make("span", "sale", `SALE · ${Math.round((1 - sale / original) * 100)}% OFF`));
 
   const details = make("div", "details");
   details.append(make("span", "type", product.category || "Custom Peds"));
-  const title = make("button", "product-name", displayName(product));
+  const title = make("button", "product-name", product.name || "Custom character");
   title.type = "button"; title.dataset.openId = product.id;
   title.setAttribute("aria-label", `View details for ${product.name || `this ${noun}`}`);
   details.append(title);
@@ -231,9 +201,7 @@ function buildCard(product) {
 
   const meta = make("div", "meta");
   meta.classList.toggle("on-sale", onSale);
-  if (free) {
-    meta.append(make("span", "price free-price", "FREE"));
-  } else if (hasPrice) {
+  if (hasPrice) {
     const price = make("span", "price", money.format(sale));
     if (onSale) price.append(make("del", "", money.format(original)));
     meta.append(price);
@@ -242,13 +210,8 @@ function buildCard(product) {
   }
   const action = product.is_sold
     ? make("span", "card-cta sold-cta", "SOLD OUT")
-    : product.isSample ? make("a", "card-cta secondary-cta", "Add your own in Admin")
-    : free ? make("a", "card-cta download-cta", "Get it free")
-    : make("button", "card-cta", "View details");
-  if (action.tagName === "A" && free) {
-    action.href = DISCORD_URL; action.target = "_blank"; action.rel = "noopener noreferrer";
-    action.setAttribute("aria-label", `Get ${product.name || "this free ped"} free on our Discord (opens in a new tab)`);
-  } else if (action.tagName === "A") action.href = "./admin.html";
+    : product.isSample ? make("a", "card-cta secondary-cta", "Add your own in Admin") : make("button", "card-cta", "View details");
+  if (action.tagName === "A") action.href = "./admin.html";
   if (action.tagName === "BUTTON") {
     action.type = "button";
     action.dataset.openId = product.id;
@@ -259,39 +222,8 @@ function buildCard(product) {
   return card;
 }
 
-/* Free Peds teaser: shown above the Peds & Clothing catalogs with the newest free peds */
-const teaser = document.querySelector("#free-teaser");
-function renderFreeTeaser() {
-  if (!teaser) return;
-  const free = products.filter((product) => isFree(product) && !product.is_sold && !product.isSample)
-    .sort((a, b) => (Date.parse(b.created_at || "") || 0) - (Date.parse(a.created_at || "") || 0));
-  teaser.hidden = !free.length || activeCollection === "free";
-  if (teaser.hidden) return;
-  const list = teaser.querySelector(".ft-list");
-  list.replaceChildren(...free.slice(0, 2).map((product) => {
-    const item = make("button", "ft-item");
-    item.type = "button";
-    item.dataset.openId = product.id;
-    item.setAttribute("aria-label", `View free ped ${product.name || ""}`);
-    const image = make("img"); image.src = product.image; image.alt = ""; image.loading = "lazy";
-    image.onerror = () => { image.src = placeholderFor({ ...product, sampleCode: "R67" }); };
-    const text = make("span", "ft-item-text");
-    const gender = genderOf(product);
-    text.append(make("strong", "", displayName(product)), make("small", "", gender ? `${gender} ped` : "Ped"));
-    item.append(image, text, make("span", "ft-free", "FREE"));
-    return item;
-  }));
-  const more = teaser.querySelector("[data-ft-count]");
-  if (more) more.textContent = free.length > 2 ? `+${free.length - 2} more on Discord` : "";
-}
-teaser?.addEventListener("click", (event) => {
-  const item = event.target.closest("[data-open-id]");
-  if (item) openDetails(products.find((product) => String(product.id) === item.dataset.openId), item);
-});
-
 function render() {
   fillCategories();
-  renderFreeTeaser();
   const visible = currentProducts();
   if (sortSelect.value !== "code") {
     const direction = sortSelect.value === "newest" ? -1 : 1;
@@ -303,15 +235,15 @@ function render() {
     });
   }
   grid.replaceChildren();
-  const [itemType, itemTypes] = COLLECTION_NAMES[activeCollection];
-  count.textContent = `${visible.length} ${visible.length === 1 ? itemType : itemTypes}`;
+  const itemType = activeCollection === "clothing" ? "clothing item" : "ped";
+  count.textContent = `${visible.length} ${visible.length === 1 ? itemType : `${itemType}s`}`;
   const pageCount = Math.ceil(visible.length / PAGE_SIZE);
   currentPage = Math.min(Math.max(currentPage, 1), Math.max(pageCount, 1));
   if (!visible.length) {
     const empty = make("div", "empty");
-    const collectionProducts = products.filter((product) => collectionOf(product) === activeCollection);
-    empty.append(make("strong", "", collectionProducts.length ? `No ${itemTypes} match those filters` : activeCollection === "free" ? "No free peds yet" : `No ${activeCollection === "clothing" ? "clothing" : "peds"} in this catalog yet`));
-    empty.append(make("span", "", collectionProducts.length ? "Try a different search or clear your filters." : activeCollection === "free" ? "New free peds will show up here — check back soon or join our Discord." : "Add an item from the Admin page to start this collection."));
+    const collectionProducts = products.filter((product) => (String(product.category || "Other").toLowerCase().startsWith("clothing")) === (activeCollection === "clothing"));
+    empty.append(make("strong", "", collectionProducts.length ? `No ${activeCollection === "clothing" ? "clothing items" : "peds"} match those filters` : `No ${activeCollection === "clothing" ? "clothing" : "peds"} in this catalog yet`));
+    empty.append(make("span", "", collectionProducts.length ? "Try a different search or clear your filters." : "Add an item from the Admin page to start this collection."));
     if (collectionProducts.length) {
       const clear = make("button", "btn ghost", "Clear filters");
       clear.type = "button";
@@ -324,19 +256,19 @@ function render() {
     card.style.setProperty("--card-index", index);
     grid.append(card);
   });
-  renderPagination(visible.length, itemType, itemTypes);
+  renderPagination(visible.length, itemType);
   renderTagFilters();
   renderActiveFilters();
 }
 
-function renderPagination(total, itemType, itemTypes) {
+function renderPagination(total, itemType) {
   pagination.replaceChildren();
   const pageCount = Math.ceil(total / PAGE_SIZE);
   pagination.classList.toggle("hide", pageCount <= 1);
   if (pageCount <= 1) return;
   const first = (currentPage - 1) * PAGE_SIZE + 1;
   const last = Math.min(currentPage * PAGE_SIZE, total);
-  pagination.append(make("span", "pagination-summary", `Showing ${first}–${last} of ${total} ${total === 1 ? itemType : itemTypes}`));
+  pagination.append(make("span", "pagination-summary", `Showing ${first}–${last} of ${total} ${itemType}${total === 1 ? "" : "s"}`));
   const controls = make("div", "pagination-controls");
   const addButton = (label, page, options = {}) => {
     if (options.ellipsis) { controls.append(make("span", "pagination-ellipsis", "…")); return; }
@@ -375,8 +307,6 @@ const ICONS = {
   shirt: '<path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z"/>',
   percent: '<path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
   chevron: '<path d="m9 18 6-6-6-6"/>',
-  spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
-  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
 };
 
 function icon(name) {
@@ -392,34 +322,13 @@ const isClothing = (product) => String(product.category || "").toLowerCase().sta
 function tagIcon(tag, product) {
   const value = tag.toLowerCase();
   if (value === "sale") return "percent";
-  if (value === "new") return "spark";
   if (isClothing(product) && value === String(product.category).toLowerCase()) return "shirt";
   if (["male", "female", "unisex", "baby"].includes(value) || value.endsWith("peds")) return "users";
   return "tag";
 }
 
-function setCollection(name) {
-  // free peds have no tab on the site (they're claimed on Discord), so fall back to Peds
-  activeCollection = collectionButtons.some((button) => button.dataset.collection === name) ? name : "peds";
-  collectionButtons.forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.collection === activeCollection)));
-  const tabs = collectionButtons[0]?.parentElement;
-  if (tabs) tabs.dataset.active = activeCollection;
-  genderFilter?.classList.toggle("hide", activeCollection === "clothing");
-  window.dispatchEvent(new CustomEvent("raven67:collection", { detail: activeCollection }));
-}
-
-// Used by the top menu (PEDS / FREE PED) to open a collection
-window.raven67SetCollection = (name) => {
-  if (name === activeCollection) return;
-  setCollection(name);
-  activeGender = "all"; activeTag = ""; currentPage = 1; searchInput.value = ""; categorySelect.value = "all";
-  genderButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.gender === "all")));
-  render();
-};
-
-function showCatalog({ category = "all", collection } = {}) {
+function showCatalog({ category = "all" } = {}) {
   dialog.close();
-  if (collection) setCollection(collection);
   activeGender = "all"; activeTag = ""; currentPage = 1; searchInput.value = ""; sortSelect.value = "code";
   genderButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.gender === "all")));
   fillCategories();
@@ -432,7 +341,7 @@ function showCatalog({ category = "all", collection } = {}) {
 
 function renderRelated(product) {
   const wrap = document.querySelector("#dialog-related-wrap");
-  const pool = products.filter((item) => item.id !== product.id && collectionOf(item) === collectionOf(product) && !item.is_sold);
+  const pool = products.filter((item) => item.id !== product.id && isClothing(item) === isClothing(product) && !item.is_sold);
   const related = [...pool.filter((item) => item.category === product.category), ...pool.filter((item) => item.category !== product.category)].slice(0, 4);
   document.querySelector("#dialog-related").replaceChildren(...related.map((item) => {
     const button = make("button", "pd-related-item");
@@ -441,7 +350,7 @@ function renderRelated(product) {
     const image = make("img");
     image.src = item.image; image.alt = ""; image.loading = "lazy";
     image.onerror = () => { image.src = placeholderFor({ ...item, sampleCode: "R67" }); };
-    button.append(image, make("span", "", displayName(item)));
+    button.append(image, make("span", "", item.name || "Custom character"));
     button.addEventListener("click", () => openDetails(item, opener));
     return button;
   }));
@@ -453,20 +362,17 @@ function openDetails(product, trigger) {
   opener = trigger;
   currentDetail = product;
   const clothing = isClothing(product);
-  const free = isFree(product);
-  const collection = collectionOf(product);
   const category = product.category || "Custom Peds";
 
   const crumbs = document.querySelector("#dialog-crumbs");
-  const crumbCollection = free ? "peds" : collection; // there's no Free tab to go back to
   crumbs.replaceChildren();
-  for (const [label, target] of (free ? [["Peds", { collection: "peds" }]] : [[clothing ? "Clothing" : "Peds", { collection: crumbCollection }], [category, { category, collection: crumbCollection }]])) {
+  for (const [label, target] of [[clothing ? "Clothing" : "Peds", {}], [category, { category }]]) {
     const link = make("button", "pd-crumb", label);
     link.type = "button";
     link.addEventListener("click", () => showCatalog(target));
     crumbs.append(link, icon("chevron"));
   }
-  const current = make("span", "pd-crumb is-current", displayName(product));
+  const current = make("span", "pd-crumb is-current", product.name || "Custom character");
   current.setAttribute("aria-current", "page");
   crumbs.append(current);
 
@@ -476,26 +382,20 @@ function openDetails(product, trigger) {
   image.onerror = () => { image.src = placeholderFor({ ...product, sampleCode: "R67" }); };
   media.append(image);
 
-  const categoryEl = document.querySelector("#dialog-category");
-  categoryEl.textContent = free ? `${genderOf(product) || "Community"} ped` : category;
-  if (isNew(product)) categoryEl.append(make("span", "pd-new", "NEW"));
-  document.querySelector("#dialog-title").textContent = displayName(product);
+  document.querySelector("#dialog-category").textContent = category;
+  document.querySelector("#dialog-title").textContent = product.name || "Custom character";
   const model = document.querySelector("#dialog-model");
   model.textContent = product.modelName ? `Model name · ${product.modelName}` : "";
   model.classList.toggle("hide", !product.modelName);
   document.querySelector("#dialog-code").textContent = product.productCode || "Not assigned";
-  // free peds are claimed in the Discord free-ped channel, so no code to copy
-  document.querySelector("#copy-code").classList.toggle("hide", !product.productCode || free);
-  document.querySelector("#dialog-code").closest(".code-row")?.classList.toggle("hide", free);
+  document.querySelector("#copy-code").classList.toggle("hide", !product.productCode);
   document.querySelector("#copy-code-status").textContent = "";
 
   const dialogPrice = document.querySelector("#dialog-price");
   dialogPrice.replaceChildren();
   const salePrice = Number(product.price);
   const originalPrice = Number(product.originalPrice);
-  if (free) {
-    dialogPrice.append(make("strong", "free-price", "FREE"));
-  } else if (product.price !== null && product.price !== undefined && Number.isFinite(salePrice)) {
+  if (product.price !== null && product.price !== undefined && Number.isFinite(salePrice)) {
     dialogPrice.append(make("strong", "", money.format(salePrice)));
     if (Number.isFinite(originalPrice) && originalPrice > salePrice) {
       dialogPrice.append(make("del", "", money.format(originalPrice)), make("span", "pd-save", `Save ${Math.round((1 - salePrice / originalPrice) * 100)}%`));
@@ -505,10 +405,7 @@ function openDetails(product, trigger) {
   const description = document.querySelector("#dialog-description");
   description.textContent = product.description || "";
   description.classList.toggle("hide", !product.description);
-  const shownTags = free
-    ? [...product.tags.filter((tag) => tag !== product.category && !/^free/i.test(tag)), genderOf(product)].filter(Boolean)
-    : product.tags;
-  document.querySelector("#dialog-tags").replaceChildren(...shownTags.map((tag) => {
+  document.querySelector("#dialog-tags").replaceChildren(...product.tags.map((tag) => {
     const badge = make("span", "dialog-tag");
     badge.append(icon(tagIcon(tag, product)), document.createTextNode(tag));
     return badge;
@@ -519,7 +416,7 @@ function openDetails(product, trigger) {
   document.querySelector("#dialog-install").textContent = installText;
   const download = document.querySelector("#dialog-download");
   const downloadUrl = safeOptionalLink(product.download_url || product.downloadUrl);
-  download.classList.toggle("hide", !downloadUrl || product.isSample || free); // free peds are claimed on Discord
+  download.classList.toggle("hide", !downloadUrl || product.isSample);
   download.href = downloadUrl || "#";
 
   const rating = document.querySelector("#dialog-rating");
@@ -542,25 +439,8 @@ function openDetails(product, trigger) {
   } else if (product.isSample) {
     discord.href = "./admin.html"; discord.target = "_self"; discordLabel.textContent = "Replace demo items in Admin";
   } else {
-    discord.href = DISCORD_URL; discord.target = "_blank"; discordLabel.textContent = free ? "Claim on Discord" : "Order on Discord";
+    discord.href = DISCORD_URL; discord.target = "_blank"; discordLabel.textContent = "Order on Discord";
   }
-  discord.classList.remove("is-download");
-  const speed = document.querySelector("[data-trust-speed]");
-  if (speed) speed.lastChild.textContent = free ? "Members-only channel" : "Files within 24h";
-
-  // short "how to" so the next step is obvious (and the panel isn't empty)
-  const name = displayName(product);
-  const steps = free
-    ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are posted there."], [`Download ${name}`, "Add it to your server and enjoy."]]
-    : product.isSample ? []
-    : [["Copy the catalog code", product.productCode ? `This ${clothing ? "item" : "ped"} is ${product.productCode}.` : "You'll find it on every listing."], ["Open a ticket on Discord", "Send the code and we'll confirm payment."], ["Get your files", "Delivered in your ticket within 24 hours."]];
-  document.querySelector("#dialog-steps").classList.toggle("hide", !steps.length);
-  document.querySelector("#dialog-steps-title").textContent = free ? "How to claim" : "How to order";
-  document.querySelector("#dialog-steps-list").replaceChildren(...steps.map(([title, text]) => {
-    const li = make("li");
-    li.append(make("strong", "", title), make("span", "", text));
-    return li;
-  }));
 
   renderRelated(product);
   genderFilter?.classList.toggle("hide", activeCollection === "clothing");
@@ -583,8 +463,8 @@ for (const imageArea of [grid, document.querySelector("#dialog-media")]) {
   });
 }
 document.querySelector("#dialog-close").addEventListener("click", () => dialog.close());
-document.querySelector("#dialog-similar").addEventListener("click", () => showCatalog(currentDetail && isFree(currentDetail) ? { collection: "peds" } : { category: currentDetail?.category, collection: currentDetail && collectionOf(currentDetail) }));
-document.querySelector("#dialog-all").addEventListener("click", () => showCatalog({ collection: currentDetail && !isFree(currentDetail) ? collectionOf(currentDetail) : "peds" }));
+document.querySelector("#dialog-similar").addEventListener("click", () => showCatalog({ category: currentDetail?.category }));
+document.querySelector("#dialog-all").addEventListener("click", () => showCatalog());
 dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
 dialog.addEventListener("close", () => { if (opener?.isConnected) opener.focus(); });
 
@@ -610,19 +490,14 @@ genderButtons.forEach((button) => button.addEventListener("click", () => {
 
 collectionButtons.forEach((button) => button.addEventListener("click", () => {
   currentPage = 1;
-  setCollection(button.dataset.collection);
+  activeCollection = button.dataset.collection;
   activeGender = "all";
   activeTag = "";
   categorySelect.value = "all";
   genderButtons.forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.gender === "all")));
+  collectionButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
   render();
 }));
-
-// Lets other parts of the page (e.g. the hero "Latest drop" card) open a product popup
-window.raven67OpenProduct = (id, trigger = null) => {
-  const product = products.find((item) => String(item.id) === String(id));
-  if (product) openDetails(product, trigger);
-};
 
 window.addEventListener("catalog-products-loaded", (event) => {
   const uploaded = (event.detail || []).filter((item) => item.image_url || item.image).map((item) => normalizeProduct(item));
@@ -661,4 +536,3 @@ syncHeaderDepth();
 window.addEventListener("scroll", syncHeaderDepth, { passive: true });
 
 renderSkeleton();
-if (location.hash === "#free") setCollection("free"); // opened from a #free link
