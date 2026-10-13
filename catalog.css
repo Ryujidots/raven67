@@ -128,7 +128,7 @@ button,input,select{font:inherit;color:inherit}
 /* Peds / Clothing switch: game-style tabs on a baseline,
    with an angled glowing panel + underline that slides to the active tab */
 .collection-tabs{
-  position:relative;display:grid;grid-template-columns:repeat(2,220px);
+  position:relative;display:grid;grid-template-columns:repeat(3,220px);
   margin:0 0 28px;border-bottom:1px solid var(--r-line);
 }
 .tab-glider{position:absolute;top:0;bottom:-1px;left:0;width:220px;pointer-events:none;transition:transform .5s var(--ease-out)}
@@ -144,7 +144,8 @@ button,input,select{font:inherit;color:inherit}
   background:linear-gradient(90deg,transparent,var(--r-purple-3),transparent);
   box-shadow:0 0 12px var(--r-glow),0 0 24px var(--r-glow);
 }
-.collection-tabs[data-active=clothing] .tab-glider{transform:translateX(100%)}
+.collection-tabs[data-active=head] .tab-glider{transform:translateX(100%)}
+.collection-tabs[data-active=clothing] .tab-glider{transform:translateX(200%)}
 .collection-tabs[data-active=free] .tab-glider{transform:translateX(200%)}
 
 .collection-tabs button{
@@ -557,8 +558,8 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
 }
 @media (max-width:720px){
   .gallery-heading p{display:none}
-  .collection-tabs{grid-template-columns:1fr 1fr}
-  .tab-glider{width:50%}
+  .collection-tabs{grid-template-columns:repeat(3,1fr)}
+  .tab-glider{width:33.334%}
   .collection-tabs button{min-height:52px;padding:0 8px;gap:8px}
   .tab-text strong{font-size:13px;letter-spacing:.14em}
   /* on phones the stacked filters would cover too much screen if they stuck */

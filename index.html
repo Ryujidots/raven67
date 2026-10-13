@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=33">
-<link rel="stylesheet" href="./raven67-theme.css?v=33">
+<link rel="stylesheet" href="./catalog.css?v=34">
+<link rel="stylesheet" href="./raven67-theme.css?v=34">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -175,7 +175,7 @@
 <section class="r67-tab-panel" data-tab-panel="peds" hidden id="tab-peds" aria-label="Peds catalog">
   <section class="wrap gallery" id="gallery">
     <div class="gallery-heading scroll-reveal">
-      <div><span class="eyebrow">RAVEN67 COLLECTION</span><h2>Browse the collection</h2><p>Explore peds and clothing separately, then order on Discord. Free peds are waiting there too.</p></div>
+      <div><span class="eyebrow">RAVEN67 COLLECTION</span><h2>Browse the collection</h2><p>Explore full peds, head-only peds and clothing, then order on Discord. Free peds are waiting there too.</p></div>
       <span class="count" id="gallery-count" aria-live="polite">Loading…</span>
     </div>
     <div class="collection-tabs scroll-reveal" role="group" aria-label="Choose catalog" data-active="peds">
@@ -183,6 +183,10 @@
       <button type="button" data-collection="peds" aria-pressed="true">
         <svg class="tab-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
         <span class="tab-text"><strong>Peds</strong><small>Ready-made FiveM characters</small></span>
+      </button>
+      <button type="button" data-collection="head" aria-pressed="false">
+        <svg class="tab-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="6.5"/><path d="M9.5 9.5h.01M14.5 9.5h.01M9.8 13a3.2 3.2 0 0 0 4.4 0M8.5 16.2 8 21h8l-.5-4.8"/></svg>
+        <span class="tab-text"><strong>Head Only</strong><small>Faces &amp; heads</small></span>
       </button>
       <button type="button" data-collection="clothing" aria-pressed="false">
         <svg class="tab-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z"/></svg>
@@ -441,7 +445,7 @@
   window.addEventListener('catalog-products-loaded', (event) => {
     const items = (event.detail || []).filter(item => item && (item.image_url || item.image));
     // paid peds only (clothing and free peds are not counted here)
-    const peds = items.filter(item => !/^(clothing|free)/i.test(String(item.category || '')));
+    const peds = items.filter(item => !/^(clothing|free|head)/i.test(String(item.category || '')));
     const available = peds.filter(item => !item.is_sold);
 
     const prices = available
@@ -555,7 +559,7 @@
 })();
 </script>
 
-<!-- Moves the highlight on the Peds / Clothing switch -->
+<!-- Moves the highlight on the Peds / Head Only / Clothing switch -->
 <script>
 document.addEventListener('click', (event) => {
   const tab = event.target.closest('[data-collection]');
@@ -585,9 +589,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=33"></script>
-<script type="module" src="./catalog-ui.js?v=33"></script>
-<script type="module" src="./catalog-client.js?v=33"></script>
-<script type="module" src="./reviews-client.js?v=33"></script>
+<script type="module" src="./hero-reviews.js?v=34"></script>
+<script type="module" src="./catalog-ui.js?v=34"></script>
+<script type="module" src="./catalog-client.js?v=34"></script>
+<script type="module" src="./reviews-client.js?v=34"></script>
 </body>
 </html>

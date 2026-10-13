@@ -34,7 +34,7 @@ const make = (tag, className = "", text) => {
 // Which tab a product belongs to: "peds", "clothing" or "free" (Free Ped tab)
 function collectionOf(product) {
   const category = String(product.category || "").toLowerCase();
-  return category.startsWith("clothing") ? "clothing" : category.startsWith("free") ? "free" : "peds";
+  return category.startsWith("clothing") ? "clothing" : category.startsWith("free") ? "free" : category.startsWith("head") ? "head" : "peds";
 }
 const isFree = (product) => collectionOf(product) === "free";
 // "Free Ped DEATH" → "DEATH" (the FREE badge already says it's free)
@@ -51,7 +51,10 @@ function isNew(product) {
   const added = Date.parse(product.created_at);
   return Number.isFinite(added) && Date.now() - added < NEW_DAYS * 24 * 60 * 60 * 1000 && Date.now() >= added - 60000;
 }
-const COLLECTION_NAMES = { peds: ["ped", "peds"], clothing: ["clothing item", "clothing items"], free: ["free ped", "free peds"] };
+const COLLECTION_NAMES = { peds: ["ped", "peds"], head: ["head", "heads"], clothing: ["clothing item", "clothing items"], free: ["free ped", "free peds"] };
+const isHead = (product) => collectionOf(product) === "head";
+// what to call one product in sentences: "ped", "head" or "item"
+const nounOf = (product) => isClothing(product) ? "item" : isHead(product) ? "head" : "ped";
 
 function placeholderFor(product) {
   const color = product.accent || "#9868f2";
@@ -95,7 +98,8 @@ function compareCatalogCodes(a, b) {
     const ped = code.match(/^#(\d+)$/);
     const clothing = code.match(/^C-(\d+)$/);
     const free = code.match(/^F-(\d+)$/);
-    return ped ? { group: 0, number: Number(ped[1]) } : clothing ? { group: 1, number: Number(clothing[1]) } : free ? { group: 2, number: Number(free[1]) } : null;
+    const head = code.match(/^H-(\d+)$/);
+    return ped ? { group: 0, number: Number(ped[1]) } : head ? { group: 1, number: Number(head[1]) } : clothing ? { group: 2, number: Number(clothing[1]) } : free ? { group: 3, number: Number(free[1]) } : null;
   };
   const left = parse(a.productCode);
   const right = parse(b.productCode);
@@ -169,7 +173,7 @@ function renderActiveFilters() {
 }
 
 function buildCard(product) {
-  const noun = isClothing(product) ? "item" : "ped";
+  const noun = nounOf(product);
   const card = make("article", "card");
   const photo = make("div", "photo");
   const open = make("button", "card-image-button");
@@ -310,7 +314,7 @@ function render() {
   if (!visible.length) {
     const empty = make("div", "empty");
     const collectionProducts = products.filter((product) => collectionOf(product) === activeCollection);
-    empty.append(make("strong", "", collectionProducts.length ? `No ${itemTypes} match those filters` : activeCollection === "free" ? "No free peds yet" : `No ${activeCollection === "clothing" ? "clothing" : "peds"} in this catalog yet`));
+    empty.append(make("strong", "", collectionProducts.length ? `No ${itemTypes} match those filters` : activeCollection === "free" ? "No free peds yet" : `No ${activeCollection === "clothing" ? "clothing" : activeCollection === "head" ? "head-only items" : "peds"} in this catalog yet`));
     empty.append(make("span", "", collectionProducts.length ? "Try a different search or clear your filters." : activeCollection === "free" ? "New free peds will show up here — check back soon or join our Discord." : "Add an item from the Admin page to start this collection."));
     if (collectionProducts.length) {
       const clear = make("button", "btn ghost", "Clear filters");
@@ -460,7 +464,7 @@ function openDetails(product, trigger) {
   const crumbs = document.querySelector("#dialog-crumbs");
   const crumbCollection = free ? "peds" : collection; // there's no Free tab to go back to
   crumbs.replaceChildren();
-  for (const [label, target] of (free ? [["Peds", { collection: "peds" }]] : [[clothing ? "Clothing" : "Peds", { collection: crumbCollection }], [category, { category, collection: crumbCollection }]])) {
+  for (const [label, target] of (free ? [["Peds", { collection: "peds" }]] : [[clothing ? "Clothing" : isHead(product) ? "Head Only" : "Peds", { collection: crumbCollection }], [category, { category, collection: crumbCollection }]])) {
     const link = make("button", "pd-crumb", label);
     link.type = "button";
     link.addEventListener("click", () => showCatalog(target));
@@ -534,7 +538,7 @@ function openDetails(product, trigger) {
   const discord = document.querySelector("#dialog-discord");
   const discordLabel = document.querySelector("#dialog-discord-label");
   const soldNote = document.querySelector("#dialog-sold-note");
-  soldNote.textContent = `This ${clothing ? "item" : "ped"} has been sold and is no longer available.`;
+  soldNote.textContent = `This ${nounOf(product)} has been sold and is no longer available.`;
   soldNote.classList.toggle("hide", !product.is_sold);
   discord.classList.toggle("hide", Boolean(product.is_sold));
   if (product.is_sold) {
@@ -553,7 +557,7 @@ function openDetails(product, trigger) {
   const steps = free
     ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are posted there."], [`Download ${name}`, "Add it to your server and enjoy."]]
     : product.isSample ? []
-    : [["Copy the catalog code", product.productCode ? `This ${clothing ? "item" : "ped"} is ${product.productCode}.` : "You'll find it on every listing."], ["Open a ticket on Discord", "Send the code and we'll confirm payment."], ["Get your files", "Delivered in your ticket within 24 hours."]];
+    : [["Copy the catalog code", product.productCode ? `This ${nounOf(product)} is ${product.productCode}.` : "You'll find it on every listing."], ["Open a ticket on Discord", "Send the code and we'll confirm payment."], ["Get your files", "Delivered in your ticket within 24 hours."]];
   document.querySelector("#dialog-steps").classList.toggle("hide", !steps.length);
   document.querySelector("#dialog-steps-title").textContent = free ? "How to claim" : "How to order";
   document.querySelector("#dialog-steps-list").replaceChildren(...steps.map(([title, text]) => {
