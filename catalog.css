@@ -883,3 +883,16 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
   .pd-buy-top{flex-direction:column;align-items:flex-start}
 }
 @media (prefers-reduced-motion:reduce){ .pd-cta::after{animation:none} }
+
+/* ---- Popup typography: Orbitron for the name only; price + code in Chakra Petch (sharper, compact digits) ---- */
+.pd-head h2{font-weight:700;letter-spacing:.04em;line-height:1.05}
+.pd-buy .dialog-price strong{font-family:var(--f-ui);font-weight:700;font-size:clamp(38px,4.4vw,48px);letter-spacing:-.01em;line-height:1;font-variant-numeric:tabular-nums}
+.pd-buy .dialog-price strong.free-price{font-family:var(--f-head);font-weight:800;letter-spacing:.06em;font-size:clamp(32px,3.8vw,40px)}
+.pd-buy .dialog-price del{font-family:var(--f-ui);font-weight:500;font-size:16px}
+.pd-buy .pd-save{font-family:var(--f-ui)}
+.code-chip strong{font-family:var(--f-ui);font-weight:700;font-size:17px;letter-spacing:.06em}
+.pd-steps li strong{font-family:var(--f-ui);font-size:15px;letter-spacing:.03em}
+/* card prices too, for consistency */
+.meta .price{font-family:var(--f-ui);font-weight:700;font-size:21px;letter-spacing:0;font-variant-numeric:tabular-nums}
+.meta .price del{font-family:var(--f-ui)}
+.meta .free-price{font-family:var(--f-head);font-weight:800;font-size:18px;letter-spacing:.08em}
