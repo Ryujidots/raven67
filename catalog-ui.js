@@ -756,7 +756,7 @@ window.raven67OpenProduct = (id, trigger = null) => {
 window.addEventListener("catalog-products-loaded", (event) => {
   const uploaded = (event.detail || []).filter((item) => item.image_url || item.image).map((item) => normalizeProduct(item));
   products = (uploaded.length ? uploaded : SAMPLE_CATALOG.map((item) => normalizeProduct(item, true))).sort(compareCatalogCodes);
-  currentPage = 1;
+  if (!event.detail?.isRefresh) currentPage = 1; // a refresh keeps the visitor's page (render() clamps it)
   fillCategories();
   render();
 });
@@ -838,6 +838,26 @@ window.addEventListener("scroll", syncHeaderDepth, { passive: true });
     tools.before(sentinel);
     new IntersectionObserver(([entry]) => tools.classList.toggle("is-stuck", !entry.isIntersecting && entry.boundingClientRect.top < 120), { rootMargin: "-90px 0px 0px 0px" }).observe(sentinel);
   }
+})();
+
+/* ---------- Refresh button: reload the latest products without reloading the page ---------- */
+(() => {
+  const button = document.querySelector("#catalog-refresh");
+  if (!button) return;
+  const label = button.querySelector(".rf-text");
+  button.addEventListener("click", async () => {
+    if (button.classList.contains("is-loading") || typeof window.raven67ReloadCatalog !== "function") return;
+    button.classList.remove("is-done", "is-error");
+    button.classList.add("is-loading"); button.disabled = true; label.textContent = "Loading…";
+    const started = performance.now();
+    const ok = await window.raven67ReloadCatalog();
+    await new Promise((r) => setTimeout(r, Math.max(0, 650 - (performance.now() - started)))); // let the spin be seen
+    button.classList.remove("is-loading"); button.disabled = false;
+    button.classList.add(ok ? "is-done" : "is-error");
+    label.textContent = ok ? "Updated" : "Try again";
+    clearTimeout(button._t);
+    button._t = setTimeout(() => { button.classList.remove("is-done", "is-error"); label.textContent = "Refresh"; }, ok ? 1800 : 3000);
+  });
 })();
 
 renderSkeleton();
