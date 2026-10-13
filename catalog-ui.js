@@ -629,6 +629,10 @@ function openDetails(product, trigger) {
     discord.href = DISCORD_URL; discord.target = "_blank"; discordLabel.textContent = free ? "Claim on Discord" : "Order on Discord";
   }
   discord.classList.remove("is-download");
+  // free peds are grabbed from the free-peds channel, so the copied order message is for paid items only
+  const orderable = !product.is_sold && !product.isSample && !free;
+  discord.dataset.orderReady = orderable ? "1" : "";
+  document.querySelector("#dialog-order-hint")?.classList.toggle("hide", !orderable);
   const speed = document.querySelector("[data-trust-speed]");
   if (speed) speed.querySelector("span").textContent = free ? "Members-only channel" : "Files within 24h";
 
@@ -637,7 +641,7 @@ function openDetails(product, trigger) {
   const steps = free
     ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are posted there."], [`Download ${name}`, "Add it to your server and enjoy."]]
     : product.isSample ? []
-    : [["Copy the catalog code", product.productCode ? `This ${nounOf(product)} is ${product.productCode}.` : "You'll find it on every listing."], ["Open a ticket on Discord", "Send the code and we'll confirm payment."], ["Get your files", "Delivered in your ticket within 24 hours."]];
+    : [["Click “Order on Discord”", "Your order message (with the code) is copied for you."], ["Open a ticket and paste it", "Press Ctrl+V (or hold → Paste on phone) and send."], ["Get your files", "Delivered in your ticket within 24 hours."]];
   document.querySelector("#dialog-steps").classList.toggle("hide", !steps.length);
   document.querySelector("#dialog-steps-title").textContent = free ? "How to claim" : "How to order";
   document.querySelector("#dialog-steps-list").replaceChildren(...steps.map(([title, text]) => {
@@ -652,6 +656,42 @@ function openDetails(product, trigger) {
   dialog.scrollTop = 0;
   document.querySelector("#dialog-close").focus();
 }
+
+/* ---------- One-click order message: copied when "Order on Discord" is clicked ---------- */
+function orderMessage(product) {
+  const name = displayName(product);
+  const code = product.productCode && !name.toUpperCase().includes(product.productCode.toUpperCase()) ? ` (${product.productCode})` : "";
+  if (isFree(product)) return `Hi! I'd like to claim the free ped ${name}${code}.`;
+  const price = Number(product.price);
+  const priceText = product.price !== null && product.price !== undefined && product.price !== "" && Number.isFinite(price) ? ` — ${money.format(price)}` : "";
+  return `Hi! I'd like to order ${name}${code}${priceText}. Is it still available?`;
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch {}
+  try { // older browsers / blocked clipboard API
+    const area = document.createElement("textarea");
+    area.value = text; area.setAttribute("readonly", ""); area.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+    dialog.append(area); area.select(); const ok = document.execCommand("copy"); area.remove(); return ok;
+  } catch { return false; }
+}
+function showToast(html, ok = true) {
+  let toast = dialog.querySelector(".order-toast");
+  if (!toast) { toast = make("div", "order-toast"); toast.setAttribute("role", "status"); dialog.append(toast); }
+  toast.classList.toggle("is-error", !ok);
+  toast.innerHTML = html;
+  toast.classList.remove("is-on"); void toast.offsetWidth; toast.classList.add("is-on");
+  clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove("is-on"), 5200);
+}
+document.querySelector("#dialog-discord").addEventListener("click", (event) => {
+  const link = event.currentTarget;
+  if (!currentDetail || link.dataset.orderReady !== "1") return;
+  const message = orderMessage(currentDetail);
+  // copy first, then let the link open Discord in a new tab (no preventDefault → popup blockers stay happy)
+  copyText(message).then((ok) => {
+    if (ok) showToast(`<strong>Order message copied</strong><span>Open a ticket and paste it (Ctrl+V)</span>`);
+    else showToast(`<strong>Couldn't copy automatically</strong><span>Send this in your ticket: “${message.replace(/[<>&]/g, "")}”</span>`, false);
+  });
+});
 
 grid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-open-id]");
