@@ -951,3 +951,9 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
 @media (prefers-reduced-motion:reduce){ .pd-features li{animation:none;opacity:1;transform:none} }
 /* beat the generic ".pd svg" icon size so the feature icons get their full size */
 .pd .pd-features svg{width:30px !important;height:30px !important;padding:7px;stroke-width:2}
+
+/* ---------- Popup: photos stay in view while the details scroll (computers only) ---------- */
+@media (min-width:821px){
+  .pd-main{align-items:start}
+  .pd-gallery{position:sticky;top:16px;z-index:1}
+}
