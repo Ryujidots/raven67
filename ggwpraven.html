@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="./raven67.svg"><title>Store Admin — Raven67</title>
+<style>
+:root{color-scheme:dark;--bg:#171b18;--panel:#202620;--line:#343d32;--text:#eff1eb;--muted:#9ea79a;--lime:#b8ff3b;--danger:#ff827a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}.shell{max-width:1180px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:10px 0 20px}.brand{color:var(--lime);font-weight:900;letter-spacing:.3px;text-decoration:none;font-size:19px}.back,.quiet{color:var(--muted);text-decoration:none;font-size:13px}.topright{display:flex;gap:18px;align-items:center}.pill{border:1px solid var(--line);border-radius:30px;padding:8px 12px;color:var(--muted);font-size:12px}.hero{padding:38px 0 25px}.eyebrow{display:inline-block;color:var(--lime);font-size:11px;font-weight:800;letter-spacing:1px}.hero h1{font-size:32px;letter-spacing:-1px;margin:12px 0 8px}.hero p{color:var(--muted);margin:0;line-height:1.6}.notice{display:none;padding:13px 15px;margin:18px 0;border:1px solid var(--line);border-radius:6px;font-size:13px;line-height:1.5}.notice.visible{display:block}.notice.error{border-color:#76413f;color:#ffc0bb;background:#321c1b}.notice.success{border-color:#4c612d;color:#ceff92;background:#25311d}.config{border-color:#665a32;color:#ead78e;background:#2c291d}.login{max-width:460px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:25px;margin:22px 0}.login h2,.panel h2{margin:0 0 18px;font-size:18px}.field{display:grid;gap:8px;margin:13px 0}.field label{font-size:12px;color:#c5cbc0}.field input,.field textarea,.field select{width:100%;border:1px solid #414a3f;border-radius:5px;background:#171c18;color:var(--text);padding:11px 12px;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--lime)}.field textarea{min-height:88px;resize:vertical}.btn{border:1px solid var(--lime);border-radius:5px;background:var(--lime);color:#17200f;font-size:12px;font-weight:900;padding:12px 15px;cursor:pointer}.btn.secondary{background:transparent;color:var(--lime)}.btn.danger{background:transparent;border-color:#75413e;color:#ffaaa4}.btn:disabled{opacity:.55;cursor:wait}.admin{display:none}.admin.ready{display:block}.layout{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(380px,1.4fr);gap:20px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:22px}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.panel-head h2{margin:0}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.preview{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--muted);font-size:12px}.preview img{width:92px;height:56px;object-fit:cover;border-radius:4px;background:#161a16}.items{display:grid;gap:10px}.item{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border:1px solid #30392f;border-radius:6px}.item img{width:72px;height:48px;object-fit:cover;border-radius:4px;background:#151915}.item strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.item small{color:var(--muted);display:block;margin-top:5px;font-size:11px}.item-actions{display:flex;gap:6px}.item-actions button{padding:8px 9px;font-size:10px}.status{display:inline-flex;color:var(--lime);font-size:10px;margin-top:4px}.status.hidden{color:#f0aa83}.empty{color:var(--muted);font-size:13px;padding:22px 0}.sub{color:var(--muted);font-size:12px;line-height:1.6;margin-top:12px}.hide{display:none!important}.image-note{font-size:11px;color:var(--muted);line-height:1.5}.footer{color:#758071;font-size:11px;padding:28px 0 12px}@media(max-width:800px){.layout{grid-template-columns:1fr}.shell{padding:18px}.hero h1{font-size:27px}.item{grid-template-columns:60px minmax(0,1fr)}.item img{width:60px;height:46px}.item-actions{grid-column:2}.item-actions button{flex:1}}
+</style><style>:root{--bg:#101611;--panel:#172018;--line:#2b392d;--text:#f0f3eb;--muted:#a4afa1;--lime:#68d75a;--danger:#ff8c80}body{background:#101611;background-image:radial-gradient(ellipse at 83% 0,rgba(65,130,57,.13),transparent 37%)}.top{border-color:#29362b}.brand{color:#7de470}.pill{border-color:#334234;color:#bac3b5;background:#151d16}.btn{background:#68d75a;border-color:#68d75a;color:#102011;border-radius:6px}.btn.secondary{background:#1b281c;color:#a8eb9c;border-color:#354835}.btn.danger{background:#261b19;border-color:#75413e;color:#ffaaa4}.panel,.login{background:linear-gradient(155deg,#19221a,#141a15);border-color:#2e3c30;border-radius:9px;box-shadow:0 9px 30px #0002}.field input,.field textarea,.field select{background:#101611;border-color:#334135;border-radius:6px}.field input:focus,.field textarea:focus,.field select:focus{border-color:#70dc62}.eyebrow{color:#9cea8f}.item{border-color:#2f3b30;background:#141a15}.item:hover{border-color:#4b724a}.status{color:#80e66f}.notice.success{border-color:#42643e;color:#c1f7b4;background:#1c2b1d}.config{border-color:#53633b;color:#e0dc9c;background:#252819}.notice.error{border-color:#75413e;color:#ffc0bb;background:#321c1b}.preview img{background:#101611}.back,.quiet{color:#a7b19f}.footer{color:#839080}</style><style>:root{--bg:#100d16;--panel:#191320;--line:#352742;--text:#f2eef8;--muted:#aaa0b7;--lime:#a986ff;--danger:#ff8c98}body{background:#100d16;background-image:radial-gradient(ellipse at 83% 0,rgba(111,68,180,.18),transparent 38%)}.top{border-color:#30243c}.brand{color:#b99aff}.pill{border-color:#463652;color:#c9bed6;background:#191320}.btn{background:#9868f2;border-color:#9868f2;color:#fff;border-radius:6px}.btn.secondary{background:#261c31;color:#c1a6ff;border-color:#49365f}.btn.danger{background:#2a191e;border-color:#75414f;color:#ffb2be}.panel,.login{background:linear-gradient(155deg,#1c1524,#15111b);border-color:#392b47;border-radius:9px;box-shadow:0 9px 30px #0003}.field input,.field textarea,.field select{background:#110e17;border-color:#40334d}.field input:focus,.field textarea:focus,.field select:focus{border-color:#a986ff}.eyebrow{color:#c7afff}.item{border-color:#392d47;background:#15111b}.item:hover{border-color:#7759a1}.status{color:#b49aff}.notice.success{border-color:#584277;color:#d8c7ff;background:#241a30}.config{border-color:#6a593f;color:#e7d596;background:#292317}.notice.error{border-color:#75414e;color:#ffc0c7;background:#321c22}.preview img{background:#100d16}.back,.quiet{color:#b0a5bd}.footer{color:#8d829a}</style><style>.admin-logo{width:38px;height:38px;object-fit:cover;border-radius:8px;vertical-align:middle;margin-right:10px;box-shadow:0 0 22px #9868f255}.brand small{display:block;font-size:9px;letter-spacing:1.5px;margin:3px 0 0 48px;color:#b99aff}</style><style>.item-actions{flex-wrap:wrap;justify-content:flex-end}.item-actions button{flex:1 1 auto;white-space:nowrap}.status.sold{color:#d2a8ff}.sold-item{border-color:#57436b;background:#1d1724}.sold-item img{filter:grayscale(.55)}@media(max-width:800px){.item-actions{grid-column:1/-1;justify-content:stretch}.item-actions button{min-width:calc(50% - 8px)}}@media(max-width:450px){.item-actions button{min-width:100%}}.admin-tabs{display:flex;gap:6px;margin:0 0 20px;padding:5px;width:max-content;max-width:100%;border:1px solid var(--line);border-radius:10px;background:#15111b}
+.admin-tabs button{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
+.admin-tabs button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.admin-tabs button:hover{color:var(--text);background:#1f1829}
+.admin-tabs button[aria-selected=true]{background:#9868f2;color:#fff;box-shadow:0 0 18px #9868f255}
+.admin-view[hidden]{display:none!important}
+@media(max-width:800px){.admin-tabs{width:100%}.admin-tabs button{flex:1;justify-content:center}}.review-quote{color:var(--muted);font-size:12px;line-height:1.5;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.item.review-item{grid-template-columns:44px minmax(0,1fr) auto}.review-badge{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:linear-gradient(180deg,#9d3dff,#7a1cf0);color:#fff;font-weight:900}</style></head>
+<body><div class="shell"><header class="top"><a class="brand" href="./index.html"><img class="admin-logo" src="./raven67.svg" alt="" onerror='this.onerror=null;this.src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 52 52%27%3E%3Crect width=%2752%27 height=%2752%27 rx=%2712%27 fill=%27%23140a22%27/%3E%3Cpath d=%27M12 8h28l-3 7H24l-7 25H7z%27 fill=%27%23a855f7%27/%3E%3Cpath d=%27M26 18h13c3 0 5 2 4 5l-1 3c-1 2-2 3-4 3l5 9h-8l-4-8h-5l2-5h9l1-2H24z%27 fill=%27%23fff%27/%3E%3C/svg%3E"'>RAVEN67 <small>STORE ADMIN</small></a><div class="topright"><a class="back" href="./index.html">← View storefront</a><span class="pill hide" id="userBadge"></span><button class="btn secondary hide" id="signOut">SIGN OUT</button></div></header>
+<section class="hero"><span class="eyebrow">PRIVATE STORE TOOLS</span><h1>Store admin</h1><p>Manage your products and customer reviews, and keep your storefront up to date.</p></section>
+<div class="notice config" id="configNotice">Connect your Supabase project first: add your project URL and publishable key to <strong>supabase-config.js</strong>, then run the setup SQL included with this site.</div><div class="notice" id="message" role="status"></div>
+<section class="login" id="login"><h2>Sign in to manage your store</h2><form id="loginForm"><div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required></div><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div><button class="btn" id="loginButton">SIGN IN</button></form><p class="sub">Create your admin account in Supabase Authentication first. Public sign-up is not needed.</p></section>
+<section class="admin" id="admin">
+<nav class="admin-tabs" role="tablist" aria-label="Admin sections">
+  <button type="button" role="tab" id="tabProducts" data-view="viewProducts" aria-selected="true">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>Products
+  </button>
+  <button type="button" role="tab" id="tabReviews" data-view="reviewsAdmin" aria-selected="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Reviews
+  </button>
+</nav>
+<div class="layout admin-view" id="viewProducts" role="tabpanel" aria-labelledby="tabProducts"><form class="panel" id="productForm"><div class="panel-head"><h2 id="formTitle">Add a product</h2><button class="quiet hide" type="button" id="cancelEdit">Cancel edit</button></div><input id="productId" type="hidden"><div class="field"><label for="productCode">Catalog code</label><input id="productCode" maxlength="25" required autocomplete="off"><span class="image-note">Auto-generated by collection: peds use #0201; clothing uses C-0001; free peds use F-0001. You can still customize the code.</span></div><div class="field"><label for="name">Product name <span class="image-note">(optional)</span></label><input id="name" maxlength="120" placeholder="Defaults to Ped #0001"></div><div class="field"><label for="modelName">Model name / ped code</label><input id="modelName" maxlength="100" placeholder="Example: r67_custom_ped_01"><span class="image-note">Optional. Enter the exact model identifier if you have it.</span></div><div class="field"><label for="description">Short description <span class="image-note">(optional)</span></label><textarea id="description" maxlength="1000" placeholder="What makes this ped special?"></textarea></div><div class="field"><label for="category">Product category</label><select id="category"><option value="Custom Peds">Custom Peds</option><option value="Baby Peds">Baby Peds</option><option value="Male Peds">Male</option><option value="Female Peds">Female</option><option value="Clothing">Clothing</option><option value="Free Peds">Free Peds (claim on Discord)</option><option value="Other">Other</option></select><span class="image-note">For peds, choose Male or Female. For clothing, choose its audience below. Free Peds show as FREE in the teaser and send visitors to your Discord to claim them.</span></div><div class="field hide" id="clothingAudienceWrap"><label for="clothingAudience" id="audienceLabel">Clothing category</label><select id="clothingAudience"><option value="Unisex">Unisex</option><option value="Male">Male</option><option value="Female">Female</option></select><span class="image-note" id="audienceNote">Choose who this clothing item is designed for.</span></div><div class="field hide" id="downloadWrap"><label for="downloadUrl">Download link</label><input id="downloadUrl" type="url" maxlength="500" placeholder="https://drive.google.com/… or https://mega.nz/…" autocomplete="off"><span class="image-note">Paste the link where buyers can download this free ped (Google Drive, MEGA, MediaFire, Discord…). The card and popup will show a Download button instead of a price.</span></div><div class="layout" id="priceWrap" style="grid-template-columns:1fr 1fr;gap:10px"><div class="field"><label for="price">Sale price (USD)</label><input id="price" type="number" min="0" step="0.01" required></div><div class="field"><label for="originalPrice">Original price (USD)</label><input id="originalPrice" type="number" min="0" step="0.01" ></div></div><div class="field"><label for="rating">Rating</label><select id="rating"><option value="5">5 stars</option><option value="4.5">4.5 stars</option><option value="4">4 stars</option><option value="3.5">3.5 stars</option><option value="3">3 stars</option></select></div><div class="field"><label for="image">Product image</label><input id="image" type="file" accept="image/png,image/jpeg,image/webp" required><span class="image-note">JPG, PNG, or WebP · up to 25 MB. Images are automatically resized and converted to WebP so your catalog loads fast. When editing, leave empty to keep the current image.</span><button class="btn secondary" type="button" id="pasteImage">PASTE IMAGE FROM CLIPBOARD</button><span class="image-note">Copy an image, then use this button or press Ctrl+V while this page is open. File upload is still available above.</span></div><div class="preview hide" id="preview"><img id="previewImage" alt="Current product image"><span id="previewText">Current image</span></div><button class="btn" id="saveButton">SAVE PRODUCT</button></form>
+<div class="panel"><div class="panel-head"><h2>Your products</h2><span class="pill" id="productCount">0 items</span></div><div id="items" class="items"><div class="empty">Sign in to load your products.</div></div></div></div>
+<div class="panel reviews-admin admin-view" id="reviewsAdmin" role="tabpanel" aria-labelledby="tabReviews" hidden>
+  <div class="panel-head"><h2>Customer reviews</h2><span class="pill" id="reviewCount">0 reviews</span></div>
+  <p class="sub" style="margin-top:0">Add feedback a real customer actually sent you (for example in a Discord ticket), copied as they wrote it. The name is masked <strong>before</strong> it is saved, so the full name is never stored or shown on the website.</p>
+  <div class="layout">
+    <form id="reviewForm">
+      <input id="reviewId" type="hidden">
+      <div class="field"><label for="reviewName">Customer name</label><input id="reviewName" maxlength="40" required autocomplete="off" placeholder="Example: agung"><span class="image-note">Shown on the website as: <strong id="reviewNamePreview">—</strong></span></div>
+      <div class="field"><label for="reviewMessage">What the customer said</label><textarea id="reviewMessage" maxlength="500" required placeholder="Paste the customer's own words"></textarea><span class="image-note"><span id="reviewChars">0</span>/500</span></div>
+      <div class="layout" style="grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field"><label for="reviewRating">Rating they gave</label><select id="reviewRating"><option value="5">5 stars</option><option value="4.5">4.5 stars</option><option value="4">4 stars</option><option value="3.5">3.5 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></div>
+        <div class="field"><label for="reviewProduct">What they bought <span class="image-note">(optional)</span></label><input id="reviewProduct" maxlength="60" placeholder="Example: Ped #0001"></div>
+      </div>
+      <div class="form-actions"><button class="btn" id="reviewSave">SAVE REVIEW</button><button class="btn secondary hide" type="button" id="reviewCancel">CANCEL EDIT</button></div>
+    </form>
+    <div><div id="reviewItems" class="items"><div class="empty">Sign in to load reviews.</div></div></div>
+  </div>
+</div>
+</section>
+<footer class="footer" id="adminFooter">Local-only mode stores product data in this browser.</footer></div>
+<script type="module">
+import { isSupabaseConfigured, PRODUCTS_TABLE, PRODUCT_IMAGES_BUCKET, SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./supabase-config.js";
+import { deleteLocalProduct, getLocalProducts, saveLocalProduct } from "./catalog-storage.js";
+const $=id=>document.getElementById(id), login=$('login'), admin=$('admin'), message=$('message');
+const localMode=!isSupabaseConfigured;let supabase=null,rows=[],localImageUrls=[];
+const isClothingCategory=c=>String(c||'').toLowerCase().startsWith('clothing');
+function updateFormWording(){const cat=$('category').value,clothing=cat==='Clothing',free=cat==='Free Peds',noun=clothing?'item':'ped';$('name').placeholder=`Defaults to ${clothing?'Clothing':free?'Free Ped':'Ped'} ${$('productCode').value||nextProductCode()}`;$('description').placeholder=`What makes this ${noun} special?`;document.querySelector('label[for=modelName]').textContent=clothing?'Model / drawable name':'Model name / ped code';$('clothingAudienceWrap').classList.toggle('hide',!clothing&&!free);$('audienceLabel').textContent=free?'Free ped gender':'Clothing category';$('audienceNote').textContent=free?'Choose Male or Female so the gender filter works.':'Choose who this clothing item is designed for.';$('priceWrap').classList.toggle('hide',free);$('price').required=!free;$('downloadWrap').classList.add('hide');$('downloadUrl').required=false;}
+function tell(text,type=''){message.textContent=text;message.className='notice visible '+type;}
+function escapeHtml(value=''){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function lock(button,on,label){button.disabled=on;if(on){button.dataset.label=button.textContent;button.textContent=label||'PLEASE WAIT…'}else{button.textContent=button.dataset.label||button.textContent}}
+function signedIn(session){const ok=!!session;login.classList.toggle('hide',ok);admin.classList.toggle('ready',ok);$('signOut').classList.toggle('hide',!ok);$('userBadge').classList.toggle('hide',!ok);if(ok){$('userBadge').textContent=session.user.email;loadProducts()}else{$('items').innerHTML='<div class="empty">Sign in to load your products.</div>';rows=[]}}
+function renderRows(){suggestProductCode(); $('productCount').textContent=rows.length+' '+(rows.length===1?'item':'items');$('items').innerHTML=rows.length?rows.map(p=>`<article class="item ${p.is_sold?'sold-item':''}"><img src="${escapeHtml(p.image_url)}" alt=""><div><strong>${escapeHtml(p.name||`${isClothingCategory(p.category)?"Clothing":"Ped"} ${p.product_code||"—"}`)}</strong><small>Code ${escapeHtml(p.product_code||'—')} · ${String(p.category||'').toLowerCase().startsWith('free')?'FREE · Discord':'$'+Number(p.price||0).toFixed(2)} · ${escapeHtml(p.category||'Custom Peds')}</small><span class="status ${p.is_sold?'sold':p.is_active?'':'hidden'}">${p.is_sold?'SOLD':p.is_active?'LIVE':'HIDDEN'}</span></div><div class="item-actions"><button class="btn secondary" data-edit="${p.id}">EDIT</button><button class="btn ${p.is_sold?'secondary':'danger'}" data-sold="${p.id}">${p.is_sold?'RESTOCK':'MARK SOLD'}</button><button class="btn ${p.is_active?'danger':'secondary'}" data-toggle="${p.id}">${p.is_active?'HIDE':'SHOW'}</button><button class="btn danger" data-delete="${p.id}">DELETE</button></div></article>`).join(''):'<div class="empty">No products yet. Add your first product using the form.</div>';document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>toggleProduct(b.dataset.toggle));document.querySelectorAll('[data-sold]').forEach(b=>b.onclick=()=>toggleSold(b.dataset.sold));document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteProduct(b.dataset.delete));}
+async function loadProducts(){if(localMode){try{for(const url of localImageUrls)URL.revokeObjectURL(url);localImageUrls=[];const stored=await getLocalProducts();rows=stored.sort((a,b)=>(a.sort_order||0)-(b.sort_order||0)).map(p=>({...p,image_url:p.image_blob?URL.createObjectURL(p.image_blob):''}));localImageUrls=rows.map(p=>p.image_url).filter(Boolean);renderRows()}catch(error){tell('Could not load local products: '+(error.message||'Storage unavailable'),'error')}return}const {data,error}=await supabase.from(PRODUCTS_TABLE).select('*').order('sort_order',{ascending:true}).order('created_at',{ascending:false});if(error){tell('Could not load products: '+error.message,'error');return}rows=data||[];renderRows()}
+function nextProductCode(category=$('category').value){const clothing=category==='Clothing',free=category==='Free Peds',prefix=clothing?'C-':free?'F-':'#',pattern=clothing?/^C-(\d+)$/i:free?/^F-(\d+)$/i:/^#(\d+)$/;let highest=0;for(const product of rows){const match=String(product.product_code||'').match(pattern);if(match)highest=Math.max(highest,Number(match[1]))}let next=highest+1,candidate=`${prefix}${String(next).padStart(4,'0')}`;while(rows.some(product=>String(product.product_code||'').toUpperCase()===candidate.toUpperCase())){next++;candidate=`${prefix}${String(next).padStart(4,'0')}`}return candidate}
+function suggestProductCode(){const input=$('productCode');if(input.dataset.auto!=='false'||!input.value){input.value=nextProductCode();input.dataset.auto='true'}updateFormWording()}function resetForm(){$('productForm').reset();$('downloadUrl').value='';$('clothingAudienceWrap').classList.add('hide');$('clothingAudience').value='Unisex';$('productId').value='';$('productCode').value=nextProductCode();$('productCode').dataset.auto='true';$('price').value='';$('originalPrice').value='';$('formTitle').textContent='Add a product';$('saveButton').textContent='SAVE PRODUCT';$('cancelEdit').classList.add('hide');$('image').required=true;$('preview').classList.add('hide');updateFormWording()}
+function editProduct(id){const p=rows.find(x=>x.id===id);if(!p)return;$('productId').value=p.id;$('productCode').value=p.product_code||nextProductCode();$('productCode').dataset.auto=p.product_code?'false':'true';$('name').value=p.name;$('modelName').value=p.model_name||'';$('description').value=p.description||'';$('category').value=String(p.category||'Custom Peds').toLowerCase().startsWith('clothing')?'Clothing':String(p.category||'').toLowerCase().startsWith('free')?'Free Peds':p.category||'Custom Peds';$('downloadUrl').value=p.download_url||'';$('clothingAudience').value=String(p.category||'').toLowerCase().includes('female')?'Female':String(p.category||'').toLowerCase().includes('male')?'Male':'Unisex';$('clothingAudienceWrap').classList.toggle('hide',$('category').value!=='Clothing');$('price').value=p.price??'';$('originalPrice').value=p.original_price??'';$('rating').value=p.rating||5;$('image').required=false;$('preview').classList.remove('hide');$('previewImage').src=p.image_url;$('previewText').textContent='Current image — choose a new file to replace it';$('formTitle').textContent='Edit product';$('saveButton').textContent='SAVE CHANGES';$('cancelEdit').classList.remove('hide');updateFormWording();window.scrollTo({top:0,behavior:'smooth'})}
+async function uploadImage(file){const ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';const path=`${crypto.randomUUID()}.${ext}`;const {error}=await supabase.storage.from(PRODUCT_IMAGES_BUCKET).upload(path,file,{contentType:file.type,cacheControl:'3600',upsert:false});if(error)throw error;return {path,url:supabase.storage.from(PRODUCT_IMAGES_BUCKET).getPublicUrl(path).data.publicUrl}}
+async function toggleProduct(id){const p=rows.find(x=>x.id===id);if(!p)return;if(localMode){await saveLocalProduct({...p,is_active:!p.is_active});localStorage.setItem('raven67-catalog-revision',String(Date.now()));tell(p.is_active?'Product hidden from the storefront.':'Product is live on the storefront.','success');await loadProducts();return}const {error}=await supabase.from(PRODUCTS_TABLE).update({is_active:!p.is_active}).eq('id',id);if(error){tell('Could not update this product: '+error.message,'error');return}tell(p.is_active?'Product hidden from the storefront.':'Product is live on the storefront.','success');await loadProducts()}
+async function toggleSold(id){const p=rows.find(x=>x.id===id);if(!p)return;const is_sold=!p.is_sold;if(localMode){await saveLocalProduct({...p,is_sold});localStorage.setItem('raven67-catalog-revision',String(Date.now()))}else{const {error}=await supabase.from(PRODUCTS_TABLE).update({is_sold}).eq('id',id);if(error){tell('Could not update sold status: '+error.message,'error');return}}tell(is_sold?'Product marked as sold.':'Product is available again.','success');await loadProducts()}
+async function deleteProduct(id){const p=rows.find(x=>x.id===id);if(!p||!confirm(`Delete “${p.name||p.product_code}” permanently? This cannot be undone.`))return;try{if(localMode){await deleteLocalProduct(id);localStorage.setItem('raven67-catalog-revision',String(Date.now()))}else{const {error}=await supabase.from(PRODUCTS_TABLE).delete().eq('id',id);if(error)throw error;if(p.image_path){const {error:imageError}=await supabase.storage.from(PRODUCT_IMAGES_BUCKET).remove([p.image_path]);if(imageError)console.warn('Product removed, but its stored image could not be deleted.',imageError.message)}}tell('Product deleted.','success');await loadProducts()}catch(error){tell('Could not delete product: '+(error.message||'Unknown error'),'error')}}
+async function hashPassword(password,salt){const bytes=new TextEncoder().encode(`${salt}:${password}`);const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest)).map(byte=>byte.toString(16).padStart(2,'0')).join('')}
+if(localMode){$('adminFooter').textContent='Local-only mode: products and uploaded images stay in this browser.';$('configNotice').innerHTML='<strong>Local-only admin mode.</strong> Create a local login below. Your images and catalog will be saved in this browser only; this is not secure for a public website.';$('configNotice').classList.add('visible');$('login').querySelector('h2').textContent=localStorage.getItem('raven67-local-admin-hash')?'Sign in to local admin':'Create your local admin login';$('login').querySelector('.sub').textContent=localStorage.getItem('raven67-local-admin-hash')?'Your catalog is stored in this browser.':'First login creates the local account on this browser. Use a password with at least 8 characters.';$('loginButton').textContent=localStorage.getItem('raven67-local-admin-hash')?'SIGN IN':'CREATE LOCAL LOGIN';$('password').autocomplete='new-password';if(sessionStorage.getItem('raven67-local-session')==='active'){signedIn({user:{email:localStorage.getItem('raven67-local-admin-email')||'Local admin'}})}}else{const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2.116.0');supabase=createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);const {data:{session}}=await supabase.auth.getSession();signedIn(session)}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('loginButton');lock(button,true,localMode?'CHECKING…':'SIGNING IN…');try{const email=$('email').value.trim().toLowerCase(),password=$('password').value;if(localMode){let savedHash=localStorage.getItem('raven67-local-admin-hash'),salt=localStorage.getItem('raven67-local-admin-salt');if(!savedHash){if(password.length<8){tell('Use a password with at least 8 characters.','error');return}salt=Array.from(crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join('');savedHash=await hashPassword(password,salt);localStorage.setItem('raven67-local-admin-email',email);localStorage.setItem('raven67-local-admin-salt',salt);localStorage.setItem('raven67-local-admin-hash',savedHash);tell('Local admin account created. Your data stays in this browser.','success')}else if(email!==localStorage.getItem('raven67-local-admin-email')||await hashPassword(password,salt)!==savedHash){tell('Email or password is incorrect.','error');return}sessionStorage.setItem('raven67-local-session','active');signedIn({user:{email}});return}const {data,error}=await supabase.auth.signInWithPassword({email,password});if(error){tell('Sign-in failed: '+error.message,'error');return}tell('Signed in. Loading your products.','success');signedIn(data.session)}catch(error){tell('Could not sign in: '+(error.message||'Unknown error'),'error')}finally{lock(button,false)}});
+$('signOut').onclick=async()=>{if(localMode){sessionStorage.removeItem('raven67-local-session');tell('Signed out.','success');signedIn(null);return}const {error}=await supabase.auth.signOut();if(error){tell(error.message,'error');return}tell('Signed out.','success');signedIn(null)};
+$('cancelEdit').onclick=resetForm;$('category').addEventListener('change',()=>{$('clothingAudienceWrap').classList.toggle('hide',$('category').value!=='Clothing');if($('productCode').dataset.auto!=='false')$('productCode').value=nextProductCode();updateFormWording()});
+// ---- Automatic image compression ----
+// Every uploaded / pasted image is resized (longest side max 1600px) and saved as WebP,
+// so the catalog loads fast. Images that are already small enough are kept as they are.
+const IMG_MAX_SIDE=1600, IMG_QUALITY=0.85, IMG_KEEP_UNDER=350*1024, IMG_MAX_INPUT=25*1024*1024;
+const fmtSize=b=>b>=1048576?(b/1048576).toFixed(1)+' MB':Math.max(1,Math.round(b/1024))+' KB';
+async function compressImage(file){
+  const bitmap=await createImageBitmap(file);
+  const scale=Math.min(1,IMG_MAX_SIDE/Math.max(bitmap.width,bitmap.height));
+  const w=Math.round(bitmap.width*scale),h=Math.round(bitmap.height*scale);
+  if(scale===1&&file.type==='image/webp'&&file.size<=IMG_KEEP_UNDER){bitmap.close?.();return file}
+  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext('2d');ctx.imageSmoothingQuality='high';ctx.drawImage(bitmap,0,0,w,h);bitmap.close?.();
+  const blob=await new Promise(r=>canvas.toBlob(r,'image/webp',IMG_QUALITY));
+  // Very old browsers can't make WebP: keep the original rather than lose quality
+  if(!blob||blob.type!=='image/webp'||blob.size>=file.size)return file;
+  const base=(file.name||'image').replace(/\.[^.]+$/,'')||'image';
+  return new File([blob],`${base}.webp`,{type:'image/webp'});
+}
+let imageBusy=false;
+async function setSelectedImage(file,announce=false){
+  if(!file||!['image/png','image/jpeg','image/webp'].includes(file.type)){tell('Choose or paste a PNG, JPG, or WebP image.','error');return}
+  if(file.size>IMG_MAX_INPUT){tell('Choose an image smaller than 25 MB.','error');return}
+  const save=$('saveButton');imageBusy=true;save.disabled=true;
+  $('previewText').textContent='Optimizing image…';$('preview').classList.remove('hide');
+  try{
+    let selected=await compressImage(file);
+    if(!selected.name){const ext=selected.type==='image/jpeg'?'jpg':selected.type.split('/')[1];selected=new File([selected],`pasted-image.${ext}`,{type:selected.type})}
+    if(selected.size>6*1024*1024){tell('This image is still over 6 MB after optimizing. Try a smaller image.','error');$('image').value='';return}
+    const transfer=new DataTransfer();transfer.items.add(selected);$('image').files=transfer.files;
+    $('previewImage').src=URL.createObjectURL(selected);
+    const saved=file.size-selected.size;
+    $('previewText').textContent=(announce?'Pasted image':'New image')+(saved>1024?` · optimized ${fmtSize(file.size)} → ${fmtSize(selected.size)} (${Math.round(saved/file.size*100)}% smaller)`:` · ${fmtSize(selected.size)}`);
+    if(announce)tell('Image pasted and optimized. Save the product to keep it.','success');
+  }catch(error){tell('Could not read this image: '+(error.message||'unknown error'),'error');$('image').value=''}
+  finally{imageBusy=false;save.disabled=false}
+}
+$('image').onchange=()=>{const file=$('image').files[0];if(file)setSelectedImage(file)};
+$('pasteImage').onclick=async()=>{try{if(!navigator.clipboard?.read)throw new Error('Clipboard reading is unavailable.');const entries=await navigator.clipboard.read();for(const entry of entries){const type=entry.types.find(value=>['image/png','image/jpeg','image/webp'].includes(value));if(type){const blob=await entry.getType(type);setSelectedImage(new File([blob],`pasted-image.${type==='image/jpeg'?'jpg':type.split('/')[1]}`,{type}),true);return}}tell('No PNG, JPG, or WebP image found in the clipboard.','error')}catch{tell('Clipboard access is unavailable. Copy an image, focus this page, then press Ctrl+V.','error')}};
+document.addEventListener('paste',event=>{const item=Array.from(event.clipboardData?.items||[]).find(entry=>['image/png','image/jpeg','image/webp'].includes(entry.type));if(!item)return;const file=item.getAsFile();if(!file)return;event.preventDefault();setSelectedImage(file,true)});
+$('productCode').addEventListener('input',()=>{$('productCode').dataset.auto='false';updateFormWording()});
+$('productForm').addEventListener('submit',async e=>{e.preventDefault();if(imageBusy){tell('Please wait — the image is still being optimized.','error');return}const file=$('image').files[0];if(file&&(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>6*1024*1024)){tell('Choose a JPG, PNG, or WebP image smaller than 6 MB.','error');return}const codeField=$('productCode'),enteredCode=codeField.value.trim().toUpperCase(),productCode=/^\d+$/.test(enteredCode)?`#${enteredCode}`:enteredCode;if(!/^(?:#[A-Z0-9][A-Z0-9_-]{0,23}|[A-Z][A-Z0-9_-]{0,23})$/.test(productCode)){tell('Use #0001 for a ped, C-0001 for clothing, or F-0001 for a free ped.','error');return}if(rows.some(product=>product.id!==$('productId').value&&String(product.product_code||'').toUpperCase()===productCode)){tell('That catalog code is already in use. Choose another code.','error');return}codeField.value=productCode;const free=$('category').value==='Free Peds',downloadUrl=$('downloadUrl').value.trim();const button=$('saveButton');lock(button,true,'SAVING…');try{const old=rows.find(p=>p.id===$('productId').value),id=$('productId').value||crypto.randomUUID();const common={id,name:$('name').value.trim()||($('category').value==='Clothing'?`Clothing ${productCode}`:free?`Free Ped ${productCode}`:`Ped ${productCode}`),product_code:$('productCode').value.trim().toUpperCase(),model_name:$('modelName').value.trim(),description:$('description').value.trim(),category:$('category').value==='Clothing'?`Clothing - ${$('clothingAudience').value}`:free?`Free Peds - ${$('clothingAudience').value}`:$('category').value,price:free?0:Number($('price').value),original_price:!free&&$('originalPrice').value?Number($('originalPrice').value):null,rating:Number($('rating').value),is_active:old?.is_active??true,is_sold:old?.is_sold??false,sort_order:old?.sort_order??rows.length,created_at:old?.created_at??new Date().toISOString()};if(localMode){const image_blob=file||old?.image_blob;if(!image_blob)throw new Error('Choose a product image.');await saveLocalProduct({...common,image_blob});localStorage.setItem('raven67-catalog-revision',String(Date.now()));tell($('productId').value?'Product updated in this browser.':'Product added to your local catalog.','success')}else{let image=old?{image_url:old.image_url,image_path:old.image_path}:{image_url:'',image_path:''};if(file)image=await uploadImage(file);const payload={...common,image_url:image.url||image.image_url,image_path:image.path||image.image_path};const result=$('productId').value?await supabase.from(PRODUCTS_TABLE).update(payload).eq('id',$('productId').value):await supabase.from(PRODUCTS_TABLE).insert(payload);if(result.error)throw result.error;tell($('productId').value?'Product updated.':'Product added to your catalog.','success')}resetForm();await loadProducts()}catch(error){const msg=error.message||'Unknown error';tell('Could not save this product: '+msg+(/download_url/i.test(msg)?' — run free-peds-setup.sql in Supabase (SQL Editor) once, then try again.':''),'error')}finally{lock(button,false)}});
+</script>
+<!-- ============ ADMIN TABS ============ -->
+<script>
+(() => {
+  const tabs = [...document.querySelectorAll('.admin-tabs [data-view]')];
+  function show(viewId) {
+    if (!tabs.some((t) => t.dataset.view === viewId)) viewId = 'viewProducts';
+    tabs.forEach((tab) => {
+      const active = tab.dataset.view === viewId;
+      tab.setAttribute('aria-selected', String(active));
+      document.getElementById(tab.dataset.view).hidden = !active;
+    });
+    try { localStorage.setItem('raven67-admin-tab', viewId); } catch {}
+  }
+  tabs.forEach((tab) => tab.addEventListener('click', () => show(tab.dataset.view)));
+  // reopen the tab you used last
+  let saved = 'viewProducts';
+  try { saved = localStorage.getItem('raven67-admin-tab') || saved; } catch {}
+  show(saved);
+})();
+</script>
+
+<!-- ============ CUSTOMER REVIEWS ============ -->
+<script type="module">
+import * as config from "./supabase-config.js";
+const $ = (id) => document.getElementById(id);
+const TABLE = config.REVIEWS_TABLE || "reviews";
+const LOCAL_KEY = "raven67-local-reviews";
+const local = !config.isSupabaseConfigured;
+let supabase = null, reviews = [];
+
+// "agung" -> "a**ng". Applied before saving, so the full name never leaves this page.
+function maskName(name) {
+  return String(name || "").trim().split(/\s+/).filter(Boolean).map((word) => {
+    if (word.includes("*")) return word;
+    const c = [...word];
+    if (c.length <= 2) return c[0] + "*";
+    if (c.length === 3) return c[0] + "*" + c[2];
+    return c[0] + "*".repeat(c.length - 3) + c.slice(-2).join("");
+  }).join(" ");
+}
+function tell(text, type = "") { const m = $("message"); m.textContent = text; m.className = "notice visible " + type; }
+const make = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
+
+if (!local) {
+  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.116.0");
+  supabase = createClient(config.SUPABASE_URL, config.SUPABASE_PUBLISHABLE_KEY);
+}
+
+const readLocal = () => { try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]"); } catch { return []; } };
+const writeLocal = (list) => localStorage.setItem(LOCAL_KEY, JSON.stringify(list));
+
+async function load() {
+  if (local) { reviews = readLocal(); }
+  else {
+    const { data, error } = await supabase.from(TABLE).select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: false });
+    if (error) { $("reviewItems").replaceChildren(make("div", "empty", "Could not load reviews: " + error.message + " — did you run reviews-setup.sql in Supabase?")); return; }
+    reviews = data || [];
+  }
+  render();
+}
+
+function render() {
+  $("reviewCount").textContent = reviews.length + (reviews.length === 1 ? " review" : " reviews");
+  const box = $("reviewItems");
+  if (!reviews.length) { box.replaceChildren(make("div", "empty", "No reviews yet. Add one using the form.")); return; }
+  box.replaceChildren(...reviews.map((r) => {
+    const item = make("article", "item review-item");
+    item.append(make("span", "review-badge", (r.display_name || "?").charAt(0).toUpperCase()));
+    const info = make("div");
+    info.append(make("strong", "", `${r.display_name} · ${Number(r.rating) || 5}★`),
+                make("small", "", r.product_label || "No product"),
+                make("span", "review-quote", "“" + r.message + "”"),
+                make("span", "status " + (r.is_active === false ? "hidden" : ""), r.is_active === false ? "HIDDEN" : "LIVE"));
+    const actions = make("div", "item-actions");
+    const button = (label, cls, fn) => { const b = make("button", "btn " + cls, label); b.type = "button"; b.onclick = fn; actions.append(b); };
+    button("EDIT", "secondary", () => edit(r));
+    button(r.is_active === false ? "SHOW" : "HIDE", r.is_active === false ? "secondary" : "danger", () => save({ ...r, is_active: r.is_active === false }, "Review " + (r.is_active === false ? "is live." : "hidden.")));
+    button("DELETE", "danger", () => remove(r));
+    item.append(info, actions);
+    return item;
+  }));
+}
+
+function resetForm() {
+  $("reviewForm").reset(); $("reviewId").value = "";
+  $("reviewNamePreview").textContent = "—"; $("reviewChars").textContent = "0";
+  $("reviewSave").textContent = "SAVE REVIEW"; $("reviewCancel").classList.add("hide");
+}
+function edit(r) {
+  $("reviewId").value = r.id; $("reviewName").value = r.display_name; $("reviewMessage").value = r.message;
+  $("reviewRating").value = String(r.rating || 5); $("reviewProduct").value = r.product_label || "";
+  $("reviewNamePreview").textContent = r.display_name; $("reviewChars").textContent = r.message.length;
+  $("reviewSave").textContent = "SAVE CHANGES"; $("reviewCancel").classList.remove("hide");
+  $("reviewsAdmin").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+async function save(review, doneText) {
+  try {
+    if (local) {
+      const list = readLocal(); const i = list.findIndex((x) => x.id === review.id);
+      if (i >= 0) list[i] = review; else list.unshift(review);
+      writeLocal(list);
+    } else {
+      const exists = reviews.some((x) => x.id === review.id);
+      const { error } = exists ? await supabase.from(TABLE).update(review).eq("id", review.id) : await supabase.from(TABLE).insert(review);
+      if (error) throw error;
+    }
+    tell(doneText, "success"); await load();
+  } catch (error) { tell("Could not save the review: " + (error.message || "Unknown error"), "error"); }
+}
+async function remove(r) {
+  if (!confirm(`Delete the review from “${r.display_name}”? This cannot be undone.`)) return;
+  try {
+    if (local) writeLocal(readLocal().filter((x) => x.id !== r.id));
+    else { const { error } = await supabase.from(TABLE).delete().eq("id", r.id); if (error) throw error; }
+    tell("Review deleted.", "success"); await load();
+  } catch (error) { tell("Could not delete the review: " + (error.message || "Unknown error"), "error"); }
+}
+
+$("reviewName").addEventListener("input", () => { $("reviewNamePreview").textContent = maskName($("reviewName").value) || "—"; });
+$("reviewMessage").addEventListener("input", () => { $("reviewChars").textContent = $("reviewMessage").value.length; });
+$("reviewCancel").onclick = resetForm;
+$("reviewForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const id = $("reviewId").value, old = reviews.find((x) => x.id === id);
+  const display_name = maskName($("reviewName").value), message = $("reviewMessage").value.trim();
+  if (!display_name || !message) { tell("Add the customer's name and what they said.", "error"); return; }
+  const button = $("reviewSave"); button.disabled = true;
+  await save({
+    id: id || crypto.randomUUID(), display_name, message,
+    rating: Number($("reviewRating").value), product_label: $("reviewProduct").value.trim() || null,
+    is_active: old ? old.is_active !== false : true, sort_order: old?.sort_order ?? 0,
+    created_at: old?.created_at ?? new Date().toISOString(),
+  }, id ? "Review updated." : "Review added. It now appears on the Reviews tab.");
+  button.disabled = false; resetForm();
+});
+
+// Load once the admin area is unlocked (after sign-in).
+const adminArea = $("admin");
+const loadWhenReady = () => { if (adminArea.classList.contains("ready")) load(); };
+new MutationObserver(loadWhenReady).observe(adminArea, { attributes: true, attributeFilter: ["class"] });
+loadWhenReady();
+</script>
+</body></html>
+
+
+
+
+
+
+
+
+
+

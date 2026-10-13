@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#030205">
+<link rel="icon" type="image/svg+xml" href="./raven67.svg">
+<meta name="description" content="Raven67 catalog of exclusive FiveM peds and clothing. Browse character previews, then order through Discord.">
+<title>Raven67 — Exclusive FiveM Peds & Clothing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+<!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
+     Bump the number whenever you change a CSS file. -->
+<link rel="stylesheet" href="./catalog.css?v=33">
+<link rel="stylesheet" href="./raven67-theme.css?v=33">
+<!-- Keeps the background layer behind the page even if the CSS loads late -->
+<style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
+</head>
+<body>
+
+<!-- Shared animated background (behind every tab) -->
+<div class="site-fx" aria-hidden="true">
+  <div class="fx-grid"></div>
+  <div class="haze"></div>
+  <div class="shard" style="left:-4%;top:42%;width:340px;height:260px;opacity:.6"></div>
+  <div class="shard" style="right:-3%;top:30%;width:300px;height:520px;opacity:.55"></div>
+  <div class="shard" style="right:8%;top:14%;width:120px;height:180px;opacity:.35"></div>
+  <div class="streak" style="left:10%;top:30%;width:260px"></div>
+  <div class="streak" style="right:6%;top:22%;width:200px"></div>
+  <div class="streak" style="right:-2%;top:62%;width:320px"></div>
+  <div class="plus" style="left:39%;top:25%">+</div>
+  <div class="plus" style="left:42%;top:54%">+</div>
+  <div class="plus" style="left:48%;top:61%;font-size:24px">+</div>
+  <div class="plus" style="left:67%;top:28%;font-size:20px">+</div>
+</div>
+
+<!-- ============ HEADER (sticky, shared by every tab) ============ -->
+<header class="site-header r67-header">
+  <a class="logo" href="#home" data-tab-link="home" aria-label="Raven67 home">
+    <svg viewBox="0 0 52 40" fill="none" aria-hidden="true">
+      <path d="M8 2h34l-4 8H22l-8 28H2L8 2Z" fill="url(#lg)"/>
+      <path d="M28 14h16c4 0 6 3 5 6l-2 4c-1 2-3 3-5 3l6 11H36l-5-10h-6l2-6h11l1-3H26l2-5Z" fill="#fff"/>
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c084fc"/><stop offset="1" stop-color="#7a1cf0"/></linearGradient></defs>
+    </svg>
+    <span class="logo-text">RAVEN<b>67</b></span>
+  </a>
+  <nav aria-label="Main">
+    <a class="active" href="#home" data-tab-link="home" aria-current="page">HOME</a><i aria-hidden="true"></i>
+    <a href="#peds" data-tab-link="peds">PEDS</a><i aria-hidden="true"></i>
+    <a href="#reviews" data-tab-link="reviews">REVIEWS</a><i aria-hidden="true"></i>
+    <a href="#faq" data-tab-link="faq">FAQ</a>
+  </nav>
+  <a class="header-cta" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer" aria-label="Join Raven67 on Discord">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+    <span>DISCORD</span>
+  </a>
+</header>
+
+<main id="top">
+
+<!-- ============ HOME TAB ============ -->
+<section class="r67-tab-panel is-active" data-tab-panel="home" id="tab-home" aria-labelledby="home-tab-title">
+  <div class="r67-hero-wrap">
+
+
+    <div class="r67-hero">
+      <div class="r67-hero-inner">
+
+        <div class="hero-meta rise d1">
+          <span class="hero-eyebrow">EXCLUSIVE PED COLLECTION</span>
+          <span class="hero-badge"><i aria-hidden="true"></i><span id="hero-badge-text">FIVEM READY · TESTED</span></span>
+        </div>
+
+        <h1 class="title rise d2" id="home-tab-title" aria-label="Raven67">
+          <span class="w" aria-hidden="true">RAVEN</span><span class="p" aria-hidden="true">67</span>
+          <span class="glow" aria-hidden="true">RAVEN67</span>
+        </h1>
+
+        <div class="cols">
+          <div class="col rise d3">
+            <h2>Premium <em>FiveM Peds</em></h2>
+            <p>Ready-made, tested, and detailed peds for your FiveM server. Find one you like, copy its catalog code, and get your files within 24 hours.</p>
+            <div class="cta-row">
+              <a class="btn-ghost" href="#peds" data-tab-link="peds">BROWSE CATALOG
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+              </a>
+              <a class="btn-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>
+                ORDER ON DISCORD
+              </a>
+              <div class="slashes" aria-hidden="true"><i></i><i></i></div>
+            </div>
+          </div>
+          <!-- Character art: game-poster style, stands in front of the RAVEN67 logo -->
+          <div class="hero-art" aria-hidden="true">
+            <span class="art-beam"></span>
+            <span class="art-floor"></span>
+            <span class="art-particles"></span>
+            <div class="art-tilt">
+              <div class="art-figure">
+                <picture>
+                  <source srcset="./Raven67.webp" type="image/webp">
+                  <img src="./Raven67.png" alt="" width="1135" height="1386" decoding="async" fetchpriority="high">
+                </picture>
+                <span class="art-fx art-scan"></span>
+                <span class="art-fx art-shine"></span>
+                <span class="art-fx art-glitch art-glitch-a"></span>
+                <span class="art-fx art-glitch art-glitch-b"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col right rise d3">
+            <h2>Ready to Play. <em>Delivered Fast.</em></h2>
+            <p>Every ped is tested on FiveM and sent to your Discord ticket within 24 hours of payment.</p>
+          </div>
+        </div>
+
+        <!-- ============ STATS BAR ============ -->
+        <div class="stats rise d4">
+          <div class="stat">
+            <div class="ic" aria-hidden="true">
+              <svg viewBox="0 0 100 100" fill="none" stroke="#a855f7" stroke-width="2.2">
+                <circle cx="50" cy="50" r="44"/>
+                <ellipse cx="50" cy="50" rx="18" ry="44"/><ellipse cx="50" cy="50" rx="34" ry="44"/>
+                <path d="M6 50h88M12 28h76M12 72h76M50 6v88"/>
+              </svg>
+            </div>
+            <div>
+              <div class="head"><h4>Peds in<br>Catalog</h4><div class="big" id="stat-peds-wrap"><span id="stat-peds">—</span><small>LISTED</small></div></div>
+              <p>Ready-made characters, each with its own catalog code.</p>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div>
+              <div class="head"><h4>Fast<br>Delivery</h4><div class="big">24H<small>AFTER PAYMENT</small></div></div>
+              <p>Files arrive in your Discord ticket within 24 hours of payment confirmation.</p>
+            </div>
+          </div>
+
+          <div class="stat">
+            <div class="ic ic-ring" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="#9d3dff">
+                <circle cx="32" cy="20" r="9"/><path d="M16 50c0-10 7-16 16-16s16 6 16 16v4H16z"/>
+                <circle cx="14" cy="25" r="6.5" opacity=".85"/><path d="M2 50c0-7 5-12 12-12 2 0 4 .4 5.5 1.2A20 20 0 0 0 13 50v4H2z" opacity=".85"/>
+                <circle cx="50" cy="25" r="6.5" opacity=".85"/><path d="M62 50c0-7-5-12-12-12-2 0-4 .4-5.5 1.2A20 20 0 0 1 51 50v4h11z" opacity=".85"/>
+              </svg>
+            </div>
+            <div>
+              <h4>Join Our<br>Discord</h4>
+              <p>Place orders through tickets, browse the full catalog, and grab some free peds.</p>
+            </div>
+            <a class="go" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer" aria-label="Join the Raven67 Discord">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- ============ TRUST BADGES (only claims we can back up) ============ -->
+        <ul class="trust-strip rise d4" aria-label="Why buy from Raven67">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><strong>FiveM tested</strong><small>Every ped checked in-game</small></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg><span><strong>Files within 24h</strong><small>After payment is confirmed</small></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span><strong>Discord ticket support</strong><small>Help for the life of your purchase</small></span></li>
+          <li class="trust-rating" data-rating-badge hidden><a href="#reviews" data-tab-link="reviews"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><span><strong data-rating-text></strong><small>Real buyer reviews →</small></span></a></li>
+          <li><a href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span><strong>Free peds</strong><small>Only on our Discord</small></span></a></li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PEDS TAB ============ -->
+<section class="r67-tab-panel" data-tab-panel="peds" hidden id="tab-peds" aria-label="Peds catalog">
+  <section class="wrap gallery" id="gallery">
+    <div class="gallery-heading scroll-reveal">
+      <div><span class="eyebrow">RAVEN67 COLLECTION</span><h2>Browse the collection</h2><p>Explore peds and clothing separately, then order on Discord. Free peds are waiting there too.</p></div>
+      <span class="count" id="gallery-count" aria-live="polite">Loading…</span>
+    </div>
+    <div class="collection-tabs scroll-reveal" role="group" aria-label="Choose catalog" data-active="peds">
+      <span class="tab-glider" aria-hidden="true"></span>
+      <button type="button" data-collection="peds" aria-pressed="true">
+        <svg class="tab-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+        <span class="tab-text"><strong>Peds</strong><small>Ready-made FiveM characters</small></span>
+      </button>
+      <button type="button" data-collection="clothing" aria-pressed="false">
+        <svg class="tab-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z"/></svg>
+        <span class="tab-text"><strong>Clothing</strong><small>Wearables &amp; outfits</small></span>
+      </button>
+    </div>
+    <!-- Free Peds teaser (filled by catalog-ui.js; hidden when there are no free peds) -->
+    <aside class="free-teaser" id="free-teaser" aria-label="Free peds" hidden>
+      <div class="ft-copy">
+        <span class="ft-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>COMMUNITY GIFT</span>
+        <strong>Grab a ped for free</strong>
+        <p>Join our Discord to claim free peds — try one on your server and see the Raven67 quality yourself.</p>
+        <div class="ft-actions">
+          <a class="ft-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>Claim on our Discord</a>
+          <span class="ft-more" data-ft-count></span>
+        </div>
+      </div>
+      <div class="ft-list"></div>
+    </aside>
+    <div class="catalog-tools scroll-reveal" aria-label="Catalog filters">
+      <label class="search-box"><span class="sr-only">Search peds</span><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg><input id="catalog-search" type="search" autocomplete="off" placeholder="Search name, model, category, or tag…"></label>
+      <label class="category-select"><span class="sr-only">Filter by category</span><select id="category-filter"><option value="all">All categories</option></select></label>
+      <label class="category-select"><span class="sr-only">Sort catalog by upload date</span><select id="catalog-sort"><option value="code">Catalog code</option><option value="newest">Newest uploads</option><option value="oldest">Oldest uploads</option></select></label>
+      <div class="seg" role="group" aria-label="Filter characters by gender">
+        <button type="button" data-gender="all" aria-pressed="true">All</button>
+        <button type="button" data-gender="male" aria-pressed="false">Male</button>
+        <button type="button" data-gender="female" aria-pressed="false">Female</button>
+      </div>
+    </div>
+    <div class="active-filters" id="active-filters" aria-live="polite"></div>
+    <div class="tag-filters" id="tag-filters" aria-label="Popular tags"></div>
+    <div id="catalog-grid" class="grid" aria-label="Character catalog"></div>
+    <nav class="pagination hide" id="catalog-pagination" aria-label="Catalog pages"></nav>
+  </section>
+</section>
+
+<!-- ============ REVIEWS TAB ============ -->
+<section class="r67-tab-panel" data-tab-panel="reviews" hidden id="tab-reviews" aria-labelledby="reviews-title">
+  <section class="reviews-section">
+    <div class="wrap reviews-head scroll-reveal">
+      <span class="eyebrow reviews-pill">TESTIMONIALS</span>
+      <h2 id="reviews-title">Customer experiences</h2>
+      <p>Real feedback from buyers on our Discord. Names are partly hidden to protect their privacy.</p>
+      <div class="reviews-summary" id="reviews-summary" hidden>
+        <span class="rs-score" id="rs-score"></span>
+        <span id="rs-stars"></span>
+        <span class="rs-count" id="rs-count"></span>
+      </div>
+    </div>
+
+    <!-- Two ticker rows. They pause while hovered or held. -->
+    <div class="marquee" data-review-row aria-label="Customer reviews (scrolling — hover or hold to pause)" hidden>
+      <div class="marquee-track"></div>
+    </div>
+    <div class="marquee reverse" data-review-row aria-label="More customer reviews (scrolling — hover or hold to pause)" hidden>
+      <div class="marquee-track"></div>
+    </div>
+
+    <div class="wrap">
+      <p class="reviews-empty" id="reviews-empty" hidden>No reviews yet. Bought a ped? Tell us how it went on Discord.</p>
+      <div class="reviews-cta">
+        <a class="btn ghost" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer">Share your experience on Discord</a>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ FAQ TAB ============ -->
+<section class="r67-tab-panel" data-tab-panel="faq" hidden id="tab-faq" aria-label="Frequently asked questions">
+  <section class="wrap faq-section scroll-reveal" id="faq" aria-labelledby="faq-title">
+    <div class="faq-heading"><span class="eyebrow">GOOD TO KNOW</span><h2 id="faq-title">Frequently asked questions</h2><p>Everything you need to know before choosing your ped.</p></div>
+    <div class="faq-cards">
+    <section class="faq-pricing" aria-labelledby="faq-pricing-title">
+      <h3 id="faq-pricing-title">Pricing &amp; payment methods</h3>
+      <p class="price-from" id="faq-price-from" hidden>Peds start from <strong id="faq-price-value"></strong>. Every listing shows its exact price in the catalog.</p>
+      <div class="pay">
+        <div><h4>Crypto</h4><div class="chips"><span class="chip">USDT (TRC20/ERC20)</span><span class="chip">₿ Bitcoin</span></div></div>
+        <div><h4>International</h4><div class="chips"><span class="chip">Gift Card (via G2A)</span><span class="chip">RIA Money Transfer (International customers)</span></div></div>
+      </div>
+      <p class="note">Choose your preferred payment method when you open a Discord ticket. We’ll share the payment details after confirming your order.</p>
+    </section>
+    <section class="faq-order-guide" aria-labelledby="faq-order-title">
+      <h3 id="faq-order-title">How to order</h3>
+      <p class="faq-order-intro">Follow these steps to order your Raven67 ped.</p>
+      <ol class="steps">
+        <li><span>Browse the Peds catalog and note the item's catalog code.</span></li>
+        <li><span>Open a <a href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer">Discord ticket</a> to place your order.</span></li>
+        <li><span>Send the ped code and confirm your preferred payment method.</span></li>
+        <li><span>Pay using one of the methods listed above.</span></li>
+        <li><span>Receive your files within 24 hours after payment is confirmed.</span></li>
+      </ol>
+    </section>
+    </div>
+    <div class="faq-layout">
+      <div class="faq-list">
+        <details class="faq-item"><summary>What is this store?</summary><p>We sell ready-made custom FiveM peds. Browse our catalog, pick a code, and place your order through Discord.</p></details>
+        <details class="faq-item"><summary>Do you take commissions?</summary><p>No. Raven67 is a catalog-only store, so we do not take custom orders.</p></details>
+        <details class="faq-item"><summary>How long is delivery?</summary><p>Your files are sent through a ticket within 24 hours after your payment is confirmed.</p></details>
+        <details class="faq-item"><summary>Will it work on my server?</summary><p>Yes. All peds are tested and prepared for FiveM servers.</p></details>
+        <details class="faq-item"><summary>Can I get a refund?</summary><p>All sales are final. We do not offer refunds.</p></details>
+        <details class="faq-item"><summary>What if I have not received my files after 24 hours?</summary><p>Open a ticket on <a href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer">Discord</a>, and our team will be happy to help.</p></details>
+      </div>
+      <aside class="support-card"><span class="support-icon" aria-hidden="true">↗</span><span class="eyebrow">LIVE SUPPORT</span><h3>We’re here when you need us.</h3><p>Get help through Discord chat throughout the lifetime of your purchase. Use the Discord button in the header to reach us.</p></aside>
+    </div>
+  </section>
+</section>
+</main>
+
+<dialog class="ped-dialog" id="ped-dialog" aria-labelledby="dialog-title">
+  <div class="pd">
+    <div class="pd-top">
+      <nav class="pd-crumbs" id="dialog-crumbs" aria-label="Breadcrumb"></nav>
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Close details">×</button>
+    </div>
+    <div class="pd-main">
+      <div class="pd-gallery">
+        <div class="dialog-media" id="dialog-media"></div>
+        <div class="pd-gallery-foot">
+          <span class="compatibility"><span aria-hidden="true">✓</span> FiveM Ready</span>
+          <button class="pd-small-btn" id="dialog-similar" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Find similar</button>
+        </div>
+      </div>
+      <div class="pd-info">
+        <span class="type" id="dialog-category"></span>
+        <h2 id="dialog-title"></h2>
+        <p class="dialog-model" id="dialog-model"></p>
+        <div class="dialog-price" id="dialog-price"></div>
+        <p class="sold-note hide" id="dialog-sold-note">This ped has been sold and is no longer available.</p>
+        <div class="pd-actions">
+          <a class="btn" id="dialog-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg class="discord-mark" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg><svg class="download-mark" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span id="dialog-discord-label">Order on Discord</span></a>
+          <button class="btn ghost" id="copy-code" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>Copy code</button>
+        </div>
+        <ul class="pd-trust" aria-label="Order guarantees">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>FiveM tested</li>
+          <li data-trust-speed><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Files within 24h</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discord ticket support</li>
+          <li data-rating-badge hidden><a href="#reviews" data-tab-link="reviews" data-close-dialog><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><span data-rating-text></span></a></li>
+        </ul>
+        <div class="code-row"><span class="fact-label">Catalog code</span><strong id="dialog-code">Not assigned</strong><span class="copy-status" id="copy-code-status" aria-live="polite"></span></div>
+        <div class="dialog-tags" id="dialog-tags"></div>
+        <p class="dialog-description" id="dialog-description"></p>
+        <section class="pd-steps" id="dialog-steps" aria-labelledby="dialog-steps-title">
+          <h3 id="dialog-steps-title">How to order</h3>
+          <ol id="dialog-steps-list"></ol>
+        </section>
+        <section class="dialog-extra hide" id="dialog-install-wrap"><h3>Installation notes</h3><p id="dialog-install"></p></section>
+        <a class="btn ghost hide" id="dialog-download" href="#" target="_blank" rel="noopener noreferrer">Download files ↗</a>
+        <div class="pd-seller">
+          <img src="./raven67.svg" alt="Raven67 logo" width="48" height="48" onerror='this.onerror=null;this.src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 52 52%27%3E%3Crect width=%2752%27 height=%2752%27 rx=%2712%27 fill=%27%23140a22%27/%3E%3Cpath d=%27M12 8h28l-3 7H24l-7 25H7z%27 fill=%27%23a855f7%27/%3E%3Cpath d=%27M26 18h13c3 0 5 2 4 5l-1 3c-1 2-2 3-4 3l5 9h-8l-4-8h-5l2-5h9l1-2H24z%27 fill=%27%23fff%27/%3E%3C/svg%3E"'>
+          <div><strong>Raven67</strong><span class="pd-rating" id="dialog-rating"></span></div>
+          <button class="pd-link" id="dialog-all" type="button">All listings →</button>
+        </div>
+      </div>
+    </div>
+    <section class="pd-related hide" id="dialog-related-wrap" aria-labelledby="dialog-related-title">
+      <h3 id="dialog-related-title">You might also like</h3>
+      <div class="pd-related-grid" id="dialog-related"></div>
+    </section>
+  </div>
+</dialog>
+
+<footer class="site-footer"><div class="wrap foot">
+  <span>© Raven67 · Exclusive FiveM character catalog</span>
+  <span><a href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer">Discord</a><a href="#reviews" data-tab-link="reviews">Reviews</a><a href="#faq" data-tab-link="faq">FAQ</a></span>
+</div></footer>
+
+<noscript><p class="noscript wrap">Enable JavaScript to browse the catalog.</p></noscript>
+
+<!-- Tab navigation: one main view at a time. -->
+<script>
+(() => {
+  const panels = [...document.querySelectorAll('[data-tab-panel]')];
+  const navLinks = [...document.querySelectorAll('.r67-header nav [data-tab-link]')];
+  const hashToTab = { '#top':'home', '#home':'home', '#gallery':'peds', '#peds':'peds', '#free':'peds', '#catalog':'peds', '#order':'faq', '#about':'faq', '#payment':'faq', '#pricing':'faq', '#faq':'faq', '#reviews':'reviews', '#testimonials':'reviews' };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Which catalog switch is open inside the Peds tab: peds / clothing / free.
+  // "free" lights up the FREE PED menu item instead of PEDS.
+  let collection = location.hash === '#free' ? 'free' : 'peds';
+  let currentTab = 'home';
+
+  function highlightNav() {
+    const key = currentTab === 'peds' && collection === 'free' ? 'free' : currentTab;
+    navLinks.forEach(link => {
+      const active = (link.dataset.navKey || link.dataset.tabLink) === key;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+    });
+  }
+
+  function showTab(name, options = {}) {
+    if (!panels.some(panel => panel.dataset.tabPanel === name)) name = 'home';
+    panels.forEach(panel => {
+      const active = panel.dataset.tabPanel === name;
+      panel.classList.toggle('is-active', active);
+      panel.hidden = !active;
+    });
+    currentTab = name;
+    if (name === 'peds' && options.collection) {
+      collection = options.collection;
+      if (typeof window.raven67SetCollection === 'function') window.raven67SetCollection(collection);
+    }
+    highlightNav();
+    if (options.updateHash !== false) {
+      const tabHash = { home:'#home', peds: collection === 'free' ? '#free' : '#peds', reviews:'#reviews', faq:'#faq' }[name];
+      if (location.hash !== tabHash) history.pushState(null, '', tabHash);
+    }
+    if (options.scroll !== false) window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    window.dispatchEvent(new CustomEvent('raven67:tabchange', { detail: { tab: name } }));
+  }
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link) return;
+    const tab = link.dataset.tabLink || hashToTab[link.getAttribute('href')];
+    if (!tab) return;
+    event.preventDefault();
+    // Menu "PEDS" opens the paid peds, "FREE PED" opens the free ones
+    const href = link.getAttribute('href');
+    showTab(tab, { collection: href === '#free' ? 'free' : href === '#peds' && link.closest('.r67-header nav') ? 'peds' : undefined });
+  });
+  // Switching Peds / Clothing / Free Ped inside the catalog keeps the menu and address in sync
+  window.addEventListener('raven67:collection', event => {
+    collection = event.detail;
+    if (currentTab !== 'peds') return;
+    highlightNav();
+    const hash = collection === 'free' ? '#free' : '#peds';
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  });
+  window.addEventListener('popstate', () => showTab(hashToTab[location.hash] || 'home', { updateHash: false, collection: location.hash === '#free' ? 'free' : location.hash === '#peds' ? 'peds' : undefined }));
+  window.raven67ShowTab = showTab;
+  showTab(hashToTab[location.hash] || 'home', { updateHash: false, scroll: false });
+})();
+</script>
+
+<!-- Live hero numbers + "starting from" price, computed from the real catalog data. -->
+<script>
+(() => {
+  const formatPrice = (value) => new Intl.NumberFormat('en-US', {
+    style: 'currency', currency: 'USD',
+    minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(value);
+
+  // Animate a number from 0 up to its value
+  function countUp(el, target) {
+    if (!target) { el.textContent = '—'; return; }
+    const start = performance.now(), duration = 1100;
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      el.textContent = String(Math.round(target * (1 - Math.pow(1 - t, 3))));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('catalog-products-loaded', (event) => {
+    const items = (event.detail || []).filter(item => item && (item.image_url || item.image));
+    // paid peds only (clothing and free peds are not counted here)
+    const peds = items.filter(item => !/^(clothing|free)/i.test(String(item.category || '')));
+    const available = peds.filter(item => !item.is_sold);
+
+    const prices = available
+      .filter(item => item.price !== null && item.price !== undefined && item.price !== '')
+      .map(item => Number(item.price))
+      .filter(value => Number.isFinite(value) && value > 0);
+    const minPrice = prices.length ? Math.min(...prices) : null;
+
+    // Stat: number of peds listed
+    // (Safe to run more than once — the catalog can reload.)
+    countUp(document.getElementById('stat-peds'), peds.length);
+    document.getElementById('stat-peds-wrap').hidden = !peds.length;
+
+    // Badge above the title
+    const badge = document.getElementById('hero-badge-text');
+    if (available.length && minPrice !== null) badge.textContent = `${available.length} AVAILABLE · FROM ${formatPrice(minPrice)}`;
+    else if (available.length) badge.textContent = `${available.length} AVAILABLE NOW`;
+    else badge.textContent = 'FIVEM READY · TESTED';
+
+    // FAQ pricing line
+    document.getElementById('faq-price-value').textContent = minPrice !== null ? formatPrice(minPrice) : '';
+    document.getElementById('faq-price-from').hidden = minPrice === null;
+  });
+})();
+</script>
+
+<!-- Sizes the hero characters so they stand big in front of the RAVEN67 logo
+     and reach down behind the stats bar, whatever the screen size or font.
+     Re-measures whenever anything in the hero changes size (fonts, products, reviews). -->
+<script>
+(() => {
+  const art = document.querySelector('.hero-art');
+  const inner = document.querySelector('.r67-hero-inner');
+  const title = document.querySelector('.r67-hero .title');
+  const stats = document.querySelector('.r67-hero .stats');
+  const left = document.querySelector('.r67-hero .col:not(.right)');
+  const right = document.querySelector('.r67-hero .col.right');
+  if (!art || !inner || !title || !stats) return;
+  const HEAD = 0.28;      // heads start this far down the RAVEN67 logo (0 = top of the letters)
+  const TUCK = 40;        // must match --tuck in raven67-theme.css
+  const RATIO = 1135 / 1386; // picture width ÷ height
+
+  let frame = 0;
+  function fit() {
+    frame = 0;
+    if (window.innerWidth <= 1240 || !inner.offsetParent) { if (window.innerWidth <= 1240) art.style.removeProperty('--art-h'); return; }
+    const box = (el) => el.getBoundingClientRect();
+    const t = box(title), s = box(stats);
+    // ignore the entrance slide (transform) by using layout offsets for the vertical positions
+    const top = title.offsetTop + title.offsetHeight * HEAD;
+    const bottom = stats.offsetTop + TUCK;
+    let h = bottom - top;
+    // don't let the picture grow wider than the space between the two text columns
+    if (left && right) {
+      // where the words/buttons actually end (blocks stretch to the full column width)
+      const range = document.createRange();
+      const ends = [...left.querySelectorAll('h2, p')].map((el) => { range.selectNodeContents(el); return range.getBoundingClientRect().right; });
+      left.querySelectorAll('.cta-row > a').forEach((el) => ends.push(box(el).right));
+      const textRight = Math.max(...ends);
+      const gap = box(right).left - textRight;
+      if (gap > 0) h = Math.min(h, (gap + 160) / RATIO); // may tuck a little behind each side
+    }
+    h = Math.max(380, Math.min(820, h));
+    art.style.setProperty('--art-h', h.toFixed(1) + 'px');
+  }
+  const queue = () => { if (!frame) frame = requestAnimationFrame(fit); };
+  fit();
+  window.addEventListener('resize', queue);
+  window.addEventListener('load', queue);
+  window.addEventListener('raven67:tabchange', queue);
+  if (document.fonts) document.fonts.ready.then(queue); // real fonts change the logo height
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(queue);
+    [inner, title, stats, left, right].forEach((el) => el && ro.observe(el));
+  }
+})();
+</script>
+
+<!-- Glowing particles rising around the hero characters -->
+<script>
+(() => {
+  const box = document.querySelector('.art-particles');
+  if (!box) return;
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('i');
+    p.style.left = (8 + Math.random() * 84) + '%';
+    p.style.setProperty('--size', (2 + Math.random() * 4).toFixed(1) + 'px');
+    p.style.setProperty('--drift', ((Math.random() - .5) * 60).toFixed(0) + 'px');
+    p.style.animationDuration = (4 + Math.random() * 5).toFixed(2) + 's';
+    p.style.animationDelay = (-Math.random() * 8).toFixed(2) + 's';
+    box.appendChild(p);
+  }
+})();
+</script>
+
+<!-- Fills the live buyer rating into the trust badges (hidden until there are reviews) -->
+<script>
+(() => {
+  function show({ average, count } = {}) {
+    document.querySelectorAll('[data-rating-badge]').forEach((el) => {
+      el.hidden = !count;
+      el.querySelector('[data-rating-text]').textContent = count ? `${average.toFixed(1)} · ${count} review${count === 1 ? '' : 's'}` : '';
+    });
+  }
+  window.addEventListener('raven67:rating', (e) => show(e.detail));
+  if (window.raven67Rating) show(window.raven67Rating);
+  // the rating link inside the product popup closes the popup first
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-close-dialog]')) document.getElementById('ped-dialog')?.close();
+  });
+})();
+</script>
+
+<!-- Moves the highlight on the Peds / Clothing switch -->
+<script>
+document.addEventListener('click', (event) => {
+  const tab = event.target.closest('[data-collection]');
+  if (tab) tab.parentElement.dataset.active = tab.dataset.collection;
+});
+</script>
+
+<!-- Mouse parallax on the background (skipped on touch screens and for "reduce motion"). -->
+<script>
+(() => {
+  const root = document.documentElement;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let frame = 0;
+  window.addEventListener('pointermove', (event) => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      root.style.setProperty('--px', (event.clientX / window.innerWidth - .5).toFixed(3));
+      root.style.setProperty('--py', (event.clientY / window.innerHeight - .5).toFixed(3));
+    });
+  });
+  document.addEventListener('pointerleave', () => {
+    root.style.setProperty('--px', 0);
+    root.style.setProperty('--py', 0);
+  });
+})();
+</script>
+
+<script type="module" src="./hero-reviews.js?v=33"></script>
+<script type="module" src="./catalog-ui.js?v=33"></script>
+<script type="module" src="./catalog-client.js?v=33"></script>
+<script type="module" src="./reviews-client.js?v=33"></script>
+</body>
+</html>
