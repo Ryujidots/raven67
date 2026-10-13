@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=42">
-<link rel="stylesheet" href="./raven67-theme.css?v=42">
+<link rel="stylesheet" href="./catalog.css?v=43">
+<link rel="stylesheet" href="./raven67-theme.css?v=43">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -292,6 +292,7 @@
       <div class="faq-list">
         <details class="faq-item"><summary>What is this store?</summary><p>We sell ready-made custom FiveM peds. Browse our catalog, pick a code, and place your order through Discord.</p></details>
         <details class="faq-item"><summary>Do you take commissions?</summary><p>No. Raven67 is a catalog-only store, so we do not take custom orders.</p></details>
+        <details class="faq-item"><summary>What's included with every ped?</summary><p>Every full ped is <strong>FiveM ready</strong>, with <strong>all LODs fixed &amp; optimized</strong>, <strong>facial animations &amp; lip sync</strong>, <strong>full clothing included</strong>, and <strong>hair variations</strong>. Head-only peds include everything except the clothing.</p></details>
         <details class="faq-item"><summary>How long is delivery?</summary><p>Your files are sent through a ticket within 24 hours after your payment is confirmed.</p></details>
         <details class="faq-item"><summary>Will it work on my server?</summary><p>Yes. All peds are tested and prepared for FiveM servers.</p></details>
         <details class="faq-item"><summary>Can I get a refund?</summary><p>All sales are final. We do not offer refunds.</p></details>
@@ -347,6 +348,11 @@
           </ul>
           <a class="pd-rating-link" href="#reviews" data-tab-link="reviews" data-close-dialog data-rating-badge hidden><span class="pd-rating-stars" aria-hidden="true">★★★★★</span><span data-rating-text></span><span aria-hidden="true">→</span></a>
         </div>
+        <!-- What's included (filled per product type by catalog-ui.js) -->
+        <section class="pd-features hide" id="dialog-features" aria-labelledby="dialog-features-title">
+          <h3 id="dialog-features-title">What's included</h3>
+          <ul id="dialog-features-list"></ul>
+        </section>
         <div class="dialog-tags" id="dialog-tags"></div>
         <p class="dialog-description" id="dialog-description"></p>
         <section class="pd-steps" id="dialog-steps" aria-labelledby="dialog-steps-title">
@@ -610,9 +616,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=42"></script>
-<script type="module" src="./catalog-ui.js?v=42"></script>
-<script type="module" src="./catalog-client.js?v=42"></script>
-<script type="module" src="./reviews-client.js?v=42"></script>
+<script type="module" src="./hero-reviews.js?v=43"></script>
+<script type="module" src="./catalog-ui.js?v=43"></script>
+<script type="module" src="./catalog-client.js?v=43"></script>
+<script type="module" src="./reviews-client.js?v=43"></script>
 </body>
 </html>

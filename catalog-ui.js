@@ -465,6 +465,19 @@ function renderRelated(product) {
   wrap.classList.toggle("hide", !related.length);
 }
 
+/* ---------- "What's included" per product type ---------- */
+const FEATURE_ICONS = {
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  layers: '<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
+  face: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/>',
+  shirt: '<path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.2a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z"/>',
+  hair: '<path d="M4 20c0-9 3-16 8-16s8 7 8 16"/><path d="M8 20c0-6 1.5-10 4-10s4 4 4 10"/>',
+};
+const PED_FEATURES = {
+  peds: [["check", "FiveM Ready"], ["layers", "All LODs Fixed & Optimized"], ["face", "Facial Animations & Lip Sync"], ["shirt", "Full Clothing Included"], ["hair", "Hair Variations"]],
+  head: [["check", "FiveM Ready"], ["layers", "All LODs Fixed & Optimized"], ["face", "Facial Animations & Lip Sync"], ["hair", "Hair Variations"]],
+};
+
 /* ---------- Popup photo gallery: big photo + thumbnails, arrows, ← → keys, swipe ---------- */
 const galleryState = { product: null, index: 0 };
 function showPhoto(index) {
@@ -639,6 +652,17 @@ function openDetails(product, trigger) {
 
   // short "how to" so the next step is obvious (and the panel isn't empty)
   const name = displayName(product);
+  // "What's included" checklist — edit PED_FEATURES below to change the wording
+  const features = PED_FEATURES[collectionOf(product)] || [];
+  document.querySelector("#dialog-features").classList.toggle("hide", !features.length || product.isSample);
+  document.querySelector("#dialog-features-list").replaceChildren(...features.map(([iconName, text]) => {
+    const li = make("li");
+    const ic = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    ic.setAttribute("viewBox", "0 0 24 24"); ic.setAttribute("aria-hidden", "true"); ic.innerHTML = FEATURE_ICONS[iconName];
+    li.append(ic, make("span", "", text));
+    return li;
+  }));
+
   const steps = free
     ? [["Join our Discord", "Takes just a few seconds."], ["Open the free peds channel", "All community peds are posted there."], [`Download ${name}`, "Add it to your server and enjoy."]]
     : product.isSample ? []
