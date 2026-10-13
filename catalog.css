@@ -145,6 +145,7 @@ button,input,select{font:inherit;color:inherit}
   box-shadow:0 0 12px var(--r-glow),0 0 24px var(--r-glow);
 }
 .collection-tabs[data-active=clothing] .tab-glider{transform:translateX(100%)}
+.collection-tabs[data-active=free] .tab-glider{transform:translateX(200%)}
 
 .collection-tabs button{
   position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:10px;
@@ -598,3 +599,109 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
   .tab-glider{transition:none}
   .card:hover,.faq-pricing:hover,.faq-order-guide:hover,.support-card:hover{transform:none}
 }
+
+/* ---------- Free Ped tab ---------- */
+.free-badge{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 14px rgba(34,197,94,.35)}
+.free-price{color:#4ade80;letter-spacing:.08em;text-shadow:0 0 14px rgba(74,222,128,.35)}
+.download-cta{gap:7px;border-color:rgba(74,222,128,.45);color:#bbf7d0}
+.download-cta svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.card-cta.download-cta:hover{border-color:#4ade80;background:rgba(34,197,94,.16);color:#fff}
+/* popup main button: Discord logo for orders, download arrow for free peds */
+.download-mark{display:none}
+#dialog-discord.is-download .discord-mark{display:none}
+#dialog-discord.is-download .download-mark{display:inline-block;width:18px;height:18px}
+@media (max-width:420px){
+  .collection-tabs button{gap:6px;padding:0 4px}
+  .collection-tabs .tab-ic{width:17px;height:17px}
+  .tab-text strong{font-size:11.5px;letter-spacing:.1em}
+}
+
+/* ---------- "NEW" badge (added in the last 7 days) ---------- */
+.new-badge{
+  position:absolute;top:12px;right:12px;z-index:4;padding:5px 11px;border-radius:999px;
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a0f00;
+  font:800 11px var(--f-ui);letter-spacing:.14em;
+  box-shadow:0 4px 14px rgba(245,158,11,.4);
+  animation:new-glow 2.4s ease-in-out infinite;
+}
+@keyframes new-glow{50%{box-shadow:0 4px 20px rgba(245,158,11,.75),0 0 0 4px rgba(251,191,36,.18)}}
+.pd-new{display:inline-block;margin-left:10px;padding:2px 8px;border-radius:999px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a0f00;font:800 10px var(--f-ui);letter-spacing:.14em;vertical-align:1px}
+
+/* ---------- Free Peds teaser (Peds & Clothing tabs) ---------- */
+.free-teaser{
+  position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 28px;
+  margin:0 0 22px;padding:18px 20px 18px 24px;
+  border:1px solid rgba(74,222,128,.32);border-radius:16px;
+  background:
+    radial-gradient(ellipse 60% 120% at 0% 50%,rgba(34,197,94,.14),transparent 70%),
+    linear-gradient(120deg,rgba(24,14,40,.9),rgba(12,7,22,.92));
+  box-shadow:0 12px 30px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.free-teaser[hidden]{display:none}
+/* slow light sweep */
+.free-teaser::after{content:"";position:absolute;inset:0 auto 0 -40%;width:30%;pointer-events:none;transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(187,247,208,.08),transparent);animation:ft-sweep 7s ease-in-out infinite}
+@keyframes ft-sweep{0%,55%{left:-40%}100%{left:130%}}
+.ft-copy{display:grid;gap:6px;min-width:0}
+.ft-eyebrow{display:flex;align-items:center;gap:8px;color:#4ade80;font:700 11px var(--f-ui);letter-spacing:.22em}
+.ft-eyebrow svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ft-copy strong{font:800 clamp(18px,1.6vw,22px)/1.2 var(--f-head);letter-spacing:.03em;text-transform:uppercase}
+.ft-copy p{margin:0;max-width:52ch;color:var(--r-muted);font-size:14px;line-height:1.55}
+.ft-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:6px}
+.ft-discord{
+  display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:0 16px;border-radius:999px;
+  background:linear-gradient(135deg,#22c55e,#16a34a);color:#04140a;text-decoration:none;
+  font:800 12px var(--f-ui);letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:0 6px 18px rgba(34,197,94,.3);transition:transform .2s,box-shadow .25s;
+}
+.ft-discord svg{width:18px;height:18px}
+.ft-discord:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(34,197,94,.45)}
+.ft-more{color:#bbf7d0;font:700 12px var(--f-ui);letter-spacing:.1em;text-transform:uppercase}
+.ft-more:empty{display:none}
+.ft-all{padding:6px 0;border:0;background:none;color:#bbf7d0;cursor:pointer;font:700 12px var(--f-ui);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.ft-all:hover{color:#fff}
+.ft-all span:empty{display:none}
+.ft-all span{color:var(--r-muted)}
+.ft-list{display:flex;gap:12px}
+.ft-item{
+  position:relative;display:flex;align-items:center;gap:12px;width:230px;padding:8px 12px 8px 8px;
+  border:1px solid var(--r-line);border-radius:12px;background:rgba(10,6,18,.7);color:var(--r-text);text-align:left;cursor:pointer;
+  transition:border-color .2s,transform .25s var(--ease-out),background .2s;
+}
+.ft-item:hover{border-color:rgba(74,222,128,.55);background:rgba(34,197,94,.08);transform:translateY(-2px)}
+.ft-item img{width:56px;height:70px;flex:none;border-radius:8px;object-fit:cover;background:var(--raised)}
+.ft-item-text{display:grid;gap:3px;min-width:0}
+.ft-item-text strong{overflow:hidden;font:700 14px var(--f-ui);letter-spacing:.03em;text-overflow:ellipsis;white-space:nowrap}
+.ft-item-text small{color:var(--r-muted);font:600 11px var(--f-mono,monospace)}
+.ft-free{margin-left:auto;padding:3px 8px;border-radius:999px;background:rgba(34,197,94,.16);color:#4ade80;font:800 10px var(--f-ui);letter-spacing:.14em}
+@media (max-width:1100px){
+  .free-teaser{grid-template-columns:1fr}
+  .ft-list{flex-wrap:wrap}
+  .ft-item{flex:1 1 220px;width:auto}
+}
+@media (max-width:560px){
+  .free-teaser{padding:16px}
+  .ft-copy p{font-size:13px}
+  .ft-discord{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .new-badge,.free-teaser::after{animation:none}
+}
+
+/* keep the Discord logo visible on long button labels ("Get it free on Discord") */
+.discord-mark{flex:none}
+.pd-actions .btn{gap:8px}
+
+/* ---------- "How to order / claim" steps in the product popup ---------- */
+.pd-steps{margin-top:4px;padding:16px 18px;border:1px solid var(--r-line);border-radius:14px;background:rgba(14,8,24,.55)}
+.pd-steps h3{margin:0 0 12px;color:var(--r-purple-3);font:700 12px var(--f-ui);letter-spacing:.2em;text-transform:uppercase}
+.pd-steps ol{display:grid;gap:12px;margin:0;padding:0;list-style:none;counter-reset:step}
+.pd-steps li{position:relative;display:grid;gap:2px;padding-left:42px;counter-increment:step}
+.pd-steps li::before{
+  content:counter(step);position:absolute;left:0;top:1px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;
+  background:rgba(138,44,255,.18);box-shadow:inset 0 0 0 1px rgba(168,85,247,.45);color:#fff;font:800 13px var(--f-head);
+}
+/* line linking the numbers */
+.pd-steps li:not(:last-child)::after{content:"";position:absolute;left:13.5px;top:32px;bottom:-12px;width:1px;background:rgba(168,85,247,.3)}
+.pd-steps li strong{font:700 14px var(--f-ui);letter-spacing:.04em}
+.pd-steps li span{color:var(--r-muted);font-size:13.5px;line-height:1.5}

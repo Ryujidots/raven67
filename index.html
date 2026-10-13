@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=24">
-<link rel="stylesheet" href="./raven67-theme.css?v=24">
+<link rel="stylesheet" href="./catalog.css?v=33">
+<link rel="stylesheet" href="./raven67-theme.css?v=33">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -163,7 +163,7 @@
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg><span><strong>Files within 24h</strong><small>After payment is confirmed</small></span></li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span><strong>Discord ticket support</strong><small>Help for the life of your purchase</small></span></li>
           <li class="trust-rating" data-rating-badge hidden><a href="#reviews" data-tab-link="reviews"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><span><strong data-rating-text></strong><small>Real buyer reviews →</small></span></a></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span><strong>Free peds</strong><small>On our Discord</small></span></li>
+          <li><a href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span><strong>Free peds</strong><small>Only on our Discord</small></span></a></li>
         </ul>
 
       </div>
@@ -175,7 +175,7 @@
 <section class="r67-tab-panel" data-tab-panel="peds" hidden id="tab-peds" aria-label="Peds catalog">
   <section class="wrap gallery" id="gallery">
     <div class="gallery-heading scroll-reveal">
-      <div><span class="eyebrow">RAVEN67 COLLECTION</span><h2>Browse the collection</h2><p>Explore peds and clothing separately, then ask us about an item on Discord.</p></div>
+      <div><span class="eyebrow">RAVEN67 COLLECTION</span><h2>Browse the collection</h2><p>Explore peds and clothing separately, then order on Discord. Free peds are waiting there too.</p></div>
       <span class="count" id="gallery-count" aria-live="polite">Loading…</span>
     </div>
     <div class="collection-tabs scroll-reveal" role="group" aria-label="Choose catalog" data-active="peds">
@@ -189,6 +189,19 @@
         <span class="tab-text"><strong>Clothing</strong><small>Wearables &amp; outfits</small></span>
       </button>
     </div>
+    <!-- Free Peds teaser (filled by catalog-ui.js; hidden when there are no free peds) -->
+    <aside class="free-teaser" id="free-teaser" aria-label="Free peds" hidden>
+      <div class="ft-copy">
+        <span class="ft-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>COMMUNITY GIFT</span>
+        <strong>Grab a ped for free</strong>
+        <p>Join our Discord to claim free peds — try one on your server and see the Raven67 quality yourself.</p>
+        <div class="ft-actions">
+          <a class="ft-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" stroke="none" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg>Claim on our Discord</a>
+          <span class="ft-more" data-ft-count></span>
+        </div>
+      </div>
+      <div class="ft-list"></div>
+    </aside>
     <div class="catalog-tools scroll-reveal" aria-label="Catalog filters">
       <label class="search-box"><span class="sr-only">Search peds</span><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg><input id="catalog-search" type="search" autocomplete="off" placeholder="Search name, model, category, or tag…"></label>
       <label class="category-select"><span class="sr-only">Filter by category</span><select id="category-filter"><option value="all">All categories</option></select></label>
@@ -299,18 +312,22 @@
         <div class="dialog-price" id="dialog-price"></div>
         <p class="sold-note hide" id="dialog-sold-note">This ped has been sold and is no longer available.</p>
         <div class="pd-actions">
-          <a class="btn" id="dialog-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg class="discord-mark" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg><span id="dialog-discord-label">Order on Discord</span></a>
+          <a class="btn" id="dialog-discord" href="https://discord.gg/3KPa29G6Vs" target="_blank" rel="noopener noreferrer"><svg class="discord-mark" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M19.7 5.1a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.4.6 13.6 1 17.7a18.7 18.7 0 0 0 5.7 2.9l1.2-2a12 12 0 0 1-1.9-.9l.5-.4c3.7 1.7 7.6 1.7 11.2 0l.5.4a12 12 0 0 1-1.9.9l1.2 2a18.7 18.7 0 0 0 5.7-2.9c.5-4.8-.8-9-3.5-12.6ZM8.7 14.8c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Zm6.6 0c-1.1 0-2-1-2-2.2s.9-2.2 2-2.2 2 1 2 2.2-.9 2.2-2 2.2Z"/></svg><svg class="download-mark" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span id="dialog-discord-label">Order on Discord</span></a>
           <button class="btn ghost" id="copy-code" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>Copy code</button>
         </div>
         <ul class="pd-trust" aria-label="Order guarantees">
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>FiveM tested</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Files within 24h</li>
+          <li data-trust-speed><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>Files within 24h</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Discord ticket support</li>
           <li data-rating-badge hidden><a href="#reviews" data-tab-link="reviews" data-close-dialog><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><span data-rating-text></span></a></li>
         </ul>
         <div class="code-row"><span class="fact-label">Catalog code</span><strong id="dialog-code">Not assigned</strong><span class="copy-status" id="copy-code-status" aria-live="polite"></span></div>
         <div class="dialog-tags" id="dialog-tags"></div>
         <p class="dialog-description" id="dialog-description"></p>
+        <section class="pd-steps" id="dialog-steps" aria-labelledby="dialog-steps-title">
+          <h3 id="dialog-steps-title">How to order</h3>
+          <ol id="dialog-steps-list"></ol>
+        </section>
         <section class="dialog-extra hide" id="dialog-install-wrap"><h3>Installation notes</h3><p id="dialog-install"></p></section>
         <a class="btn ghost hide" id="dialog-download" href="#" target="_blank" rel="noopener noreferrer">Download files ↗</a>
         <div class="pd-seller">
@@ -339,8 +356,21 @@
 (() => {
   const panels = [...document.querySelectorAll('[data-tab-panel]')];
   const navLinks = [...document.querySelectorAll('.r67-header nav [data-tab-link]')];
-  const hashToTab = { '#top':'home', '#home':'home', '#gallery':'peds', '#peds':'peds', '#catalog':'peds', '#order':'faq', '#about':'faq', '#payment':'faq', '#pricing':'faq', '#faq':'faq', '#reviews':'reviews', '#testimonials':'reviews' };
+  const hashToTab = { '#top':'home', '#home':'home', '#gallery':'peds', '#peds':'peds', '#free':'peds', '#catalog':'peds', '#order':'faq', '#about':'faq', '#payment':'faq', '#pricing':'faq', '#faq':'faq', '#reviews':'reviews', '#testimonials':'reviews' };
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Which catalog switch is open inside the Peds tab: peds / clothing / free.
+  // "free" lights up the FREE PED menu item instead of PEDS.
+  let collection = location.hash === '#free' ? 'free' : 'peds';
+  let currentTab = 'home';
+
+  function highlightNav() {
+    const key = currentTab === 'peds' && collection === 'free' ? 'free' : currentTab;
+    navLinks.forEach(link => {
+      const active = (link.dataset.navKey || link.dataset.tabLink) === key;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+    });
+  }
 
   function showTab(name, options = {}) {
     if (!panels.some(panel => panel.dataset.tabPanel === name)) name = 'home';
@@ -349,13 +379,14 @@
       panel.classList.toggle('is-active', active);
       panel.hidden = !active;
     });
-    navLinks.forEach(link => {
-      const active = link.dataset.tabLink === name;
-      link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
-    });
+    currentTab = name;
+    if (name === 'peds' && options.collection) {
+      collection = options.collection;
+      if (typeof window.raven67SetCollection === 'function') window.raven67SetCollection(collection);
+    }
+    highlightNav();
     if (options.updateHash !== false) {
-      const tabHash = { home:'#home', peds:'#peds', reviews:'#reviews', faq:'#faq' }[name];
+      const tabHash = { home:'#home', peds: collection === 'free' ? '#free' : '#peds', reviews:'#reviews', faq:'#faq' }[name];
       if (location.hash !== tabHash) history.pushState(null, '', tabHash);
     }
     if (options.scroll !== false) window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
@@ -368,9 +399,19 @@
     const tab = link.dataset.tabLink || hashToTab[link.getAttribute('href')];
     if (!tab) return;
     event.preventDefault();
-    showTab(tab);
+    // Menu "PEDS" opens the paid peds, "FREE PED" opens the free ones
+    const href = link.getAttribute('href');
+    showTab(tab, { collection: href === '#free' ? 'free' : href === '#peds' && link.closest('.r67-header nav') ? 'peds' : undefined });
   });
-  window.addEventListener('popstate', () => showTab(hashToTab[location.hash] || 'home', { updateHash: false }));
+  // Switching Peds / Clothing / Free Ped inside the catalog keeps the menu and address in sync
+  window.addEventListener('raven67:collection', event => {
+    collection = event.detail;
+    if (currentTab !== 'peds') return;
+    highlightNav();
+    const hash = collection === 'free' ? '#free' : '#peds';
+    if (location.hash !== hash) history.replaceState(null, '', hash);
+  });
+  window.addEventListener('popstate', () => showTab(hashToTab[location.hash] || 'home', { updateHash: false, collection: location.hash === '#free' ? 'free' : location.hash === '#peds' ? 'peds' : undefined }));
   window.raven67ShowTab = showTab;
   showTab(hashToTab[location.hash] || 'home', { updateHash: false, scroll: false });
 })();
@@ -399,7 +440,8 @@
 
   window.addEventListener('catalog-products-loaded', (event) => {
     const items = (event.detail || []).filter(item => item && (item.image_url || item.image));
-    const peds = items.filter(item => !String(item.category || '').toLowerCase().startsWith('clothing'));
+    // paid peds only (clothing and free peds are not counted here)
+    const peds = items.filter(item => !/^(clothing|free)/i.test(String(item.category || '')));
     const available = peds.filter(item => !item.is_sold);
 
     const prices = available
@@ -426,29 +468,55 @@
 })();
 </script>
 
-<!-- Sizes the hero characters to reach exactly from the middle of the RAVEN67 logo
-     down to the stats bar, whatever the screen size or font. -->
+<!-- Sizes the hero characters so they stand big in front of the RAVEN67 logo
+     and reach down behind the stats bar, whatever the screen size or font.
+     Re-measures whenever anything in the hero changes size (fonts, products, reviews). -->
 <script>
 (() => {
   const art = document.querySelector('.hero-art');
+  const inner = document.querySelector('.r67-hero-inner');
   const title = document.querySelector('.r67-hero .title');
   const stats = document.querySelector('.r67-hero .stats');
-  if (!art || !title || !stats) return;
-  const OVERLAP = 0.45; // how much of the logo the characters stand in front of
-  const TUCK = 40;      // must match --tuck in raven67-theme.css
+  const left = document.querySelector('.r67-hero .col:not(.right)');
+  const right = document.querySelector('.r67-hero .col.right');
+  if (!art || !inner || !title || !stats) return;
+  const HEAD = 0.28;      // heads start this far down the RAVEN67 logo (0 = top of the letters)
+  const TUCK = 40;        // must match --tuck in raven67-theme.css
+  const RATIO = 1135 / 1386; // picture width ÷ height
 
+  let frame = 0;
   function fit() {
-    if (window.innerWidth <= 1240) { art.style.removeProperty('--art-h'); return; } // stacked layouts use CSS sizes
-    // offsetTop/offsetHeight ignore the entrance animations, so measuring is stable
-    const top = title.offsetTop + title.offsetHeight * (1 - OVERLAP);
+    frame = 0;
+    if (window.innerWidth <= 1240 || !inner.offsetParent) { if (window.innerWidth <= 1240) art.style.removeProperty('--art-h'); return; }
+    const box = (el) => el.getBoundingClientRect();
+    const t = box(title), s = box(stats);
+    // ignore the entrance slide (transform) by using layout offsets for the vertical positions
+    const top = title.offsetTop + title.offsetHeight * HEAD;
     const bottom = stats.offsetTop + TUCK;
-    const h = Math.max(380, Math.min(680, bottom - top));
-    art.style.setProperty('--art-h', h + 'px');
+    let h = bottom - top;
+    // don't let the picture grow wider than the space between the two text columns
+    if (left && right) {
+      // where the words/buttons actually end (blocks stretch to the full column width)
+      const range = document.createRange();
+      const ends = [...left.querySelectorAll('h2, p')].map((el) => { range.selectNodeContents(el); return range.getBoundingClientRect().right; });
+      left.querySelectorAll('.cta-row > a').forEach((el) => ends.push(box(el).right));
+      const textRight = Math.max(...ends);
+      const gap = box(right).left - textRight;
+      if (gap > 0) h = Math.min(h, (gap + 160) / RATIO); // may tuck a little behind each side
+    }
+    h = Math.max(380, Math.min(820, h));
+    art.style.setProperty('--art-h', h.toFixed(1) + 'px');
   }
+  const queue = () => { if (!frame) frame = requestAnimationFrame(fit); };
   fit();
-  window.addEventListener('resize', fit);
-  window.addEventListener('load', fit);
-  if (document.fonts) document.fonts.ready.then(fit); // real fonts change the logo height
+  window.addEventListener('resize', queue);
+  window.addEventListener('load', queue);
+  window.addEventListener('raven67:tabchange', queue);
+  if (document.fonts) document.fonts.ready.then(queue); // real fonts change the logo height
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(queue);
+    [inner, title, stats, left, right].forEach((el) => el && ro.observe(el));
+  }
 })();
 </script>
 
@@ -517,9 +585,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=24"></script>
-<script type="module" src="./catalog-ui.js?v=24"></script>
-<script type="module" src="./catalog-client.js?v=24"></script>
-<script type="module" src="./reviews-client.js?v=24"></script>
+<script type="module" src="./hero-reviews.js?v=33"></script>
+<script type="module" src="./catalog-ui.js?v=33"></script>
+<script type="module" src="./catalog-client.js?v=33"></script>
+<script type="module" src="./reviews-client.js?v=33"></script>
 </body>
 </html>

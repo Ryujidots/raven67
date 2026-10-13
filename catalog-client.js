@@ -20,12 +20,17 @@ if (isSupabaseConfigured) {
   try {
     const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.116.0");
     const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-    const { data, error } = await supabase
+    const COLUMNS = "id,name,product_code,model_name,description,price,original_price,rating,image_url,image_path,category,is_active,is_sold,sort_order,created_at";
+    const query = (columns) => supabase
       .from(PRODUCTS_TABLE)
-      .select("id,name,product_code,model_name,description,price,original_price,rating,image_url,image_path,category,is_active,is_sold,sort_order,created_at")
+      .select(columns)
       .eq("is_active", true)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
+    // download_url is used by the Free Ped tab. If that column hasn't been added yet
+    // (free-peds-setup.sql), load the catalog without it so nothing breaks.
+    let { data, error } = await query(`${COLUMNS},download_url`);
+    if (error && /download_url/i.test(error.message || "")) ({ data, error } = await query(COLUMNS));
 
     if (!error) dispatchProducts(data || []);
     else {
