@@ -198,9 +198,11 @@ function buildCard(product) {
   const free = isFree(product);
   const hasPrice = !free && product.price !== null && product.price !== undefined && Number.isFinite(sale);
   const onSale = hasPrice && Number.isFinite(original) && original > sale;
+  // top-left badge: only one, in this order of importance
   if (product.isSample) photo.append(make("span", "sale sample-badge", "DEMO SAMPLE"));
   else if (product.is_sold) photo.append(make("span", "sale sold-badge", "SOLD"));
   else if (isFree(product)) photo.append(make("span", "sale free-badge", "FREE"));
+  else if (onSale) photo.append(make("span", "sale", `SALE · ${Math.round((1 - sale / original) * 100)}% OFF`));
   if (product.images.length > 1) {
     const many = make("span", "photo-count");
     many.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg>';
@@ -213,7 +215,6 @@ function buildCard(product) {
     badge.setAttribute("aria-label", "Added this week");
     photo.append(badge);
   }
-  else if (onSale) photo.append(make("span", "sale", `SALE · ${Math.round((1 - sale / original) * 100)}% OFF`));
 
   const details = make("div", "details");
   details.append(make("span", "type", product.category || "Custom Peds"));
