@@ -743,5 +743,56 @@ const syncHeaderDepth = () => siteHeader.classList.toggle("is-scrolled", window.
 syncHeaderDepth();
 window.addEventListener("scroll", syncHeaderDepth, { passive: true });
 
+/* ---------- Toolbar polish: sliding gender pill, rotating search hints, "stuck" state ---------- */
+(() => {
+  const tools = document.querySelector(".catalog-tools");
+  const seg = document.querySelector(".seg");
+  const glider = seg?.querySelector(".seg-glider");
+  // purple pill slides to whichever gender button is pressed
+  function moveGlider() {
+    const on = seg?.querySelector("[aria-pressed=true]");
+    if (!glider || !on || !on.offsetWidth) return;
+    glider.style.width = `${on.offsetWidth}px`;
+    glider.style.transform = `translateX(${on.offsetLeft - 4}px)`;
+    seg.classList.add("has-glider");
+  }
+  if (seg) {
+    new MutationObserver(moveGlider).observe(seg, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
+    window.addEventListener("resize", moveGlider);
+    window.addEventListener("raven67:tabchange", () => requestAnimationFrame(moveGlider));
+    if (document.fonts) document.fonts.ready.then(moveGlider);
+    requestAnimationFrame(moveGlider);
+  }
+
+  // rotating hints inside the search box (only while it's empty and not focused)
+  const box = document.querySelector(".search-box");
+  const hint = box?.querySelector(".search-hint span");
+  if (box && hint) {
+    const hints = ["Search name, model, or tag…", "Try “female”…", "Search a code like #0012…", "Try “custom” or “baby”…", "Find a head with H-0001…"];
+    let i = 0;
+    searchInput.placeholder = "";
+    hint.textContent = hints[0];
+    const sync = () => box.classList.toggle("has-text", Boolean(searchInput.value) || document.activeElement === searchInput);
+    ["input", "focus", "blur"].forEach((type) => searchInput.addEventListener(type, sync));
+    sync();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(() => {
+        if (box.classList.contains("has-text") || document.hidden) return;
+        hint.classList.add("is-out");
+        setTimeout(() => { i = (i + 1) % hints.length; hint.textContent = hints[i]; hint.classList.remove("is-out"); hint.classList.add("is-in"); setTimeout(() => hint.classList.remove("is-in"), 450); }, 300);
+      }, 3200);
+    }
+  }
+
+  // a touch more solid while it sticks under the header
+  if (tools && "IntersectionObserver" in window) {
+    const sentinel = document.createElement("div");
+    sentinel.className = "tools-sentinel";
+    sentinel.setAttribute("aria-hidden", "true");
+    tools.before(sentinel);
+    new IntersectionObserver(([entry]) => tools.classList.toggle("is-stuck", !entry.isIntersecting && entry.boundingClientRect.top < 120), { rootMargin: "-90px 0px 0px 0px" }).observe(sentinel);
+  }
+})();
+
 renderSkeleton();
 if (location.hash === "#free") setCollection("free"); // opened from a #free link
