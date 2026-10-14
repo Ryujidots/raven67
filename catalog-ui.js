@@ -202,7 +202,13 @@ function buildCard(product) {
   if (product.isSample) photo.append(make("span", "sale sample-badge", "DEMO SAMPLE"));
   else if (product.is_sold) photo.append(make("span", "sale sold-badge", "SOLD"));
   else if (isFree(product)) photo.append(make("span", "sale free-badge", "FREE"));
-  else if (onSale) photo.append(make("span", "sale", `SALE · ${Math.round((1 - sale / original) * 100)}% OFF`));
+  else if (onSale) {
+    const pct = Math.round((1 - sale / original) * 100);
+    const badge = make("span", "sale");
+    badge.append(make("span", "sale-long", `SALE · ${pct}% OFF`), make("span", "sale-short", `−${pct}%`)); // short version on phones
+    badge.setAttribute("aria-label", `On sale, ${pct}% off`);
+    photo.append(badge);
+  }
   if (product.images.length > 1) {
     const many = make("span", "photo-count");
     many.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></svg>';
@@ -222,7 +228,11 @@ function buildCard(product) {
   title.type = "button"; title.dataset.openId = product.id;
   title.setAttribute("aria-label", `View details for ${product.name || `this ${noun}`}`);
   details.append(title);
-  if (product.productCode) details.append(make("span", "product-code", product.productCode));
+  if (product.productCode) {
+    const codePill = make("span", "product-code", product.productCode);
+    if (displayName(product).toUpperCase().includes(product.productCode.toUpperCase())) codePill.classList.add("is-dup");
+    details.append(codePill);
+  }
   const rating = Number(product.rating);
   if (Number.isFinite(rating) && rating > 0) {
     const value = Math.max(1, Math.min(5, rating));

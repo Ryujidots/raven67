@@ -1096,3 +1096,86 @@ button.pd-crumb:hover{color:var(--r-purple-3)}
   /* both tab contents centered in the shared area */
   .pd-panel.has-tabs .pd-features,.pd-panel.has-tabs .pd-steps{align-self:center}
 }
+
+/* =========================================================
+   PHONES — catalog cards + product popup
+   ========================================================= */
+.sale-short{display:none}
+@media (max-width:720px){
+  /* cards: badges small and never overlapping */
+  .photo .sale,.photo .new-badge{top:8px;padding:4px 8px;font-size:10px;letter-spacing:.08em}
+  .photo .sale{left:8px}.photo .new-badge{right:8px}
+  .sale-long{display:none}.sale-short{display:inline}
+  .photo-count{right:8px;bottom:8px;padding:3px 7px;font-size:10px}
+  /* cards: only what matters — category, name, stars, price, button */
+  .card .details{gap:5px;padding:12px 12px 4px}
+  .card .type{font-size:9.5px;letter-spacing:.16em}
+  .card .product-name{font-size:15px}
+  .card .product-code.is-dup,
+  .card .card-tags,
+  .card .product-description,
+  .card .model-name{display:none}
+  .card .star-rating{font-size:11px}
+  .card .meta{gap:8px;margin-top:4px;padding:10px 12px 12px}
+  .card .meta .price{font-size:17px;gap:6px}
+  .card .meta .price del{font-size:11px}
+  .card .card-cta{min-height:36px;padding:0 10px;font-size:11px;letter-spacing:.08em}
+  .tag-filters{gap:6px}
+  .tag-filters .tag-label{font-size:11px;letter-spacing:.18em}
+  .tag-filter{padding:6px 12px;font-size:12px}
+
+  /* popup */
+  .pd{padding:12px 14px 18px}
+  .pd-info{gap:12px}
+  .pd-head h2{font-size:24px}
+  .pd-buy{gap:12px;padding:14px;border-radius:16px}
+  .pd-buy-top{flex-direction:column;align-items:stretch;gap:10px}
+  .pd-buy .dialog-price{flex-wrap:nowrap;gap:8px}
+  .pd-buy .dialog-price strong{font-size:32px}
+  .pd-buy .dialog-price del{font-size:13px}
+  .pd-buy .pd-save{padding:4px 9px;font-size:11px;white-space:nowrap}
+  .code-chip{justify-content:center;min-height:38px}
+  .pd-cta{min-height:50px !important;font-size:13px;letter-spacing:.1em}
+  .pd-order-hint{display:block;margin:-2px 0 0;font-size:12px;line-height:1.45}
+  .pd-order-hint svg{display:inline-block;vertical-align:-2px;margin-right:6px}
+  /* guarantees: one slim centered line instead of three big boxes */
+  .pd-buy .pd-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px}
+  .pd-buy .pd-trust li{flex-direction:row;min-height:0;padding:0;background:none;box-shadow:none;gap:5px;font-size:11.5px;color:var(--r-muted)}
+  .pd-buy .pd-trust li:hover{transform:none;background:none}
+  .pd-buy .pd-trust svg{width:14px !important;height:14px !important}
+  .pd-rating-link{font-size:12px}
+  /* tabs fit on one line */
+  .pd-panel{padding:6px 12px 14px}
+  .pd-panel.has-tabs .pd-tabs{width:100%}
+  .pd-tabs button{min-height:34px;padding:0 6px;font-size:10.5px;letter-spacing:.08em;white-space:nowrap}
+  .pd-features ul{gap:8px}
+  .pd-features li{font-size:13px}
+  .pd .pd-features svg{width:26px !important;height:26px !important;padding:6px}
+  .pd-panel .pd-steps li strong{font-size:14px}
+  .pd-panel .pd-steps li span{font-size:12.5px}
+}
+@media (max-width:720px){
+  /* similar items: 4 in one row */
+  .pd-info .pd-related-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .pd-info .pd-related-item span{font-size:11px}
+  /* tabs on phones: each tab just takes its own height (there's room to scroll) */
+  .pd-panel.has-tabs{display:block}
+  .pd-panel.has-tabs[data-active=features] .pd-steps,
+  .pd-panel.has-tabs[data-active=steps] .pd-features{display:none !important}
+  .pd-panel.has-tabs .pd-features:not(.hide),.pd-panel.has-tabs .pd-steps{visibility:visible;opacity:1;transform:none;animation:panel-in .3s var(--ease-out)}
+  /* guarantees: three even columns on one row */
+  .pd-buy .pd-trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+  .pd-buy .pd-trust li{justify-content:center;gap:4px;font-size:11px;line-height:1.25;text-align:center}
+}
+@media (max-width:720px){
+  .pd-buy .pd-trust li{flex-direction:column;gap:4px}
+}
+@media (max-width:720px){
+  .pd-cta{white-space:normal;text-align:center;line-height:1.25;padding-block:8px}
+  .pd-buy,.pd-buy-top,.pd-actions{min-width:0}
+}
+@media (max-width:720px){
+  .pd-buy .pd-trust{align-items:start}
+  .pd-buy .pd-trust li{justify-content:flex-start}
+  .pd-rating-link{margin-top:4px}
+}
