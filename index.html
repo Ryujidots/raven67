@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=50">
-<link rel="stylesheet" href="./raven67-theme.css?v=50">
+<link rel="stylesheet" href="./catalog.css?v=51">
+<link rel="stylesheet" href="./raven67-theme.css?v=51">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -118,7 +118,7 @@
 
         <!-- ============ STATS BAR ============ -->
         <div class="stats rise d4">
-          <div class="stat">
+          <a class="stat stat-link" href="#peds" data-tab-link="peds" data-collection-link="peds" aria-label="Browse the peds catalog">
             <div class="ic" aria-hidden="true">
               <svg viewBox="0 0 100 100" fill="none" stroke="#a855f7" stroke-width="2.2">
                 <circle cx="50" cy="50" r="44"/>
@@ -127,10 +127,10 @@
               </svg>
             </div>
             <div>
-              <div class="head"><h4>Peds in<br>Catalog</h4><div class="big" id="stat-peds-wrap"><span id="stat-peds">—</span><small>LISTED</small></div></div>
+              <div class="head"><h4>Peds in<br>Catalog <span class="stat-arrow" aria-hidden="true">→</span></h4><div class="big" id="stat-peds-wrap"><span id="stat-peds">—</span><small>LISTED</small></div></div>
               <p>Ready-made characters, each with its own catalog code.</p>
             </div>
-          </div>
+          </a>
 
           <div class="stat">
             <div>
@@ -442,7 +442,7 @@
     event.preventDefault();
     // Menu "PEDS" opens the paid peds, "FREE PED" opens the free ones
     const href = link.getAttribute('href');
-    showTab(tab, { collection: href === '#free' ? 'free' : href === '#peds' && link.closest('.r67-header nav') ? 'peds' : undefined });
+    showTab(tab, { collection: link.dataset.collectionLink || (href === '#free' ? 'free' : href === '#peds' && link.closest('.r67-header nav') ? 'peds' : undefined) });
   });
   // Switching Peds / Clothing / Free Ped inside the catalog keeps the menu and address in sync
   window.addEventListener('raven67:collection', event => {
@@ -626,9 +626,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=50"></script>
-<script type="module" src="./catalog-ui.js?v=50"></script>
-<script type="module" src="./catalog-client.js?v=50"></script>
-<script type="module" src="./reviews-client.js?v=50"></script>
+<script type="module" src="./hero-reviews.js?v=51"></script>
+<script type="module" src="./catalog-ui.js?v=51"></script>
+<script type="module" src="./catalog-client.js?v=51"></script>
+<script type="module" src="./reviews-client.js?v=51"></script>
 </body>
 </html>
