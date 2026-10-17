@@ -893,7 +893,7 @@ html {
   border-top:1px solid rgba(168,85,247,.25);border-bottom:1px solid rgba(168,85,247,.25);padding:4px 0;
   background:linear-gradient(90deg,rgba(138,44,255,.06),rgba(138,44,255,.14),rgba(138,44,255,.06))}
 .new-drops.nd-has-ticker .nd-ticker{display:block}
-.new-drops.nd-row.nd-has-ticker{flex-wrap:wrap}
+.new-drops.nd-row.nd-has-ticker{flex-wrap:wrap;row-gap:0}
 .new-drops.nd-row .nd-ticker{flex-basis:100%}
 .nd-ticker-track{display:flex;align-items:center;width:max-content;animation:nd-marquee 26s linear infinite;
   font:700 10px/12px var(--f-ui);letter-spacing:.24em;text-transform:uppercase;color:var(--r-purple-3);white-space:nowrap}
