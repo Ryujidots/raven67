@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=51">
-<link rel="stylesheet" href="./raven67-theme.css?v=51">
+<link rel="stylesheet" href="./catalog.css?v=52">
+<link rel="stylesheet" href="./raven67-theme.css?v=52">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -91,6 +91,11 @@
               </a>
               <div class="slashes" aria-hidden="true"><i></i><i></i></div>
             </div>
+            <!-- Just dropped: newest uploads (filled by the script below; hides itself if there's no room) -->
+            <div class="new-drops" id="new-drops" hidden>
+              <div class="nd-head"><span class="nd-pulse" aria-hidden="true"></span><span>Just dropped</span><a class="nd-all" href="#peds" data-tab-link="peds" data-collection-link="peds" data-sort-newest>See all new →</a></div>
+              <div class="nd-list"></div>
+            </div>
           </div>
           <!-- Character art: game-poster style, stands in front of the RAVEN67 logo -->
           <div class="hero-art" aria-hidden="true">
@@ -127,7 +132,7 @@
               </svg>
             </div>
             <div>
-              <div class="head"><h4>Peds in<br>Catalog <span class="stat-arrow" aria-hidden="true">→</span></h4><div class="big" id="stat-peds-wrap"><span id="stat-peds">—</span><small>LISTED</small></div></div>
+              <div class="head"><h4>Peds in<br>Catalog <span class="stat-arrow" aria-hidden="true">→</span></h4><div class="big" id="stat-peds-wrap"><span id="stat-peds">—</span><small>IN STOCK</small></div></div>
               <p>Ready-made characters, each with its own catalog code.</p>
             </div>
           </a>
@@ -491,10 +496,10 @@
       .filter(value => Number.isFinite(value) && value > 0);
     const minPrice = prices.length ? Math.min(...prices) : null;
 
-    // Stat: number of peds listed
+    // Stat: peds you can still buy (sold ones left out, same number as the badge at the top)
     // (Safe to run more than once — the catalog can reload.)
-    countUp(document.getElementById('stat-peds'), peds.length);
-    document.getElementById('stat-peds-wrap').hidden = !peds.length;
+    countUp(document.getElementById('stat-peds'), available.length);
+    document.getElementById('stat-peds-wrap').hidden = !available.length;
 
     // Badge above the title
     const badge = document.getElementById('hero-badge-text');
@@ -578,6 +583,63 @@
 })();
 </script>
 
+<!-- "Just dropped": the 4 newest peds/heads under the hero buttons. Clicking one opens its popup. -->
+<script>
+(() => {
+  const box = document.getElementById('new-drops');
+  const list = box?.querySelector('.nd-list');
+  const stats = document.querySelector('.r67-hero .stats');
+  if (!box || !list) return;
+  const esc = (t) => String(t ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let items = [];
+
+  // size the thumbnails to the free space above the stats bar (Home must stay one screen)
+  const cta = document.querySelector('.r67-hero .cta-row');
+  function fit() {
+    if (!items.length) { box.hidden = true; return; }
+    box.hidden = false;
+    box.classList.remove('no-room', 'nd-row');
+    box.style.removeProperty('--nd-h');
+    if (!stats || !cta || window.innerWidth <= 900) return; // stacked layouts scroll anyway
+    const room = stats.getBoundingClientRect().top - cta.getBoundingClientRect().bottom;
+    const stacked = room - 76;            // label above the thumbs: margin + label + gap
+    if (stacked >= 84) { box.style.setProperty('--nd-h', Math.min(138, stacked) + 'px'); return; }
+    const inline = room - 26;             // label beside the thumbs
+    if (inline >= 54) { box.classList.add('nd-row'); box.style.setProperty('--nd-h', Math.min(90, inline) + 'px'); return; }
+    box.classList.add('no-room');
+  }
+
+  window.addEventListener('catalog-products-loaded', (event) => {
+    items = (event.detail || [])
+      .filter((p) => p && (p.image_url || p.image) && !p.is_sold && !/^(clothing|free)/i.test(String(p.category || '')))
+      .sort((a, b) => (Date.parse(b.created_at || '') || 0) - (Date.parse(a.created_at || '') || 0))
+      .slice(0, 4);
+    list.innerHTML = items.map((p) => `
+      <button type="button" class="nd-item" data-nd-id="${esc(p.id)}" aria-label="View ${esc(p.name || p.product_code)}">
+        <img src="${esc(p.image_url || p.image)}" alt="" loading="lazy">
+        <span class="nd-tag">NEW</span>
+        <span class="nd-code">${esc(p.product_code || p.name || '')}</span>
+      </button>`).join('');
+    requestAnimationFrame(fit);
+  });
+
+  list.addEventListener('click', (event) => {
+    const item = event.target.closest('[data-nd-id]');
+    if (item && typeof window.raven67OpenProduct === 'function') window.raven67OpenProduct(item.dataset.ndId, item);
+  });
+  // "See all new" → catalog sorted by newest uploads
+  box.querySelector('[data-sort-newest]')?.addEventListener('click', () => {
+    setTimeout(() => {
+      const sort = document.getElementById('catalog-sort');
+      if (sort) { sort.value = 'newest'; sort.dispatchEvent(new Event('change', { bubbles: true })); }
+    }, 50);
+  });
+  window.addEventListener('resize', () => requestAnimationFrame(fit));
+  window.addEventListener('raven67:tabchange', (e) => { if (e.detail?.tab === 'home') requestAnimationFrame(fit); });
+  if (document.fonts) document.fonts.ready.then(() => requestAnimationFrame(fit));
+})();
+</script>
+
 <!-- Fills the live buyer rating into the trust badges (hidden until there are reviews) -->
 <script>
 (() => {
@@ -626,9 +688,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=51"></script>
-<script type="module" src="./catalog-ui.js?v=51"></script>
-<script type="module" src="./catalog-client.js?v=51"></script>
-<script type="module" src="./reviews-client.js?v=51"></script>
+<script type="module" src="./hero-reviews.js?v=52"></script>
+<script type="module" src="./catalog-ui.js?v=52"></script>
+<script type="module" src="./catalog-client.js?v=52"></script>
+<script type="module" src="./reviews-client.js?v=52"></script>
 </body>
 </html>
