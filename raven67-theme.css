@@ -853,17 +853,22 @@ html {
 .nd-all{margin-left:auto;color:var(--r-purple-3);font-size:10.5px;letter-spacing:.14em;text-decoration:none;transition:color .2s}
 .nd-all:hover{color:#fff}
 .nd-list{display:flex;gap:10px;position:relative;isolation:isolate}
-/* soft purple light under the row */
-.nd-list::after{content:"";position:absolute;left:4%;right:4%;bottom:-16px;height:30px;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(168,85,247,.55),rgba(138,44,255,.18) 60%,transparent);filter:blur(6px);pointer-events:none;z-index:-1;
-  animation:nd-floor 4s ease-in-out infinite}
-@keyframes nd-floor{50%{opacity:.55;transform:scaleX(.92)}}
-/* light sweep across each card, one after another */
-.nd-item::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);
-  transform:translateX(-120%);animation:nd-shine 6s ease-in-out infinite}
-.nd-item:nth-child(2)::before{animation-delay:.25s}.nd-item:nth-child(3)::before{animation-delay:.5s}.nd-item:nth-child(4)::before{animation-delay:.75s}
-@keyframes nd-shine{0%,70%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+/* lightning: an electric spark races around each card's border … */
+@property --nd-a{syntax:'<angle>';initial-value:0deg;inherits:false}
+.nd-item::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;padding:1.5px;
+  background:conic-gradient(from var(--nd-a),transparent 0 72%,rgba(168,85,247,.0) 72%,#a855f7 84%,#e9d5ff 90%,#fff 91%,transparent 92%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  filter:drop-shadow(0 0 3px #c084fc);animation:nd-spark 3.2s linear infinite}
+.nd-item:nth-child(2)::before{animation-delay:-.8s}.nd-item:nth-child(3)::before{animation-delay:-1.6s}.nd-item:nth-child(4)::before{animation-delay:-2.4s}
+@keyframes nd-spark{to{--nd-a:360deg}}
+/* … and every few seconds a card gets struck: quick double flash, one card after another */
+.nd-bolt{position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;opacity:0;
+  background:radial-gradient(120% 70% at 50% 0%,rgba(233,213,255,.55),rgba(168,85,247,.18) 45%,transparent 70%);
+  box-shadow:inset 0 0 0 1.5px rgba(233,213,255,.9),inset 0 0 18px rgba(192,132,252,.6);
+  animation:nd-strike 8s steps(1,end) infinite}
+.nd-item:nth-child(2) .nd-bolt{animation-delay:2s}.nd-item:nth-child(3) .nd-bolt{animation-delay:4s}.nd-item:nth-child(4) .nd-bolt{animation-delay:6s}
+@keyframes nd-strike{0%{opacity:0}1%{opacity:1}2%{opacity:.15}3%{opacity:.9}4.5%{opacity:0}100%{opacity:0}}
+.nd-item:hover::before{animation-duration:1.2s}
 .nd-item{
   position:relative;overflow:hidden;flex:none;height:var(--nd-h,120px);width:var(--nd-w,calc(var(--nd-h,120px) * .8));padding:0;cursor:pointer;
   border:1px solid rgba(168,85,247,.3);border-radius:12px;background:var(--raised);
@@ -885,7 +890,7 @@ html {
 .new-drops.nd-row .nd-code{font-size:9.5px;bottom:4px}
 .new-drops.nd-row .nd-tag{top:4px;left:4px;font-size:7.5px;padding:1px 5px}
 @media (max-width:900px){ .new-drops{width:auto;max-width:none} .nd-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))} .nd-item{height:auto;width:100%;aspect-ratio:4/5} }
-@media (prefers-reduced-motion:reduce){ .nd-item{animation:none} }
+@media (prefers-reduced-motion:reduce){ .nd-item{animation:none} .nd-bolt{animation-duration:12s} }
 
 /* moving ticker under "Just dropped" — fills spare space, shown only when it fits */
 .nd-ticker{display:none;margin-top:8px;overflow:hidden;width:0;min-width:100%;
@@ -904,3 +909,5 @@ html {
 @media (max-width:900px){ .nd-ticker{display:block} }
 /* "reduce motion" on (e.g. Windows animation effects off): keep it moving, just slower */
 @media (prefers-reduced-motion:reduce){ .nd-ticker-track{animation-duration:40s} }
+
+.nd-tag,.nd-code{z-index:3}

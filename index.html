@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=53">
-<link rel="stylesheet" href="./raven67-theme.css?v=53">
+<link rel="stylesheet" href="./catalog.css?v=54">
+<link rel="stylesheet" href="./raven67-theme.css?v=54">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -646,6 +646,7 @@
     list.innerHTML = items.map((p) => `
       <button type="button" class="nd-item" data-nd-id="${esc(p.id)}" aria-label="View ${esc(p.name || p.product_code)}">
         <img src="${esc(p.image_url || p.image)}" alt="" loading="lazy">
+        <span class="nd-bolt"></span>
         <span class="nd-tag">NEW</span>
         <span class="nd-code">${esc(p.product_code || p.name || '')}</span>
       </button>`).join('');
@@ -725,9 +726,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=53"></script>
-<script type="module" src="./catalog-ui.js?v=53"></script>
-<script type="module" src="./catalog-client.js?v=53"></script>
-<script type="module" src="./reviews-client.js?v=53"></script>
+<script type="module" src="./hero-reviews.js?v=54"></script>
+<script type="module" src="./catalog-ui.js?v=54"></script>
+<script type="module" src="./catalog-client.js?v=54"></script>
+<script type="module" src="./reviews-client.js?v=54"></script>
 </body>
 </html>
