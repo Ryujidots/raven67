@@ -95,6 +95,7 @@
             <div class="new-drops" id="new-drops" hidden>
               <div class="nd-head"><span class="nd-pulse" aria-hidden="true"></span><span>Just dropped</span><a class="nd-all" href="#peds" data-tab-link="peds" data-collection-link="peds" data-sort-newest>See all new →</a></div>
               <div class="nd-list"></div>
+              <div class="nd-ticker" aria-hidden="true"><div class="nd-ticker-track"></div></div>
             </div>
           </div>
           <!-- Character art: game-poster style, stands in front of the RAVEN67 logo -->
@@ -598,14 +599,36 @@
   function fit() {
     if (!items.length) { box.hidden = true; return; }
     box.hidden = false;
-    box.classList.remove('no-room', 'nd-row');
+    box.classList.remove('no-room', 'nd-row', 'nd-has-ticker');
     box.style.removeProperty('--nd-h');
+    box.style.removeProperty('--nd-w');
     if (!stats || !cta || window.innerWidth <= 900) return; // stacked layouts scroll anyway
     const room = stats.getBoundingClientRect().top - cta.getBoundingClientRect().bottom;
-    const stacked = room - 76;            // label above the thumbs: margin + label + gap
-    if (stacked >= 84) { box.style.setProperty('--nd-h', Math.min(138, stacked) + 'px'); return; }
-    const inline = room - 26;             // label beside the thumbs
-    if (inline >= 54) { box.classList.add('nd-row'); box.style.setProperty('--nd-h', Math.min(90, inline) + 'px'); return; }
+    // never reach into the main picture: stop 16px before it
+    const art = document.querySelector('.r67-hero .art-figure img');
+    const left = box.getBoundingClientRect().left;
+    let maxW = (box.parentElement || box).getBoundingClientRect().width;
+    if (art) { const a = art.getBoundingClientRect(); if (a.width && a.left > left) maxW = Math.min(maxW, a.left - left - 16); }
+    // 4 thumbs (4:5) + 3 gaps of 10px
+    const fromW = (w) => (w - 30) / 3.2;
+    let row = false;
+    let h = Math.min(room - 64, fromW(maxW), 170);                 // label above the thumbs
+    if (h < 70) { const hr = Math.min(room - 28, fromW(maxW - 190), 110); if (hr > h) { h = hr; row = true; } } // label beside
+    if (h >= 54) {
+      h = Math.floor(h);
+      const w = Math.floor(h * 0.8);
+      box.classList.toggle('nd-row', row);
+      // leftover space under the thumbs → moving ticker line (about 32px tall)
+      let spare = room - (row ? 28 : 64) - h;
+      const ticker = spare >= 32;
+      box.classList.toggle('nd-has-ticker', ticker);
+      if (ticker) spare -= 32;
+      // still space left → cards get a bit taller (up to 2:3), never wider
+      if (spare > 0) h = Math.floor(Math.min(h + spare, w * 1.5));
+      box.style.setProperty('--nd-h', h + 'px');
+      box.style.setProperty('--nd-w', w + 'px');
+      return;
+    }
     box.classList.add('no-room');
   }
 
@@ -622,6 +645,14 @@
       </button>`).join('');
     requestAnimationFrame(fit);
   });
+
+  // ticker text (written twice so the loop is seamless)
+  const track = box.querySelector('.nd-ticker-track');
+  if (track) {
+    const words = ['New drops weekly', 'FiveM ready', 'All LODs fixed', 'Facial animations', 'Files within 24h', 'Order on Discord'];
+    const once = words.map((w) => `<span>${w}</span><i>✦</i>`).join('');
+    track.innerHTML = once + once;
+  }
 
   list.addEventListener('click', (event) => {
     const item = event.target.closest('[data-nd-id]');
