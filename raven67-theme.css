@@ -885,7 +885,7 @@ html {
 .new-drops.nd-row .nd-code{font-size:9.5px;bottom:4px}
 .new-drops.nd-row .nd-tag{top:4px;left:4px;font-size:7.5px;padding:1px 5px}
 @media (max-width:900px){ .new-drops{width:auto;max-width:none} .nd-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))} .nd-item{height:auto;width:100%;aspect-ratio:4/5} }
-@media (prefers-reduced-motion:reduce){ .nd-item,.nd-pulse,.nd-list::after,.nd-item::before{animation:none} }
+@media (prefers-reduced-motion:reduce){ .nd-item{animation:none} }
 
 /* moving ticker under "Just dropped" — fills spare space, shown only when it fits */
 .nd-ticker{display:none;margin-top:8px;overflow:hidden;width:0;min-width:100%;
@@ -902,4 +902,5 @@ html {
 .nd-ticker:hover .nd-ticker-track{animation-play-state:paused}
 @keyframes nd-marquee{to{transform:translateX(-50%)}}
 @media (max-width:900px){ .nd-ticker{display:block} }
-@media (prefers-reduced-motion:reduce){ .nd-ticker-track{animation:none} }
+/* "reduce motion" on (e.g. Windows animation effects off): keep it moving, just slower */
+@media (prefers-reduced-motion:reduce){ .nd-ticker-track{animation-duration:40s} }
