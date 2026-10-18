@@ -919,3 +919,12 @@ window.addEventListener("scroll", syncHeaderDepth, { passive: true });
 
 renderSkeleton();
 if (location.hash === "#free") setCollection("free"); // opened from a #free link
+// raven67.my.id/#new → Peds catalog sorted by newest uploads (link for Discord announcements)
+if (location.hash === "#new") { setCollection("peds"); sortSelect.value = "newest"; }
+window.addEventListener("hashchange", () => {
+  if (location.hash !== "#new") return;
+  if (typeof window.raven67ShowTab === "function") window.raven67ShowTab("peds", { collection: "peds", updateHash: false });
+  sortSelect.value = "newest";
+  currentPage = 1;
+  render();
+});

@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=54">
-<link rel="stylesheet" href="./raven67-theme.css?v=54">
+<link rel="stylesheet" href="./catalog.css?v=55">
+<link rel="stylesheet" href="./raven67-theme.css?v=55">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -93,7 +93,7 @@
             </div>
             <!-- Just dropped: newest uploads (filled by the script below; hides itself if there's no room) -->
             <div class="new-drops" id="new-drops" hidden>
-              <div class="nd-head"><span class="nd-pulse" aria-hidden="true"></span><span>Just dropped</span><a class="nd-all" href="#peds" data-tab-link="peds" data-collection-link="peds" data-sort-newest>See all new →</a></div>
+              <div class="nd-head"><span class="nd-pulse" aria-hidden="true"></span><span>Just dropped</span><a class="nd-all" href="#new" data-tab-link="peds" data-collection-link="peds" data-sort-newest>See all new →</a></div>
               <div class="nd-list"></div>
               <div class="nd-ticker" aria-hidden="true"><div class="nd-ticker-track"></div></div>
             </div>
@@ -403,7 +403,7 @@
 (() => {
   const panels = [...document.querySelectorAll('[data-tab-panel]')];
   const navLinks = [...document.querySelectorAll('.r67-header nav [data-tab-link]')];
-  const hashToTab = { '#top':'home', '#home':'home', '#gallery':'peds', '#peds':'peds', '#free':'peds', '#catalog':'peds', '#order':'faq', '#about':'faq', '#payment':'faq', '#pricing':'faq', '#faq':'faq', '#reviews':'reviews', '#testimonials':'reviews' };
+  const hashToTab = { '#top':'home', '#home':'home', '#gallery':'peds', '#peds':'peds', '#new':'peds', '#free':'peds', '#catalog':'peds', '#order':'faq', '#about':'faq', '#payment':'faq', '#pricing':'faq', '#faq':'faq', '#reviews':'reviews', '#testimonials':'reviews' };
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   // Which catalog switch is open inside the Peds tab: peds / clothing / free.
   // "free" lights up the FREE PED menu item instead of PEDS.
@@ -458,7 +458,7 @@
     const hash = collection === 'free' ? '#free' : '#peds';
     if (location.hash !== hash) history.replaceState(null, '', hash);
   });
-  window.addEventListener('popstate', () => showTab(hashToTab[location.hash] || 'home', { updateHash: false, collection: location.hash === '#free' ? 'free' : location.hash === '#peds' ? 'peds' : undefined }));
+  window.addEventListener('popstate', () => showTab(hashToTab[location.hash] || 'home', { updateHash: false, collection: location.hash === '#free' ? 'free' : (location.hash === '#peds' || location.hash === '#new') ? 'peds' : undefined }));
   window.raven67ShowTab = showTab;
   showTab(hashToTab[location.hash] || 'home', { updateHash: false, scroll: false });
 })();
@@ -726,9 +726,9 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=54"></script>
-<script type="module" src="./catalog-ui.js?v=54"></script>
-<script type="module" src="./catalog-client.js?v=54"></script>
-<script type="module" src="./reviews-client.js?v=54"></script>
+<script type="module" src="./hero-reviews.js?v=55"></script>
+<script type="module" src="./catalog-ui.js?v=55"></script>
+<script type="module" src="./catalog-client.js?v=55"></script>
+<script type="module" src="./reviews-client.js?v=55"></script>
 </body>
 </html>
