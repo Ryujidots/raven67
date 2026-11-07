@@ -786,7 +786,7 @@ html {
   body:has(#tab-home.is-active) .site-footer{display:none}
 
   #tab-home .r67-hero{
-    height:calc(100dvh - var(--header-h));min-height:0;
+    height:calc(100dvh - var(--header-h) - var(--sale-h,0px));min-height:0;
     padding-top:clamp(12px,2.6vh,28px);padding-bottom:clamp(12px,2.4vh,26px);
   }
   #tab-home .r67-hero-inner{flex:1;display:flex;flex-direction:column;min-height:0}
@@ -911,3 +911,33 @@ html {
 @media (prefers-reduced-motion:reduce){ .nd-ticker-track{animation-duration:40s} }
 
 .nd-tag,.nd-code{z-index:3}
+
+/* =========================================================
+   STORE-WIDE SALE BANNER (admin → Sale)
+   ========================================================= */
+:root{--sale-h:0px}
+html.has-sale{--sale-h:38px}
+.sale-bar{position:relative;z-index:41;height:var(--sale-h);overflow:hidden;
+  background:linear-gradient(90deg,#3b0a78,#7c2cf0 30%,#a855f7 50%,#7c2cf0 70%,#3b0a78);background-size:200% 100%;
+  animation:sb-flow 8s linear infinite;border-bottom:1px solid rgba(233,213,255,.35)}
+.sale-bar[hidden]{display:none}
+.sale-bar a{display:flex;align-items:center;justify-content:center;gap:12px;height:100%;padding:0 16px;color:#fff;text-decoration:none;
+  font:600 13px var(--f-ui);letter-spacing:.04em;white-space:nowrap}
+.sale-bar .sb-title{font:800 12px var(--f-head);letter-spacing:.18em;padding:3px 9px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25)}
+.sale-bar .sb-text{font-weight:700}
+.sale-bar .sb-clock{display:inline-flex;align-items:center;gap:6px;color:#f3e8ff}
+.sale-bar .sb-clock[hidden]{display:none}
+.sale-bar .sb-time{font:700 13px 'Chakra Petch',var(--f-ui);letter-spacing:.06em;padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.35);color:#fde68a;min-width:76px;text-align:center}
+.sale-bar .sb-cta{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#fde68a;transition:transform .2s}
+.sale-bar a:hover .sb-cta{transform:translateX(3px)}
+.sale-bar .sb-fire{animation:sb-flicker 1.6s ease-in-out infinite}
+@keyframes sb-flow{to{background-position:-200% 0}}
+@keyframes sb-flicker{50%{transform:scale(1.15) rotate(-6deg)}}
+@media (max-width:720px){
+  html.has-sale{--sale-h:34px}
+  .sale-bar a{gap:8px;font-size:11.5px;padding:0 10px}
+  .sale-bar .sb-title,.sale-bar .sb-ends,.sale-bar .sb-fire{display:none}
+  .sale-bar .sb-cta{font-size:10px}
+  .sale-bar .sb-time{min-width:0;font-size:12px}
+}
+@media (max-width:380px){ .sale-bar .sb-cta{display:none} }

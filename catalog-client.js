@@ -1,5 +1,6 @@
 import { isSupabaseConfigured, PRODUCTS_TABLE, SUPABASE_PUBLISHABLE_KEY, SUPABASE_URL } from "./supabase-config.js";
 import { getLocalProducts } from "./catalog-storage.js";
+import { activeSale, applySale, SALE_KEY, SALE_LOCAL_KEY } from "./sale.js?v=56";
 
 // refresh = true when the visitor pressed the catalog's refresh button (keeps their page/filters)
 function dispatchProducts(products, refresh = false) {
@@ -45,12 +46,35 @@ async function loadRemoteCatalog() {
   return data || [];
 }
 
+/* Store-wide sale setting (see sale.js). A missing table just means "no sale". */
+async function loadSaleSetting() {
+  try {
+    if (!isSupabaseConfigured) return JSON.parse(localStorage.getItem(SALE_LOCAL_KEY) || "null");
+    const { data, error } = await supabase.from("store_settings").select("value").eq("key", SALE_KEY).maybeSingle();
+    if (error) { if (!/store_settings/i.test(error.message || "")) console.warn("Could not load the sale setting.", error.message); return null; }
+    return data?.value || null;
+  } catch { return null; }
+}
+
+let saleTimer = 0;
+function announceSale(sale) {
+  window.raven67Sale = sale;
+  document.documentElement.classList.toggle("has-sale", !!sale);
+  window.dispatchEvent(new CustomEvent("raven67:sale", { detail: sale }));
+  // when the sale ends while the page is open, put the normal prices back
+  clearTimeout(saleTimer);
+  const left = sale?.ends_at ? Date.parse(sale.ends_at) - Date.now() : 0;
+  if (left > 0 && left < 2 ** 31 - 1) saleTimer = setTimeout(() => loadCatalog({ refresh: true }), left + 1000);
+}
+
 /* Loads the catalog. Returns true when it worked.
    On a refresh that fails, the products already on screen are kept. */
 async function loadCatalog({ refresh = false } = {}) {
   try {
     const products = isSupabaseConfigured ? await loadRemoteCatalog() : await loadLocalCatalog();
-    dispatchProducts(products, refresh);
+    const sale = activeSale(await loadSaleSetting());
+    announceSale(sale);
+    dispatchProducts(applySale(products, sale), refresh);
     return true;
   } catch (error) {
     console.warn("Could not load products.", error);
@@ -67,6 +91,6 @@ loadCatalog();
 // Local-only mode: update when the admin page (in another tab) saves a product
 if (!isSupabaseConfigured) {
   window.addEventListener("storage", (event) => {
-    if (event.key === "raven67-catalog-revision") loadCatalog({ refresh: true });
+    if (event.key === "raven67-catalog-revision" || event.key === SALE_LOCAL_KEY) loadCatalog({ refresh: true });
   });
 }

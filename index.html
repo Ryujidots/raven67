@@ -122,8 +122,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
 <!-- "?v=" makes browsers fetch the newest file instead of an old cached copy.
      Bump the number whenever you change a CSS file. -->
-<link rel="stylesheet" href="./catalog.css?v=55">
-<link rel="stylesheet" href="./raven67-theme.css?v=55">
+<link rel="stylesheet" href="./catalog.css?v=56">
+<link rel="stylesheet" href="./raven67-theme.css?v=56">
 <!-- Keeps the background layer behind the page even if the CSS loads late -->
 <style>.site-fx{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}</style>
 </head>
@@ -146,6 +146,16 @@
 </div>
 
 <!-- ============ HEADER (sticky, shared by every tab) ============ -->
+<!-- Store-wide sale banner (shown only while a sale is on — set it in admin → Sale) -->
+<div class="sale-bar" id="sale-bar" hidden>
+  <a href="#peds" data-tab-link="peds" data-collection-link="peds">
+    <span class="sb-fire" aria-hidden="true">🔥</span>
+    <strong class="sb-title"></strong>
+    <span class="sb-text"></span>
+    <span class="sb-clock" hidden><span class="sb-ends">Ends in</span> <b class="sb-time"></b></span>
+    <span class="sb-cta">Shop now →</span>
+  </a>
+</div>
 <header class="site-header r67-header">
   <a class="logo" href="#home" data-tab-link="home" aria-label="Raven67 home">
     <svg viewBox="0 0 52 40" fill="none" aria-hidden="true">
@@ -767,8 +777,13 @@
   const track = box.querySelector('.nd-ticker-track');
   if (track) {
     const words = ['New drops weekly', 'FiveM ready', 'All LODs fixed', 'Facial animations', 'Files within 24h', 'Order on Discord'];
-    const once = words.map((w) => `<span>${w}</span><i>✦</i>`).join('');
-    track.innerHTML = once + once;
+    const fill = (sale) => {
+      const list = sale ? [`${sale.label || 'Sale'}: ${sale.percent}% off`, ...words] : words;
+      const once = list.map((w) => `<span>${w}</span><i>✦</i>`).join('');
+      track.innerHTML = once + once;
+    };
+    fill(window.raven67Sale);
+    window.addEventListener('raven67:sale', (event) => fill(event.detail));
   }
 
   list.addEventListener('click', (event) => {
@@ -836,9 +851,39 @@ document.addEventListener('click', (event) => {
 })();
 </script>
 
-<script type="module" src="./hero-reviews.js?v=55"></script>
-<script type="module" src="./catalog-ui.js?v=55"></script>
-<script type="module" src="./catalog-client.js?v=55"></script>
-<script type="module" src="./reviews-client.js?v=55"></script>
+<script type="module" src="./hero-reviews.js?v=56"></script>
+<script>
+/* Sale banner + countdown (the sale itself comes from catalog-client.js → "raven67:sale") */
+(() => {
+  const bar = document.getElementById('sale-bar');
+  if (!bar) return;
+  const title = bar.querySelector('.sb-title'), text = bar.querySelector('.sb-text');
+  const clock = bar.querySelector('.sb-clock'), time = bar.querySelector('.sb-time');
+  const scopeText = (s) => s.scope.length === 3 ? 'everything' : s.scope.map(k => ({ peds: 'all peds', head: 'head-only peds', clothing: 'all clothing' })[k]).join(' & ');
+  let timer = 0, endsAt = 0;
+  const pad = (n) => String(n).padStart(2, '0');
+  function tick() {
+    const left = endsAt - Date.now();
+    if (left <= 0) { time.textContent = '00:00:00'; clearInterval(timer); return; }
+    const d = Math.floor(left / 864e5), h = Math.floor(left / 36e5) % 24, m = Math.floor(left / 6e4) % 60, sec = Math.floor(left / 1e3) % 60;
+    time.textContent = d ? `${d}d ${pad(h)}h ${pad(m)}m` : `${pad(h)}:${pad(m)}:${pad(sec)}`;
+  }
+  window.addEventListener('raven67:sale', (event) => {
+    const sale = event.detail;
+    clearInterval(timer);
+    bar.hidden = !sale;
+    if (!sale) return;
+    title.textContent = (sale.label || 'Sale').toUpperCase();
+    text.textContent = `${sale.percent}% off ${scopeText(sale)}`;
+    endsAt = sale.ends_at ? Date.parse(sale.ends_at) : 0;
+    clock.hidden = !endsAt;
+    if (endsAt) { tick(); timer = setInterval(tick, 1000); }
+    window.dispatchEvent(new Event('resize')); // home hero re-fits under the banner
+  });
+})();
+</script>
+<script type="module" src="./catalog-ui.js?v=56"></script>
+<script type="module" src="./catalog-client.js?v=56"></script>
+<script type="module" src="./reviews-client.js?v=56"></script>
 </body>
 </html>

@@ -6,6 +6,31 @@
 <link rel="icon" type="image/svg+xml" href="./raven67.svg"><title>Store Admin — Raven67</title>
 <style>
 :root{color-scheme:dark;--bg:#171b18;--panel:#202620;--line:#343d32;--text:#eff1eb;--muted:#9ea79a;--lime:#b8ff3b;--danger:#ff827a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}.shell{max-width:1180px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:10px 0 20px}.brand{color:var(--lime);font-weight:900;letter-spacing:.3px;text-decoration:none;font-size:19px}.back,.quiet{color:var(--muted);text-decoration:none;font-size:13px}.topright{display:flex;gap:18px;align-items:center}.pill{border:1px solid var(--line);border-radius:30px;padding:8px 12px;color:var(--muted);font-size:12px}.hero{padding:38px 0 25px}.eyebrow{display:inline-block;color:var(--lime);font-size:11px;font-weight:800;letter-spacing:1px}.hero h1{font-size:32px;letter-spacing:-1px;margin:12px 0 8px}.hero p{color:var(--muted);margin:0;line-height:1.6}.notice{display:none;padding:13px 15px;margin:18px 0;border:1px solid var(--line);border-radius:6px;font-size:13px;line-height:1.5}.notice.visible{display:block}.notice.error{border-color:#76413f;color:#ffc0bb;background:#321c1b}.notice.success{border-color:#4c612d;color:#ceff92;background:#25311d}.config{border-color:#665a32;color:#ead78e;background:#2c291d}.login{max-width:460px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:25px;margin:22px 0}.login h2,.panel h2{margin:0 0 18px;font-size:18px}.field{display:grid;gap:8px;margin:13px 0}.field label{font-size:12px;color:#c5cbc0}.field input,.field textarea,.field select{width:100%;border:1px solid #414a3f;border-radius:5px;background:#171c18;color:var(--text);padding:11px 12px;outline:none}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--lime)}.field textarea{min-height:88px;resize:vertical}.btn{border:1px solid var(--lime);border-radius:5px;background:var(--lime);color:#17200f;font-size:12px;font-weight:900;padding:12px 15px;cursor:pointer}.btn.secondary{background:transparent;color:var(--lime)}.btn.danger{background:transparent;border-color:#75413e;color:#ffaaa4}.btn:disabled{opacity:.55;cursor:wait}.admin{display:none}.admin.ready{display:block}.layout{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(380px,1.4fr);gap:20px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:22px}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.panel-head h2{margin:0}.form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.preview{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--muted);font-size:12px}.preview img{width:92px;height:56px;object-fit:cover;border-radius:4px;background:#161a16}.items{display:grid;gap:10px}.item{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border:1px solid #30392f;border-radius:6px}.item img{width:72px;height:48px;object-fit:cover;border-radius:4px;background:#151915}.item strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.item small{color:var(--muted);display:block;margin-top:5px;font-size:11px}.item-actions{display:flex;gap:6px}.item-actions button{padding:8px 9px;font-size:10px}.status{display:inline-flex;color:var(--lime);font-size:10px;margin-top:4px}.status.hidden{color:#f0aa83}.empty{color:var(--muted);font-size:13px;padding:22px 0}.sub{color:var(--muted);font-size:12px;line-height:1.6;margin-top:12px}.hide{display:none!important}.image-note{font-size:11px;color:var(--muted);line-height:1.5}.footer{color:#758071;font-size:11px;padding:28px 0 12px}@media(max-width:800px){.layout{grid-template-columns:1fr}.shell{padding:18px}.hero h1{font-size:27px}.item{grid-template-columns:60px minmax(0,1fr)}.item img{width:60px;height:46px}.item-actions{grid-column:2}.item-actions button{flex:1}}
+</style><style>
+.sale-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:start}
+.sale-row{display:grid;grid-template-columns:160px 1fr;gap:12px}
+.suffix-input{display:flex;align-items:center;border:1px solid #414a3f;border-radius:5px;background:#171c18}
+.suffix-input input{border:0!important;background:transparent!important;font-size:18px;font-weight:800;width:70px!important}
+.suffix-input span{padding:0 12px;color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}
+.field-label{font-size:12px;color:#c5cbc0}
+.sale-scope{display:flex;flex-wrap:wrap;gap:8px}
+.sale-scope label{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #414a3f;border-radius:999px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text)}
+.sale-scope label:has(input:checked){border-color:#9868f2;background:#9868f222}
+.sale-scope input{accent-color:#9868f2;margin:0}
+.sale-quick{display:flex;flex-wrap:wrap;gap:6px}
+.sale-quick button{border:1px solid #414a3f;background:transparent;color:var(--muted);border-radius:6px;padding:7px 11px;font-size:12px;font-weight:700;cursor:pointer}
+.sale-quick button:hover{color:var(--text);border-color:#9868f2}
+.sale-preview{border:1px solid var(--line);border-radius:10px;padding:16px;background:#0f140f}
+.sale-preview h3{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sale-preview .sp-banner{border-radius:8px;padding:10px 12px;background:linear-gradient(90deg,#3b0a78,#7c2cf0,#a855f7);color:#fff;font-weight:800;font-size:13px;margin-bottom:12px}
+.sale-preview .sp-banner small{display:block;font-weight:600;opacity:.85;margin-top:2px}
+.sale-preview ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.sale-preview li{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:7px 10px;border-radius:6px;background:#172018}
+.sale-preview li s{color:var(--muted);margin-right:6px}
+.sale-preview li b{color:#c9a5ff}
+.sale-preview .sp-count{margin-top:10px;font-size:12px;color:var(--muted)}
+.pill.live{background:#9868f2;border-color:#9868f2;color:#fff}
+@media(max-width:800px){.sale-grid{grid-template-columns:1fr}.sale-row{grid-template-columns:1fr 1.4fr}}
 </style><style>:root{--bg:#101611;--panel:#172018;--line:#2b392d;--text:#f0f3eb;--muted:#a4afa1;--lime:#68d75a;--danger:#ff8c80}body{background:#101611;background-image:radial-gradient(ellipse at 83% 0,rgba(65,130,57,.13),transparent 37%)}.top{border-color:#29362b}.brand{color:#7de470}.pill{border-color:#334234;color:#bac3b5;background:#151d16}.btn{background:#68d75a;border-color:#68d75a;color:#102011;border-radius:6px}.btn.secondary{background:#1b281c;color:#a8eb9c;border-color:#354835}.btn.danger{background:#261b19;border-color:#75413e;color:#ffaaa4}.panel,.login{background:linear-gradient(155deg,#19221a,#141a15);border-color:#2e3c30;border-radius:9px;box-shadow:0 9px 30px #0002}.field input,.field textarea,.field select{background:#101611;border-color:#334135;border-radius:6px}.field input:focus,.field textarea:focus,.field select:focus{border-color:#70dc62}.eyebrow{color:#9cea8f}.item{border-color:#2f3b30;background:#141a15}.item:hover{border-color:#4b724a}.status{color:#80e66f}.notice.success{border-color:#42643e;color:#c1f7b4;background:#1c2b1d}.config{border-color:#53633b;color:#e0dc9c;background:#252819}.notice.error{border-color:#75413e;color:#ffc0bb;background:#321c1b}.preview img{background:#101611}.back,.quiet{color:#a7b19f}.footer{color:#839080}</style><style>:root{--bg:#100d16;--panel:#191320;--line:#352742;--text:#f2eef8;--muted:#aaa0b7;--lime:#a986ff;--danger:#ff8c98}body{background:#100d16;background-image:radial-gradient(ellipse at 83% 0,rgba(111,68,180,.18),transparent 38%)}.top{border-color:#30243c}.brand{color:#b99aff}.pill{border-color:#463652;color:#c9bed6;background:#191320}.btn{background:#9868f2;border-color:#9868f2;color:#fff;border-radius:6px}.btn.secondary{background:#261c31;color:#c1a6ff;border-color:#49365f}.btn.danger{background:#2a191e;border-color:#75414f;color:#ffb2be}.panel,.login{background:linear-gradient(155deg,#1c1524,#15111b);border-color:#392b47;border-radius:9px;box-shadow:0 9px 30px #0003}.field input,.field textarea,.field select{background:#110e17;border-color:#40334d}.field input:focus,.field textarea:focus,.field select:focus{border-color:#a986ff}.eyebrow{color:#c7afff}.item{border-color:#392d47;background:#15111b}.item:hover{border-color:#7759a1}.status{color:#b49aff}.notice.success{border-color:#584277;color:#d8c7ff;background:#241a30}.config{border-color:#6a593f;color:#e7d596;background:#292317}.notice.error{border-color:#75414e;color:#ffc0c7;background:#321c22}.preview img{background:#100d16}.back,.quiet{color:#b0a5bd}.footer{color:#8d829a}</style><style>.admin-logo{width:38px;height:38px;object-fit:cover;border-radius:8px;vertical-align:middle;margin-right:10px;box-shadow:0 0 22px #9868f255}.brand small{display:block;font-size:9px;letter-spacing:1.5px;margin:3px 0 0 48px;color:#b99aff}</style><style>.item-actions{flex-wrap:wrap;justify-content:flex-end}.item-actions button{flex:1 1 auto;white-space:nowrap}.status.sold{color:#d2a8ff}.sold-item{border-color:#57436b;background:#1d1724}.sold-item img{filter:grayscale(.55)}@media(max-width:800px){.item-actions{grid-column:1/-1;justify-content:stretch}.item-actions button{min-width:calc(50% - 8px)}}@media(max-width:450px){.item-actions button{min-width:100%}}.admin-tabs{display:flex;gap:6px;margin:0 0 20px;padding:5px;width:max-content;max-width:100%;border:1px solid var(--line);border-radius:10px;background:#15111b}
 .admin-tabs button{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s}
 .admin-tabs button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -50,6 +75,9 @@
   <button type="button" role="tab" id="tabProducts" data-view="viewProducts" aria-selected="true">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>Products
   </button>
+  <button type="button" role="tab" id="tabSale" data-view="saleAdmin" aria-selected="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Sale
+  </button>
   <button type="button" role="tab" id="tabReviews" data-view="reviewsAdmin" aria-selected="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Reviews
   </button>
@@ -90,6 +118,35 @@
       <div class="form-actions"><button class="btn" id="reviewSave">SAVE REVIEW</button><button class="btn secondary hide" type="button" id="reviewCancel">CANCEL EDIT</button></div>
     </form>
     <div><div id="reviewItems" class="items"><div class="empty">Sign in to load reviews.</div></div></div>
+  </div>
+</div>
+<div class="panel sale-admin admin-view" id="saleAdmin" role="tabpanel" aria-labelledby="tabSale" hidden>
+  <div class="panel-head"><h2>Store-wide sale</h2><span class="pill" id="saleStatus">Sale is off</span></div>
+  <p class="sub" style="margin-top:0">One switch for a discount on many items. Your real prices are <strong>not changed</strong>: the website shows the sale price while the sale runs, and goes back to normal by itself when it ends.</p>
+  <div class="sale-grid">
+    <form id="saleForm">
+      <div class="sale-row">
+        <div class="field"><label for="salePercent">Discount</label><div class="suffix-input"><input id="salePercent" type="number" min="1" max="90" step="1" value="20" required><span>% off</span></div></div>
+        <div class="field"><label for="saleLabel">Sale name <span class="image-note">(optional)</span></label><input id="saleLabel" maxlength="40" placeholder="Example: Weekend Sale"></div>
+      </div>
+      <div class="field"><span class="field-label">Applies to</span>
+        <div class="sale-scope">
+          <label><input type="checkbox" name="saleScope" value="peds" checked> Peds</label>
+          <label><input type="checkbox" name="saleScope" value="head" checked> Head Only</label>
+          <label><input type="checkbox" name="saleScope" value="clothing"> Clothing</label>
+        </div>
+        <span class="image-note">Free peds and sold items are never discounted.</span>
+      </div>
+      <div class="field"><label for="saleEnds">Ends</label>
+        <div class="sale-quick" role="group" aria-label="Quick end time">
+          <button type="button" data-ends="1">1 day</button><button type="button" data-ends="3">3 days</button><button type="button" data-ends="7">7 days</button><button type="button" data-ends="0">No end date</button>
+        </div>
+        <input id="saleEnds" type="datetime-local">
+        <span class="image-note">Your local time. Leave empty to run until you end it.</span>
+      </div>
+      <div class="form-actions"><button class="btn" id="saleSave">START SALE</button><button class="btn danger hide" type="button" id="saleEnd">END SALE NOW</button></div>
+    </form>
+    <div class="sale-preview" id="salePreview" aria-live="polite"></div>
   </div>
 </div>
 </section>
@@ -205,6 +262,132 @@ $('productForm').addEventListener('submit',async e=>{e.preventDefault();if(image
   try { saved = localStorage.getItem('raven67-admin-tab') || saved; } catch {}
   show(saved);
 })();
+</script>
+
+<!-- ============ STORE-WIDE SALE ============ -->
+<script type="module">
+import * as config from "./supabase-config.js";
+import { activeSale, applySale, collectionOfCategory, inSale, salePrice, SALE_KEY, SALE_LOCAL_KEY, SALE_SCOPES } from "./sale.js?v=56";
+const $ = (id) => document.getElementById(id);
+const local = !config.isSupabaseConfigured;
+let supabase = null, current = null, products = [];
+function tell(text, type = "") { const m = $("message"); m.textContent = text; m.className = "notice visible " + type; }
+const money = (n) => "$" + (Number.isInteger(n) ? n : n.toFixed(2));
+
+if (!local) {
+  const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2.116.0");
+  supabase = createClient(config.SUPABASE_URL, config.SUPABASE_PUBLISHABLE_KEY);
+}
+
+async function loadSale() {
+  if (local) { try { return JSON.parse(localStorage.getItem(SALE_LOCAL_KEY) || "null"); } catch { return null; } }
+  const { data, error } = await supabase.from("store_settings").select("value").eq("key", SALE_KEY).maybeSingle();
+  if (error) {
+    if (/store_settings/i.test(error.message || "")) tell("To use sales, run deploy/sale-setup.sql once in Supabase (SQL Editor).", "error");
+    else console.warn(error.message);
+    return null;
+  }
+  return data?.value || null;
+}
+async function loadProducts() {
+  if (local) { try { const { getLocalProducts } = await import("./catalog-storage.js"); return await getLocalProducts(); } catch { return []; } }
+  const { data } = await supabase.from(config.PRODUCTS_TABLE).select("price,category,is_sold,is_active,product_code").eq("is_active", true);
+  return data || [];
+}
+async function saveSale(value) {
+  if (local) { localStorage.setItem(SALE_LOCAL_KEY, JSON.stringify(value)); return; }
+  const { error } = await supabase.from("store_settings").upsert({ key: SALE_KEY, value, updated_at: new Date().toISOString() });
+  if (error) throw error;
+}
+
+// datetime-local <-> ISO (the input is in your own time zone)
+const toLocalInput = (iso) => { if (!iso) return ""; const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); };
+const fromLocalInput = (v) => v ? new Date(v).toISOString() : null;
+
+function formValue(active = true) {
+  return {
+    active,
+    percent: Math.round(Number($("salePercent").value)),
+    label: $("saleLabel").value.trim(),
+    scope: [...document.querySelectorAll('input[name="saleScope"]:checked')].map((i) => i.value),
+    ends_at: fromLocalInput($("saleEnds").value),
+  };
+}
+
+function renderStatus() {
+  const live = activeSale(current);
+  const status = $("saleStatus");
+  status.classList.toggle("live", !!live);
+  status.textContent = live ? `LIVE · ${live.percent}% off` + (live.ends_at ? ` · ends ${new Date(live.ends_at).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })}` : "") : (current?.active && current?.ends_at && Date.parse(current.ends_at) <= Date.now() ? "Sale ended" : "Sale is off");
+  $("saleSave").textContent = live ? "UPDATE SALE" : "START SALE";
+  $("saleEnd").classList.toggle("hide", !live);
+}
+
+function renderPreview() {
+  const v = formValue(true);
+  const box = $("salePreview");
+  const valid = v.percent >= 1 && v.percent <= 90 && v.scope.length;
+  if (!valid) { box.innerHTML = '<h3>Preview</h3><p class="sub" style="margin:0">Choose a discount between 1 and 90% and at least one type.</p>'; return; }
+  const sale = { percent: v.percent, label: v.label, scope: v.scope, ends_at: v.ends_at };
+  const affected = products.filter((p) => inSale(p, sale));
+  const prices = [...new Set(affected.map((p) => Number(p.price)))].sort((a, b) => a - b).slice(0, 4);
+  const ends = v.ends_at ? "Ends " + new Date(v.ends_at).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "No end date";
+  const what = v.scope.length === 3 ? "everything" : v.scope.map((k) => ({ peds: "all peds", head: "head-only peds", clothing: "all clothing" })[k]).join(" & ");
+  box.innerHTML = `<h3>Preview</h3>
+    <div class="sp-banner">🔥 ${(v.label || "Sale").replace(/[<>&]/g, "")} — ${v.percent}% off ${what}<small>${ends}</small></div>
+    <ul>${prices.map((p) => `<li><span>Items at ${money(p)}</span><span><s>${money(p)}</s><b>${money(salePrice(p, v.percent))}</b></span></li>`).join("") || '<li><span>No items match</span></li>'}</ul>
+    <div class="sp-count">${affected.length} item${affected.length === 1 ? "" : "s"} will show the sale price.</div>`;
+}
+
+function fillForm(raw) {
+  if (!raw) return;
+  $("salePercent").value = raw.percent || 20;
+  $("saleLabel").value = raw.label || "";
+  const scope = Array.isArray(raw.scope) && raw.scope.length ? raw.scope : Object.keys(SALE_SCOPES);
+  document.querySelectorAll('input[name="saleScope"]').forEach((i) => { i.checked = scope.includes(i.value); });
+  $("saleEnds").value = raw.ends_at && Date.parse(raw.ends_at) > Date.now() ? toLocalInput(raw.ends_at) : "";
+}
+
+async function refresh() {
+  [current, products] = await Promise.all([loadSale(), loadProducts()]);
+  fillForm(current);
+  renderStatus();
+  renderPreview();
+}
+
+document.querySelectorAll(".sale-quick [data-ends]").forEach((b) => b.addEventListener("click", () => {
+  const days = Number(b.dataset.ends);
+  if (!days) { $("saleEnds").value = ""; renderPreview(); return; }
+  const d = new Date(Date.now() + days * 864e5); d.setSeconds(0, 0);
+  $("saleEnds").value = toLocalInput(d.toISOString());
+  renderPreview();
+}));
+$("saleForm").addEventListener("input", renderPreview);
+$("saleForm").addEventListener("change", renderPreview);
+
+$("saleForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const v = formValue(true);
+  if (!(v.percent >= 1 && v.percent <= 90)) return tell("Choose a discount between 1 and 90%.", "error");
+  if (!v.scope.length) return tell("Choose at least one type the sale applies to.", "error");
+  if (v.ends_at && Date.parse(v.ends_at) <= Date.now()) return tell("The end time is in the past. Pick a later time or choose “No end date”.", "error");
+  const btn = $("saleSave"); btn.disabled = true;
+  try { await saveSale(v); current = v; renderStatus(); tell(`Sale is live: ${v.percent}% off. Refresh the website to see it.`, "success"); }
+  catch (err) { tell("Could not save the sale: " + (err.message || err) + (/store_settings/i.test(err.message || "") ? " — run deploy/sale-setup.sql in Supabase first." : ""), "error"); }
+  finally { btn.disabled = false; }
+});
+$("saleEnd").addEventListener("click", async () => {
+  if (!confirm("End the sale now? All prices go back to normal on the website.")) return;
+  try { const v = { ...(current || formValue()), active: false }; await saveSale(v); current = v; renderStatus(); tell("Sale ended. Prices are back to normal.", "success"); }
+  catch (err) { tell("Could not end the sale: " + (err.message || err), "error"); }
+});
+
+// load when the Sale tab is opened (and once now, if you are signed in)
+$("tabSale").addEventListener("click", refresh);
+if (local) refresh();
+else {
+  supabase.auth.onAuthStateChange((_event, session) => { if (session) refresh(); });
+}
 </script>
 
 <!-- ============ CUSTOMER REVIEWS ============ -->
